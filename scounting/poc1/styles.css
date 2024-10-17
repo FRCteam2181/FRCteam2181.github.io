@@ -1,0 +1,11 @@
+table {
+  width: 100%;
+}
+
+td, th {
+  text-align: right;
+}
+
+tbody tr:nth-child(odd){
+  background-color: black;
+}

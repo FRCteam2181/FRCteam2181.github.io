@@ -1,0 +1,97 @@
+<html>
+  <head>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
+
+    <script src="gamepad.js"></script>
+    <script src="https://voltron42.github.io/gizmo-atheneum/structure/importnamespace/script.js"></script>
+    <script src="gamepadtest.js"></script>
+    <style>
+      body {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body onload="importNamespace('2181robotics.crescendo.GamepadTest').init()" class="bg-secondary">
+    <svg width="0" height="0">
+      <defs>
+        <linearGradient id="gradient" x1="0%" x2="100%" y1="0%" y2="0%">
+          <stop offset="0%" stop-color="green">
+          </stop>
+          <stop offset="50%" stop-color="yellow">
+          </stop>
+          <stop offset="100%" stop-color="red">
+          </stop>
+        </linearGradient>
+        <pattern id="trigger" x="0" y="0" width="80" height="20" patternUnits="userSpaceOnUse">
+          <rect x="0" y="0" width="80" height="20" fill="url(#gradient)"/>
+        </pattern>
+      </defs>
+    </svg>
+    <div class="container">
+      <div class="row">
+        <div class="col-6">
+          <div class="d-flex flex-column">
+            <h2 class="text-center text-light">Xbox 360 Controller (XInput STANDARD GAMEPAD)</h2>
+            <div>
+              <svg width="100%" height="100%" viewBox="0 0 200 150">
+                <rect x="1" y="1" width="198" height="148" rx="15" ry="15" fill="none" stroke="white" stroke-width="2"/>
+                <circle id="B" r="9" cx="180" cy="75" fill="none" stroke="red" stroke-width="3"/>
+                <circle id="A" r="9" cx="160" cy="95" fill="none" stroke="green" stroke-width="3"/>
+                <circle id="X" r="9" cx="140" cy="75" fill="none" stroke="blue" stroke-width="3"/>
+                <circle id="Y" r="9" cx="160" cy="55" fill="none" stroke="yellow" stroke-width="3"/>
+                <rect id="DPadLeft" x="15" y="70" width="20" height="10" rx="5" ry="5" fill="none" stroke="white" stroke-width="3"/>
+                <rect id="DPadUp" x="35" y="50" width="10" height="20" rx="5" ry="5" fill="none" stroke="white" stroke-width="3"/>
+                <rect id="DPadDown" x="35" y="80" width="10" height="20" rx="5" ry="5" fill="none" stroke="white" stroke-width="3"/>
+                <rect id="DPadRight" x="45" y="70" width="20" height="10" rx="5" ry="5" fill="none" stroke="white" stroke-width="3"/>
+                <circle id="frameL" r="25" cx="70" cy="120" fill="none" stroke="white" stroke-width="1"/>
+                <circle id="frameR" r="25" cx="130" cy="120" fill="none" stroke="white" stroke-width="1"/>
+                <circle id="stickL" r="5" cx="130" cy="120" fill="white" stroke="white" stroke-width="1"/>
+                <circle id="stickR" r="5" cx="70" cy="120" fill="white" stroke="white" stroke-width="1"/>
+                <ellipse id="Menu" cx="100" cy="75" rx="15" ry="10" fill="none" stroke="white" stroke-width="3"/>
+                <ellipse id="Select" cx="75" cy="55" rx="8" ry="5" fill="none" stroke="white" stroke-width="3"/>
+                <ellipse id="Start" cx="125" cy="55" rx="8" ry="5" fill="none" stroke="white" stroke-width="3"/>
+                <rect id="LtBar" transform="translate(15,15)" width="80" height="20" fill="url(#trigger)"/>
+                <rect id="LtFrame" x="15" y="15" width="80" height="20" rx="5" ry="5" fill="none" stroke="white" stroke-width="3"/>
+                <rect id="RtBar" transform="translate(105,15)" width="80" height="20" fill="url(#trigger)"/>
+                <rect id="RtFrame" x="105" y="15" width="80" height="20" rx="5" ry="5" fill="none" stroke="white" stroke-width="3"/>
+                <rect id="Ls" x="10" y="110" width="25" height="10" rx="5" ry="5" fill="none" stroke="white" stroke-width="3"/>
+                <rect id="Rs" x="165" y="110" width="25" height="10" rx="5" ry="5" fill="none" stroke="white" stroke-width="3"/>
+                <rect id="L3" x="10" y="130" width="25" height="10" rx="5" ry="5" fill="none" stroke="white" stroke-width="3"/>
+                <rect id="R3" x="165" y="130" width="25" height="10" rx="5" ry="5" fill="none" stroke="white" stroke-width="3"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="d-flex flex-column">
+            <h2 class="text-center  text-light">Generic   USB  Joystick   (Vendor: 0079 Product: 0006)</h2>
+            <div>
+              <svg width="100%" height="100%" viewBox="0 0 200 150">
+                <rect x="1" y="1" width="198" height="148" rx="15" ry="15" fill="none" stroke="white" stroke-width="2"/>
+                <circle id="red1" r="10" cx="90" cy="130" fill="none" stroke="red" stroke-width="3"/>
+                <circle id="yellow1" r="10" cx="120" cy="130" fill="none" stroke="yellow" stroke-width="3"/>
+                <circle id="green1" r="10" cx="150" cy="130" fill="none" stroke="green" stroke-width="3"/>
+                <circle id="blue1" r="10" cx="180" cy="130" fill="none" stroke="blue" stroke-width="3"/>
+                <circle id="red2" r="10" cx="90" cy="100" fill="none" stroke="red" stroke-width="3"/>
+                <circle id="yellow2" r="10" cx="120" cy="100" fill="none" stroke="yellow" stroke-width="3"/>
+                <circle id="green2" r="10" cx="150" cy="100" fill="none" stroke="green" stroke-width="3"/>
+                <circle id="blue2" r="10" cx="180" cy="100" fill="none" stroke="blue" stroke-width="3"/>
+                <circle id="coin" r="10" cx="105" cy="70" fill="none" stroke="white" stroke-width="3"/>
+                <circle id="player1" r="10" cx="165" cy="70" fill="none" stroke="white" stroke-width="3"/>
+                <polygon id="joystickNW" points="10 10 10 35 35 10" fill="none" stroke="white" stroke-width="2"/>
+                <polygon id="joystickNE" points="55 10 80 10 80 35" fill="none" stroke="white" stroke-width="2"/>
+                <polygon id="joystickSW" points="10 55 10 80 35 80" fill="none" stroke="white" stroke-width="2"/>
+                <polygon id="joystickSE" points="55 80 80 80 80 55" fill="none" stroke="white" stroke-width="2"/>
+                <polygon id="joystickN" points="45 10 30 25 60 25" fill="none" stroke="black" stroke-width="2"/>
+                <polygon id="joystickW" points="10 45 25 30 25 60" fill="none" stroke="black" stroke-width="2"/>
+                <polygon id="joystickS" points="45 80 30 65 60 65" fill="none" stroke="black" stroke-width="2"/>
+                <polygon id="joystickE" points="80 45 65 30 65 60" fill="none" stroke="black" stroke-width="2"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

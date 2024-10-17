@@ -1,0 +1,120 @@
+<html>
+  <head>
+    <title>Clock</title>
+    <script>
+      const labels = ["twelve","one","two","three","four","five","six","seven","eight","nine","ten","eleven"];
+      const d2R = function(a) {
+        return a * Math.PI / 180;
+      }
+      function init() {
+        document.getElementById("output").innerHTML = Array(12).fill([]).map((_,i) => {
+          const a = (30 * i) - 90;
+          const x = Math.cos(d2R(a)) * 40;
+          const y = Math.sin(d2R(a)) * 40;
+          return `<use x="${x}" y="${y}" href="#${labels[i]}"><title>${i}</title></use>`;
+        });
+      }
+    </script>
+  </head>
+  <body onload="init()">
+    <svg width="100%" height="100%" viewBox="-50 -50 100 100">
+      <defs>
+        <polygon id="vert" points="1 4 1 6 2 7 3 6 3 4 2 3" fill="black"/>
+        <polygon id="horiz" points="4 1 6 1 7 2 6 3 4 3 3 2" fill="black"/>
+        <g id="zero">
+          <rect x="-5" y="-8" width="10" height="16" fill="white"/>
+          <use href="#vert" x="-5" y="-8"/>
+          <use href="#vert" x="-5" y="-2"/>
+          <use href="#vert" x="1" y="-2"/>
+          <use href="#vert" x="1" y="-8"/>
+          <use href="#horiz" x="-5" y="-8"/>
+          <use href="#horiz" x="-5" y="4"/>
+        </g>
+        <g id="one">
+          <rect x="-5" y="-8" width="10" height="16" fill="white"/>
+          <use href="#vert" x="1" y="-2"/>
+          <use href="#vert" x="1" y="-8"/>
+        </g>
+        <g id="two">
+          <rect x="-5" y="-8" width="10" height="16" fill="white"/>
+          <use href="#vert" x="-5" y="-2"/>
+          <use href="#vert" x="1" y="-8"/>
+          <use href="#horiz" x="-5" y="-8"/>
+          <use href="#horiz" x="-5" y="-2"/>
+          <use href="#horiz" x="-5" y="4"/>
+        </g>
+        <g id="three">
+          <rect x="-5" y="-8" width="10" height="16" fill="white"/>
+          <use href="#vert" x="1" y="-8"/>
+          <use href="#vert" x="1" y="-2"/>
+          <use href="#horiz" x="-5" y="-8"/>
+          <use href="#horiz" x="-5" y="-2"/>
+          <use href="#horiz" x="-5" y="4"/>
+        </g>
+        <g id="four">
+          <rect x="-5" y="-8" width="10" height="16" fill="white"/>
+          <use href="#vert" x="-5" y="-8"/>
+          <use href="#vert" x="1" y="-2"/>
+          <use href="#vert" x="1" y="-8"/>
+          <use href="#horiz" x="-5" y="-2"/>
+        </g>
+        <g id="five">
+          <rect x="-5" y="-8" width="10" height="16" fill="white"/>
+          <use href="#vert" x="-5" y="-8"/>
+          <use href="#vert" x="1" y="-2"/>
+          <use href="#horiz" x="-5" y="-8"/>
+          <use href="#horiz" x="-5" y="-2"/>
+          <use href="#horiz" x="-5" y="4"/>
+        </g>
+        <g id="six">
+          <rect x="-5" y="-8" width="10" height="16" fill="white"/>
+          <use href="#vert" x="-5" y="-8"/>
+          <use href="#vert" x="-5" y="-2"/>
+          <use href="#vert" x="1" y="-2"/>
+          <use href="#horiz" x="-5" y="-8"/>
+          <use href="#horiz" x="-5" y="-2"/>
+          <use href="#horiz" x="-5" y="4"/>
+        </g>
+        <g id="seven">
+          <rect x="-5" y="-8" width="10" height="16" fill="white"/>
+          <use href="#vert" x="1" y="-2"/>
+          <use href="#vert" x="1" y="-8"/>
+          <use href="#horiz" x="-5" y="-8"/>
+        </g>
+        <g id="eight">
+          <rect x="-5" y="-8" width="10" height="16" fill="white"/>
+          <use href="#vert" x="-5" y="-8"/>
+          <use href="#vert" x="-5" y="-2"/>
+          <use href="#vert" x="1" y="-2"/>
+          <use href="#vert" x="1" y="-8"/>
+          <use href="#horiz" x="-5" y="-8"/>
+          <use href="#horiz" x="-5" y="-2"/>
+          <use href="#horiz" x="-5" y="4"/>
+        </g>
+        <g id="nine">
+          <rect x="-5" y="-8" width="10" height="16" fill="white"/>
+          <use href="#vert" x="-5" y="-8"/>
+          <use href="#vert" x="1" y="-2"/>
+          <use href="#vert" x="1" y="-8"/>
+          <use href="#horiz" x="-5" y="-8"/>
+          <use href="#horiz" x="-5" y="-2"/>
+        </g>
+        <g id="ten">
+          <use href="#one" x="-5"/>
+          <use href="#zero" x="5"/>
+        </g>
+        <g id="eleven">
+          <use href="#one" x="-5"/>
+          <use href="#one" x="5"/>
+        </g>
+        <g id="twelve">
+          <use href="#one" x="-5"/>
+          <use href="#two" x="5"/>
+        </g>
+      </defs>
+      <circle cx="0" cy="0" r="30" fill="none" stroke="black"/>
+      <g id="output">
+      </g>
+    </svg>
+  </body>
+</html>
