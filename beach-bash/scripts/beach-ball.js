@@ -1,6 +1,7 @@
 namespace("2181robotics.beach-bash.BeachBall", {
   "2181robotics.beach-bash.Bounce": "Bounce",
-  "2181robotics.beach-bash.Constants": "Constants"
+  "2181robotics.beach-bash.Constants": "Constants",
+  "2181robotics.beach-bash.GridMath": "GridMath"
 }, ({ Bounce, Constants, GridMath }) => {
   const draw = function(x,y,z,color) {
     return `<circle cx="${x}" cy="${y}" r="${5.5 + z / 12}" fill="url(#${color}BallGrad)" stroke="black"/>`;
@@ -33,16 +34,18 @@ namespace("2181robotics.beach-bash.BeachBall", {
     };
     me.move = () => {
       const previous = Object.assign({}, state);
-      const { x, y, z } = trajectory.shift();
-      Object.assign(state, { x, y, z });
-      window.dispatchEvent(new CustomEvent("ballMove", {
-        detail: {
-          id,
-          previous,
-          current: Object.assign({}, state),
-          interactWithRobot,
-        }
-      }));
+      if (trajectory.length > 0) {
+        const { x, y, z } = trajectory.shift();
+        Object.assign(state, { x, y, z });
+        window.dispatchEvent(new CustomEvent("ballMove", {
+          detail: {
+            id,
+            previous,
+            current: Object.assign({}, state),
+            interactWithRobot,
+          }
+        }));
+      }
     };
     me.isMoving = () => trajectory.length > 0;
     window.addEventListener("ballMove",({ detail }) => {
