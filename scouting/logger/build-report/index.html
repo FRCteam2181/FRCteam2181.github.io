@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Scouting Logger - Apply Records</title>
+    <title>Scouting Logger - Build Report</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Bootstrap -->
@@ -23,13 +23,13 @@
     <!-- external namespaces -->
 
     <!-- local namespaces -->
-    <script type="text/babel" src="scripts/pit-record.js"></script>
+    <script type="text/babel" src="scripts/build-report.js"></script>
 
     <!-- init script -->
     <script type="text/babel">
         (function(){
-            const PitRecord = importNamespace("2181robotics.scouting.logger.pit-record.PitRecord");
-            ReactDOM.createRoot(document.getElementById("app-root")).render(<PitRecord/>);
+            const BuildReport = importNamespace("2181robotics.scouting.logger.build-report.BuildReport");
+            ReactDOM.createRoot(document.getElementById("app-root")).render(<BuildReport/>);
         })()
     </script>
   </head>

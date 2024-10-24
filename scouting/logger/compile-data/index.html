@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Scouting Logger - Apply Records</title>
+    <title>Scouting Logger - Compile Data</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Bootstrap -->
@@ -23,13 +23,13 @@
     <!-- external namespaces -->
 
     <!-- local namespaces -->
-    <script type="text/babel" src="scripts/record-profile-convert.js"></script>
+    <script type="text/babel" src="scripts/compile-data.js"></script>
 
     <!-- init script -->
     <script type="text/babel">
         (function(){
-            const RecordProfileConvert = importNamespace("2181robotics.scouting.logger.record-profile-convert.RecordProfileConvert");
-            ReactDOM.createRoot(document.getElementById("app-root")).render(<RecordProfileConvert/>);
+            const CompileData = importNamespace("2181robotics.scouting.logger.compile-data.CompileData");
+            ReactDOM.createRoot(document.getElementById("app-root")).render(<CompileData/>);
         })()
     </script>
   </head>
