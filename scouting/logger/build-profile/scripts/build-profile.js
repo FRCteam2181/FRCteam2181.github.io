@@ -6,12 +6,9 @@ namespace("2181robotics.scouting.logger.build-profile.BuildProfile", () => {
       super(props);
       this.state = {
         selectedTab: "Profile",
-        expanded: {},
-        editing: {},
         enums: [],
-        enumErrors: {},
         properties: [],
-        propertyErrors: {}
+        properiesError: "cannot be empty"
       };
     }
     selectTab(e, selectedTab) {
@@ -19,52 +16,163 @@ namespace("2181robotics.scouting.logger.build-profile.BuildProfile", () => {
       this.setState({ selectedTab });
     }
     toggleEditing(enumIndex) {
-
+      const enums = Array.from(this.state.enums);
+      enums[enumIndex].editing = !enums[enumIndex].editing;
+      this.setState({ enums });
     }
     toggleAccordion(enumIndex) {
-      
+      const enums = Array.from(this.state.enums);
+      enums[enumIndex].expanded = !enums[enumIndex].expanded;
+      this.setState({ enums });
     }
     updateEnumName(enumIndex,newName) {
-
+      const enums = Array.from(this.state.enums);
+      enums[enumIndex].name = newName;
+      if (newName.length === 0) {
+        enums[enumIndex].errors.name = "cannot be blank"
+      } else {
+        const names = enums.map(e => e.name);
+        if (names.indexOf(newName) !== enumIndex) {
+          enums[enumIndex].errors.name = "must be unique";
+        } else {
+          delete enums[enumIndex].errors.name;
+        }
+      }
+      this.setState({ enums });
     }
     updateEnumLabel(enumIndex,valueIndex,newLabel) {
-      
+      const enums = Array.from(this.state.enums);
+      enums[enumIndex].values = Array.from(enums[enumIndex].values);
+      enums[enumIndex].values[valueIndex].label = newLabel;
+      if (newLabel.length === 0) {
+        enums[enumIndex].values[valueIndex].errors.name = "cannot be blank"
+      } else {
+        const labels = enums[enumIndex].values.map(e => e.label);
+        if (labels.indexOf(newLabel) !== enumIndex) {
+          enums[enumIndex].values[valueIndex].errors.name = "must be unique";
+        } else {
+          delete enums[enumIndex].values[valueIndex].errors.name;
+        }
+      }
+      this.setState({ enums });
     }
     updateEnumValue(enumIndex,valueIndex,newValue) {
-      
+      const enums = Array.from(this.state.enums);
+      enums[enumIndex].values = Array.from(enums[enumIndex].values);
+      enums[enumIndex].values[valueIndex].value = newValue;
+      if (newValue.length === 0) {
+        enums[enumIndex].values[valueIndex].errors.name = "cannot be blank"
+      } else {
+        const values = enums[enumIndex].values.map(e => e.value);
+        if (values.indexOf(newValue) !== enumIndex) {
+          enums[enumIndex].values[valueIndex].errors.name = "must be unique";
+        } else {
+          delete enums[enumIndex].values[valueIndex].errors.name;
+        }
+      }
+      this.setState({ enums });
     }
     addNewEnum() {
-
+      const enums = this.state.enums.map(e => {
+        delete e.expanded;
+        delete e.editing;
+        return e;
+      });
+      enums.push({
+        expanded:true,
+        editing:true,
+        name: "",
+        values: [],
+        errors: {
+          name: "cannot be blank",
+          values: "cannot be empty"
+        }
+      });
+      this.setState({ enums });
     }
     deleteEnum(enumIndex){
-
+      const enums = Array.from(this.state.enums);
+      enums.splice(enumIndex, 1);
+      this.setState({ enums });
     }
     addNewEnumValue(enumIndex) {
-
+      const enums = Array.from(this.state.enums);
+      enums[enumIndex].values = Array.from(enums[enumIndex].values);
+      enums[enumIndex].values.push({
+        label:"",
+        value:"",
+        errors: {
+          label:"cannot be blank",
+          value:"cannot be blank",
+        }
+      })
+      this.setState({ enums });
     }
     deleteEnumValue(enumIndex,valueIndex){
-
+      const enums = Array.from(this.state.enums);
+      enums[enumIndex].values = Array.from(enums[enumIndex].values);
+      enums[enumIndex].values.splice(valueIndex,1);
+      if (enums[enumIndex].values.length === 0) {
+        enums[enumIndex].errors.values = "cannot be empty"
+      } else {
+        delete enums[enumIndex].errors.values;
+      }
+      this.setState({ enums });
     }
     addNewProperty() {
-
+      const properties = Array.from(this.state.properties);
+      properties.push({
+        name: "",
+        type: "",
+        recordType: "",
+        errors: {
+          name: "cannot be blank",
+          type: "cannot be blank",
+          recordType: "cannot be blank",
+        }
+      });
+      this.setState({ properties });
     }
-    updatePropertyName(propertyIndex, selectedIndex) {
-
+    updatePropertyName(propertyIndex, newName) {
+      const properties = Array.from(this.state.properties);
+      properties[propertyIndex].name = newName;
+      if (newName.length === 0) {
+        properties[propertyIndex].errors.name = "cannot be blank"
+      } else {
+        const names = properties.map(p => p.name);
+        if (names.indexOf(newName) !== propertyIndex) {
+          properties[propertyIndex].errors.name = "must be unique";
+        } else {
+          delete properties[propertyIndex].errors.name;
+        }
+      }
+      this.setState({ properties });
     }
     updatePropertyType(propertyIndex, selectedIndex) {
-
+      const types = basicTypes.concat(this.state.enums.map(e => e.name));
+      const properties = Array.from(this.state.properties);
+      properties[propertyIndex].type = types[selectedIndex];
+      this.setState({ properties });
     }
     updatePropertyRecordType(propertyIndex, selectedIndex) {
-
+      const properties = Array.from(this.state.properties);
+      properties[propertyIndex].recordType = recordTypes[selectedIndex];
+      this.setState({ properties });
     }
     deleteProperty(propertyIndex) {
-
+      const properties = Array.from(this.state.properties);
+      properties.splice(propertyIndex,1);
+      let propertiesError = undefined;
+      if (properties.length === 0) {
+        propertiesError = "cannot be empty"
+      }
+      this.setState({ properties, propertiesError });
     }
     downloadProfile() {
-
+      // todo
     }
     hasErrors() {
-
+      // todo
     }
     render() {
       return (<>
