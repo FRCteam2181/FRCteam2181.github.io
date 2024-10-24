@@ -18,6 +18,12 @@ namespace("2181robotics.scouting.logger.build-profile.BuildProfile", () => {
       e.preventDefault();
       this.setState({ selectedTab });
     }
+    toggleEditing(enumIndex) {
+
+    }
+    toggleAccordion(enumIndex) {
+      
+    }
     updateEnumName(enumIndex,newName) {
 
     }
@@ -30,7 +36,13 @@ namespace("2181robotics.scouting.logger.build-profile.BuildProfile", () => {
     addNewEnum() {
 
     }
+    deleteEnum(enumIndex){
+
+    }
     addNewEnumValue(enumIndex) {
+
+    }
+    deleteEnumValue(enumIndex,valueIndex){
 
     }
     addNewProperty() {
@@ -43,6 +55,9 @@ namespace("2181robotics.scouting.logger.build-profile.BuildProfile", () => {
 
     }
     updatePropertyRecordType(propertyIndex, selectedIndex) {
+
+    }
+    deleteProperty(propertyIndex) {
 
     }
     downloadProfile() {
@@ -73,11 +88,15 @@ namespace("2181robotics.scouting.logger.build-profile.BuildProfile", () => {
                   <div className="card-header">
                     <div className="d-flex">
                       {this.state.expanded[i]&&this.state.editing[i]?<input value={e.name} onChange={(e) => this.updateEnumName(i,e.target.value)}/>:<h4 className="flex-grow-1">{e.name}</h4>}
-                      <button className="btn btn-secondary"></button>
-                      <button className="btn btn-secondary">
-                        {this.state.expanded[i]?<></>:<></>}
+                      <button className="btn btn-secondary" onClick={() => this.toggleEditing(i)}><i class="fa-solid fa-pencil"></i></button>
+                      <button className="btn btn-secondary" onClick={() => this.toggleAccordion(i)}>
+                        {this.state.expanded[i]?<i class="fa-solid fa-angle-up"></i>:<i class="fa-solid fa-angle-down"></i>}
                       </button>
-                      {this.state.expanded[i]&&this.state.editing[i]&&<button className="btn btn-danger"></button>}
+                      {this.state.expanded[i]&&this.state.editing[i]&&<>
+                        <button className="btn btn-danger" onClick={() => this.deleteEnum(i)}>
+                          <i class="fa-solid fa-xmark"></i>
+                        </button>
+                      </>}
                     </div>
                   </div>
                   { this.state.expanded[i] && <div className="card-body">
@@ -100,7 +119,9 @@ namespace("2181robotics.scouting.logger.build-profile.BuildProfile", () => {
                                 <input value={value} onChange={(e) => this.updateEnumValue(i,j,e.target.value)}/>
                               </td>
                               <td>
-                                <button className="btn btn-danger"><></></button>
+                                <button className="btn btn-danger" onClick={() => this.deleteEnumValue(i,j)}>
+                                  <i class="fa-solid fa-xmark"></i>
+                                </button>
                               </td>
                             </tr>
                           })}
@@ -161,7 +182,9 @@ namespace("2181robotics.scouting.logger.build-profile.BuildProfile", () => {
                       </select>
                     </td>
                     <td>
-                      
+                      <button className="btn btn-danger" onClick={() => this.deleteProperty(i)}>
+                        <i class="fa-solid fa-xmark"></i>
+                      </button>
                     </td>
                   </tr>)}
                 </tbody>
