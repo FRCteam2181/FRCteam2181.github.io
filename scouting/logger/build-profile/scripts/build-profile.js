@@ -209,20 +209,20 @@ namespace("2181robotics.scouting.logger.build-profile.BuildProfile", () => {
                 return (<div className="card">
                   <div className="card-header">
                     <div className="d-flex">
-                      {this.state.expanded[i]&&this.state.editing[i]?<input value={e.name} onChange={(e) => this.updateEnumName(i,e.target.value)}/>:<h4 className="flex-grow-1">{e.name}</h4>}
+                      {e.expanded&&e.editing?<input value={e.name} onChange={(e) => this.updateEnumName(i,e.target.value)}/>:<h4 className="flex-grow-1">{e.name}</h4>}
                       <button className="btn btn-secondary" onClick={() => this.toggleEditing(i)}><i class="fa-solid fa-pencil"></i></button>
                       <button className="btn btn-secondary" onClick={() => this.toggleAccordion(i)}>
-                        {this.state.expanded[i]?<i class="fa-solid fa-angle-up"></i>:<i class="fa-solid fa-angle-down"></i>}
+                        {e.expanded?<i class="fa-solid fa-angle-up"></i>:<i class="fa-solid fa-angle-down"></i>}
                       </button>
-                      {this.state.expanded[i]&&this.state.editing[i]&&<>
+                      {e.expanded&&e.editing&&<>
                         <button className="btn btn-danger" onClick={() => this.deleteEnum(i)}>
                           <i class="fa-solid fa-xmark"></i>
                         </button>
                       </>}
                     </div>
                   </div>
-                  { this.state.expanded[i] && <div className="card-body">
-                    {this.state.editing[i]?<>
+                  { e.expanded && <div className="card-body">
+                    {e.editing?<>
                       <table>
                         <thead>
                           <tr>
@@ -260,11 +260,15 @@ namespace("2181robotics.scouting.logger.build-profile.BuildProfile", () => {
                         </tr>
                       </thead>
                       <tbody>
-                        {e.values.map(({label,value},j) => {
+                        {e.values.map(({ label, value, errors }, j) => {
                           return <tr>
-                            <td>{label}</td>
-                            <td>{value}</td>
-                          </tr>
+                            <td>
+                              <p>{label}</p>
+                            </td>
+                            <td>
+                              <p>{value}</p>
+                            </td>
+                          </tr>;
                         })}
                       </tbody>
                     </table>}
@@ -277,7 +281,9 @@ namespace("2181robotics.scouting.logger.build-profile.BuildProfile", () => {
             </>}
             {this.state.selectedTab==="Profile" && <>
               <h3>Profile</h3>
-              {this.state.propertyErrors}
+              { this.state.propertyErrors&&<ul>
+                <li>{this.state.propertyErrors}</li>
+              </ul> }
               <table className="table table-striped">
                 <thead>
                   <tr>
@@ -288,21 +294,30 @@ namespace("2181robotics.scouting.logger.build-profile.BuildProfile", () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {this.state.properties.map((property,i) => <tr>
+                  {this.state.properties.map(({ name, type, recordType, errors }, i) => <tr>
                     <td>
                       <input className="form-control" value={property.name} 
                         onChange={(e) => this.updatePropertyName(i,e.target.value)}/>
+                      { errors.name && <ul>
+                        <li>{errors.name}</li>
+                      </ul> }
                     </td>
                     <td>
                       <select className="form-select" onChange={(e) => this.updatePropertyType(i,e.target.selectedIndex)}>
                         {basicTypes.map((type) => <option value={type} selected={property.type === type}>{type}</option>)}
                         {this.state.enums.map((e) => <option value={e.name} selected={property.type === e.name}>{e.name}</option>)}
                       </select>
+                      { errors.type && <ul>
+                        <li>{errors.type}</li>
+                      </ul> }
                     </td>
                     <td>
                       <select className="form-select" onChange={(e) => this.updatePropertyRecordType(i,e.target.selectedIndex)}>
                         {recordTypes.map((type) => <option value={type} selected={property.recordType === type}>{type}</option>)}
                       </select>
+                      { errors.recordType && <ul>
+                        <li>{errors.recordType}</li>
+                      </ul> }
                     </td>
                     <td>
                       <button className="btn btn-danger" onClick={() => this.deleteProperty(i)}>
