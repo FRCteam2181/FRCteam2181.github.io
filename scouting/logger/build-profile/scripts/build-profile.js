@@ -1,6 +1,9 @@
 namespace("2181robotics.scouting.logger.build-profile.BuildProfile", () => {
   const basicTypes = ["counter", "stat", "check"];
   const recordTypes = ["Pit", "Match"];
+  const getTypes = function(enums) {
+    return basicTypes.concat(enums.map(e => e.name));
+  }
   return class extends React.Component {
     constructor(props) {
       super(props);
@@ -30,6 +33,8 @@ namespace("2181robotics.scouting.logger.build-profile.BuildProfile", () => {
       enums[enumIndex].name = newName;
       if (newName.length === 0) {
         enums[enumIndex].errors.name = "cannot be blank"
+      } else if (basicTypes.indexOf(newName) < 0) {
+        enums[enumIndex].errors.name = `cannot be one of "${basicTypes.join("\", \"")}"`;
       } else {
         const names = enums.map(e => e.name);
         if (names.indexOf(newName) !== enumIndex) {
@@ -61,13 +66,13 @@ namespace("2181robotics.scouting.logger.build-profile.BuildProfile", () => {
       enums[enumIndex].values = Array.from(enums[enumIndex].values);
       enums[enumIndex].values[valueIndex].value = newValue;
       if (newValue.length === 0) {
-        enums[enumIndex].values[valueIndex].errors.name = "cannot be blank"
+        enums[enumIndex].values[valueIndex].errors.value = "cannot be blank"
       } else {
         const values = enums[enumIndex].values.map(e => e.value);
         if (values.indexOf(newValue) !== enumIndex) {
-          enums[enumIndex].values[valueIndex].errors.name = "must be unique";
+          enums[enumIndex].values[valueIndex].errors.value = "must be unique";
         } else {
-          delete enums[enumIndex].values[valueIndex].errors.name;
+          delete enums[enumIndex].values[valueIndex].errors.value;
         }
       }
       this.setState({ enums });
@@ -93,7 +98,14 @@ namespace("2181robotics.scouting.logger.build-profile.BuildProfile", () => {
     deleteEnum(enumIndex){
       const enums = Array.from(this.state.enums);
       enums.splice(enumIndex, 1);
-      this.setState({ enums });
+      const typeNames = getTypes(enums);
+      const properties = this.state.properties.map(p => {
+        if (typeNames.indexOf(p.type) < 0) {
+          p.type = "";
+          p.errors.type = "cannot be empty"
+        }
+      });
+      this.setState({ enums, properties });
     }
     addNewEnumValue(enumIndex) {
       const enums = Array.from(this.state.enums);
@@ -149,14 +161,16 @@ namespace("2181robotics.scouting.logger.build-profile.BuildProfile", () => {
       this.setState({ properties });
     }
     updatePropertyType(propertyIndex, selectedIndex) {
-      const types = basicTypes.concat(this.state.enums.map(e => e.name));
+      const types = getTypes(this.state.enums);
       const properties = Array.from(this.state.properties);
       properties[propertyIndex].type = types[selectedIndex];
+      delete properties[propertyIndex].errors.type;
       this.setState({ properties });
     }
     updatePropertyRecordType(propertyIndex, selectedIndex) {
       const properties = Array.from(this.state.properties);
       properties[propertyIndex].recordType = recordTypes[selectedIndex];
+      delete properties[propertyIndex].errors.recordType;
       this.setState({ properties });
     }
     deleteProperty(propertyIndex) {
@@ -263,6 +277,7 @@ namespace("2181robotics.scouting.logger.build-profile.BuildProfile", () => {
             </>}
             {this.state.selectedTab==="Profile" && <>
               <h3>Profile</h3>
+              {this.state.propertyErrors}
               <table className="table table-striped">
                 <thead>
                   <tr>
