@@ -194,11 +194,11 @@ namespace("2181robotics.scouting.logger.build-profile.BuildProfile", () => {
         <div className="card border-3">
           <div className="card-header pb-0 bg-secondary">
             <ul className="nav nav-tabs nav-fill m-0 border-bottom-0">
-            <li className="nav-item">
-                <a className={`nav-link ${this.state.selectedTab==="Enums"?"active bg-dark text-light border-dark":"text-light"}`} href="#" onClick={(e) => this.selectTab(e, "Enums")}>Enums</a>
-              </li>
               <li className="nav-item">
                 <a className={`nav-link ${this.state.selectedTab==="Profile"?"active bg-dark text-light border-dark":"text-light"}`} href="#" onClick={(e) => this.selectTab(e, "Profile")}>Profile</a>
+              </li>
+              <li className="nav-item">
+                <a className={`nav-link ${this.state.selectedTab==="Enums"?"active bg-dark text-light border-dark":"text-light"}`} href="#" onClick={(e) => this.selectTab(e, "Enums")}>Enums</a>
               </li>
             </ul>
           </div>
@@ -210,16 +210,20 @@ namespace("2181robotics.scouting.logger.build-profile.BuildProfile", () => {
                   <div className="card-header">
                     <div className="d-flex">
                       {e.expanded&&e.editing?<input value={e.name} onChange={(e) => this.updateEnumName(i,e.target.value)}/>:<h4 className="flex-grow-1">{e.name}</h4>}
-                      <button className="btn btn-secondary" onClick={() => this.toggleEditing(i)}><i class="fa-solid fa-pencil"></i></button>
+                      <button className="btn btn-secondary" onClick={() => this.toggleEditing(i)}><i className="fa-solid fa-pencil"></i></button>
                       <button className="btn btn-secondary" onClick={() => this.toggleAccordion(i)}>
-                        {e.expanded?<i class="fa-solid fa-angle-up"></i>:<i class="fa-solid fa-angle-down"></i>}
+                        {e.expanded?<i className="fa-solid fa-angle-up"></i>:<i className="fa-solid fa-angle-down"></i>}
                       </button>
                       {e.expanded&&e.editing&&<>
                         <button className="btn btn-danger" onClick={() => this.deleteEnum(i)}>
-                          <i class="fa-solid fa-xmark"></i>
+                          <i className="fa-solid fa-xmark"></i>
                         </button>
                       </>}
                     </div>
+                    {(e.errors.name||e.errors.values)&&<ul className="text-danger">
+                      { e.errors.name && <li>{ e.errors.name }</li> }
+                      { e.errors.values && <li>{ e.errors.values }</li> }
+                    </ul>}
                   </div>
                   { e.expanded && <div className="card-body">
                     {e.editing?<>
@@ -232,17 +236,23 @@ namespace("2181robotics.scouting.logger.build-profile.BuildProfile", () => {
                           </tr>
                         </thead>
                         <tbody>
-                          {e.values.map(({label,value},j) => {
+                          {e.values.map(({ label, value, errors }, j) => {
                             return <tr>
                               <td>
-                                <input value={label} onChange={(e) => this.updateEnumLabel(i,j,e.target.value)}/>
+                                <input className="form-control" value={label} onChange={(e) => this.updateEnumLabel(i,j,e.target.value)}/>
+                                { errors.label && <ul className="text-danger">
+                                  <li>{errors.label}</li>
+                                </ul> }
                               </td>
                               <td>
-                                <input value={value} onChange={(e) => this.updateEnumValue(i,j,e.target.value)}/>
+                                <input className="form-control" type="number" value={value} onChange={(e) => this.updateEnumValue(i,j,e.target.value)}/>
+                                { errors.value && <ul className="text-danger">
+                                  <li>{errors.value}</li>
+                                </ul> }
                               </td>
                               <td>
                                 <button className="btn btn-danger" onClick={() => this.deleteEnumValue(i,j)}>
-                                  <i class="fa-solid fa-xmark"></i>
+                                  <i className="fa-solid fa-xmark"></i>
                                 </button>
                               </td>
                             </tr>
@@ -264,9 +274,15 @@ namespace("2181robotics.scouting.logger.build-profile.BuildProfile", () => {
                           return <tr>
                             <td>
                               <p>{label}</p>
+                              { errors.label && <ul className="text-danger">
+                                <li>{errors.label}</li>
+                              </ul> }
                             </td>
                             <td>
                               <p>{value}</p>
+                              { errors.value && <ul className="text-danger">
+                                <li>{errors.value}</li>
+                              </ul> }
                             </td>
                           </tr>;
                         })}
@@ -281,7 +297,7 @@ namespace("2181robotics.scouting.logger.build-profile.BuildProfile", () => {
             </>}
             {this.state.selectedTab==="Profile" && <>
               <h3>Profile</h3>
-              { this.state.propertyErrors&&<ul>
+              { this.state.propertyErrors&&<ul className="text-danger">
                 <li>{this.state.propertyErrors}</li>
               </ul> }
               <table className="table table-striped">
@@ -294,37 +310,42 @@ namespace("2181robotics.scouting.logger.build-profile.BuildProfile", () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {this.state.properties.map(({ name, type, recordType, errors }, i) => <tr>
-                    <td>
-                      <input className="form-control" value={property.name} 
-                        onChange={(e) => this.updatePropertyName(i,e.target.value)}/>
-                      { errors.name && <ul>
-                        <li>{errors.name}</li>
-                      </ul> }
-                    </td>
-                    <td>
-                      <select className="form-select" onChange={(e) => this.updatePropertyType(i,e.target.selectedIndex)}>
-                        {basicTypes.map((type) => <option value={type} selected={property.type === type}>{type}</option>)}
-                        {this.state.enums.map((e) => <option value={e.name} selected={property.type === e.name}>{e.name}</option>)}
-                      </select>
-                      { errors.type && <ul>
-                        <li>{errors.type}</li>
-                      </ul> }
-                    </td>
-                    <td>
-                      <select className="form-select" onChange={(e) => this.updatePropertyRecordType(i,e.target.selectedIndex)}>
-                        {recordTypes.map((type) => <option value={type} selected={property.recordType === type}>{type}</option>)}
-                      </select>
-                      { errors.recordType && <ul>
-                        <li>{errors.recordType}</li>
-                      </ul> }
-                    </td>
-                    <td>
-                      <button className="btn btn-danger" onClick={() => this.deleteProperty(i)}>
-                        <i class="fa-solid fa-xmark"></i>
-                      </button>
-                    </td>
-                  </tr>)}
+                  {this.state.properties.map((property, i) => {
+                    return <tr>
+                      <td>
+                        <input className="form-control" value={property.name} 
+                          onChange={(e) => this.updatePropertyName(i,e.target.value)}/>
+                        { property.errors.name && <ul className="text-danger">
+                          <li>{property.errors.name}</li>
+                        </ul> }
+                      </td>
+                      <td>
+                        <input />
+                        <select className="form-select" value={property.type} onChange={(e) => this.updatePropertyType(i,e.target.selectedIndex)}>
+                          <option value="" disabled={property.type != ""}>Select one</option>
+                          { basicTypes.map((type) => <option value={type}>{type}</option>) }
+                          { this.state.enums.map((e) => <option value={e.name}>{e.name}</option>) }
+                        </select>
+                        { property.errors.type && <ul className="text-danger">
+                          <li>{property.errors.type}</li>
+                        </ul> }
+                      </td>
+                      <td>
+                        <select className="form-select" value={property.recordType} onChange={(e) => this.updatePropertyRecordType(i,e.target.selectedIndex)}>
+                          <option value="" disabled={property.recordType != ""}>Select one</option>
+                          { recordTypes.map((type) => <option value={type}>{type}</option>) }
+                        </select>
+                        { property.errors.recordType && <ul className="text-danger">
+                          <li>{property.errors.recordType}</li>
+                        </ul> }
+                      </td>
+                      <td>
+                        <button className="btn btn-danger" onClick={() => this.deleteProperty(i)}>
+                          <i className="fa-solid fa-xmark"></i>
+                        </button>
+                      </td>
+                    </tr>;
+                  })}
                 </tbody>
               </table>
               <div className="text-center">
