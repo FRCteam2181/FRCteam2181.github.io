@@ -1,0 +1,167 @@
+[
+  {
+    "Match": 1,
+    "Teams (1)": {
+      "blue": [
+        5690,
+        4693,
+        8836
+      ],
+      "red": [
+        4009,
+        7915,
+        2531
+      ]
+    },
+    "Leave (2)": {
+      "blue": [
+        true,
+        false,
+        false
+      ],
+      "red": [
+        true,
+        true,
+        false
+      ]
+    },
+    "Amp Note Count (3)": {
+      "blue": 0,
+      "red": 0
+    },
+    "Speaker Note Count (4)": {
+      "blue": 3,
+      "red": 5
+    },
+    "Leave Points (5)": {
+      "blue": 2,
+      "red": 4
+    },
+    "Amp Note Points (6)": {
+      "blue": 0,
+      "red": 0
+    },
+    "Speaker Note Points (7)": {
+      "blue": 15,
+      "red": 25
+    },
+    "Autonomous Points (8)": {
+      "blue": 17,
+      "red": 29
+    },
+    "Amp Note Count (10)": {
+      "blue": 0,
+      "red": 7
+    },
+    "Speaker Note Un-amplified Count (11)": {
+      "blue": 7,
+      "red": 3
+    },
+    "Speaker Note Amplified Count (12)": {
+      "blue": 0,
+      "red": 1
+    },
+    "Amp Note Points (13)": {
+      "blue": 0,
+      "red": 7
+    },
+    "Speaker Note Un-amplified Points (14)": {
+      "blue": 14,
+      "red": 6
+    },
+    "Speaker Note Amplified Points (15)": {
+      "blue": 0,
+      "red": 5
+    },
+    "Spotlit (16)": {
+      "blue": [
+        false,
+        false,
+        false
+      ],
+      "red": [
+        false,
+        false,
+        false
+      ]
+    },
+    "Note In Trap (17)": {
+      "blue": [
+        false,
+        false,
+        false
+      ],
+      "red": [
+        false,
+        false,
+        false
+      ]
+    },
+    "Endgame Park Points (18)": {
+      "blue": 1,
+      "red": 1
+    },
+    "Endgame On Stage Points (19)": {
+      "blue": 3,
+      "red": 6
+    },
+    "Endgame Spot Light Bonus Points (20)": {
+      "blue": 0,
+      "red": 0
+    },
+    "Endgame Harmony Points (21)": {
+      "blue": 0,
+      "red": 0
+    },
+    "Endgame Note In Trap Points (22)": {
+      "blue": 0,
+      "red": 0
+    },
+    "Coop Button Pressed (23)": {
+      "blue": false,
+      "red": false
+    },
+    "Teleop Points (24)": {
+      "blue": 18,
+      "red": 25
+    },
+    "Fouls/Techs Committed (26)": {
+      "blue": [
+        0,
+        0
+      ],
+      "red": [
+        1,
+        1
+      ]
+    },
+    "Foul Points (27)": {
+      "blue": 7,
+      "red": 0
+    },
+    "Penalties (28)": {
+      "blue": "",
+      "red": ""
+    },
+    "Final Score (29)": {
+      "blue": 42,
+      "red": 54
+    },
+    "Ranking Points (31)": {
+      "blue": {
+        "melody": false,
+        "ensemble": false,
+        "wonMatch": 0
+      },
+      "red": {
+        "melody": false,
+        "ensemble": false,
+        "wonMatch": 2
+      }
+    },
+    "Coopertition Bonus (32)": {
+      "blue": false,
+      "red": false
+    }
+  }
+]

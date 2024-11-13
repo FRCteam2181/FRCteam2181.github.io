@@ -1,0 +1,72 @@
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-fam-h2 {
+  font-family: 'Atomic Age' !important;
+}
+
+h1, .font-fam-h1 {
+  font-family: 'Audiowide' !important;
+}
+
+.bg-gears-dark {
+  background-color: rgb(2,16,57)!important;
+}
+
+.text-gears-dark {
+  color: rgb(2,16,57)!important;
+}
+
+.text-gears-danger {
+  color: #f55;
+}
+
+h1, h2 {
+  text-transform: uppercase;
+}
+
+.gears-checked {
+  border-color: #0dcaf0!important;
+  background-color: #0dcaf0!important;
+}
+
+.gears-unchecked {
+  border-color: #0dcaf0!important;
+  border-width: medium;
+  background-color: transparent!important;
+}
+
+.gears-checked .text-info {
+  color: rgb(2,16,57)!important;
+}
+
+.gears-unchecked .text-info {
+  color: #0dcaf0!important;
+  font-weight: light!important;
+  text-decoration: line-through 20%!important;
+  text-transform: capitalize!important;
+}
+
+.gears-unchecked .text-info::before {
+  content: "\00a0";
+}
+
+.gears-unchecked .text-info::after {
+  content: "\00a0";
+}
+
+.field-style {
+  max-width: 200px;
+}
+
+.section-style {
+  width: 250px!important;
+}
+
+input, textarea, select, option {
+  background-color: #0dcaf0!important;
+  color: rgb(2,16,57)!important;
+  font-weight: bolder!important;
+}

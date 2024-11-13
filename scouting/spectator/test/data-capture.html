@@ -1,0 +1,71 @@
+<html>
+  <head>
+    <title>data grabber</title>
+    <script type="text/javascript">
+      const booleanFromIcon = ((icon) => {
+        return !icon.getAttribute("class").includes("fa-times");
+      });
+      const getIconGroup = (cell => Array.from(cell.querySelectorAll("i")).map(booleanFromIcon));
+      const fieldFunctions = {
+        "Teams": cell => Array.from(cell.querySelectorAll("div.col-sm-4")).map(div => div.textContent),
+        "Leave": getIconGroup,
+        "Spotlit": getIconGroup,
+        "Note In Trap": getIconGroup,
+        "Coop Button Pressed": (cell => booleanFromIcon(cell.querySelectorAll("i")[0])),
+        "Fouls/Techs Committed	": cell => Array.from(cell.querySelectorAll("span")).map(div => div.textContent),
+        "Ranking Points": cell => {
+          const [melody, ensemble, ...wonMatch] = Array.from(cell.querySelectorAll("div.col-md-3")).map(div => div.querySelector("i")?true:false);
+          return { melody, ensemble, wonMatch: wonMatch.filter(i => i).length };
+        },
+        "Coopertition Bonus": (cell => booleanFromIcon(Array.from(cell.querySelectorAll("i"))[0])),
+      };
+      const data = {};
+      const pages = {};
+      const ids = {};
+      function loadDataFromPage(myWindow,pageNumber) {
+        console.log(`load page: ${pageNumber}`);
+        console.log({ title: myWindow.document.title})
+        const document = myWindow.document
+        data[pageNumber] = Array.from(document.querySelectorAll("tbody tr")).reduce((outval, row) => {
+          const [header, blue, red] = row.querySelectorAll("td");
+          const key = header.textContent;
+          if (key.length > 0) {
+            const func = fieldFunctions[key] || (i => i.textContent);
+            outval[key] = { blue: func(blue), red: func(red) };
+          }
+          return outval;
+        }, {});
+        console.log({ data })
+        delete pages[pageNumber];
+        console.log({ pages });
+        if (Object.keys(pages).length === 0) {
+          document.getElementById(ids.display).innerHTML = JSON.stringify(data, i => i, "  ");
+        }
+      }
+      //const pageCount = 83;
+      const pageCount = 1;
+      function loadFromWindows(displayId, framesId) {
+        ids.display = displayId;
+        pages[1] = true;
+        const newWindow = open("https://frc-events.firstinspires.org/2024/MNDU/qualifications/1", "_blank");
+        console.log({ newWindow, document: newWindow.document });
+        newWindow.document.addEventListener("load",() => loadDataFromPage(newWindow, 1));
+        loadDataFromPage(newWindow, 1);
+        /*
+        document.getElementById(framesId).innerHTML = Array(pageCount).fill("").map((_,i) => {
+          const pageNumber = i + 1;
+          const url = `https://frc-events.firstinspires.org/2024/MNDU/qualifications/${pageNumber}`
+          console.log(url);
+          pages[pageNumber] = true;
+          return `<iframe src="${url}" onload="loadDataFromPage(this,${pageNumber})"></iframe>`;
+        });
+        */
+      }
+    </script>
+  </head>
+  <body>
+    <button onclick="loadFromWindows('display','frames')">Click Me!</button>
+    <div id="display"></div>
+    <div id="frames"></div>
+  </body>
+</html>
