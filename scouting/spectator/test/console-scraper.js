@@ -1,4 +1,9 @@
 (() => {
+  localStorage.setItem("scraper.data","[]");
+  navigation.navigate(`https://frc-events.firstinspires.org/2024/MNDU/qualifications/1`);
+})()
+
+(() => {
   const baseUrl = "https://frc-events.firstinspires.org/2024/MNDU/qualifications/";
   const parseIntOrText = (i => {
     const text = i.textContent;
