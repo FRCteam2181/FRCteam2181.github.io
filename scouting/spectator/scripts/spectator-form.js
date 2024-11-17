@@ -11,7 +11,7 @@ namespace("frc2181.scouting.spectator.SpectatorForm", {
         <h1 className="text-center text-gears-dark">{formData().page_title}</h1>
         <form className="w-100" onSubmit={e => e.preventDefault()}>
           <Sections />
-          <CommitAndResetSection onCommit={props.onCommit} />
+          <CommitAndResetSection onCommit={props.onCommit} onCancel={props.onCancel}/>
           { /* <ConfigSection /> */ }
         </form>
       </main>

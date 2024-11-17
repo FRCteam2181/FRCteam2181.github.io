@@ -70,3 +70,29 @@ input, textarea, select, option {
   color: rgb(2,16,57)!important;
   font-weight: bolder!important;
 }
+
+.table-wrapper {
+  overflow-y: scroll;
+}
+
+th {
+  position: sticky;
+  top: 0px;
+  background-color: rgb(2,16,57)!important;
+  margin: 0;
+  padding: 0;
+  outline: rgb(2,16,57)!important;
+  padding: 5px 10px;
+}
+
+td {
+  border-top: 3px solid white;
+  padding: 10px;
+}
+
+.frame-box {
+  background-color: rgb(2,16,57)!important;
+  border: 3px solid white;
+  border-radius: .3rem;
+  margin-bottom: 1.5rem;
+}

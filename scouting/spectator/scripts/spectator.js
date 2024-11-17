@@ -2,14 +2,15 @@ namespace("frc2181.scouting.spectator.Spectator", {
   "frc2181.scouting.spectator.DisplayTable": "DisplayTable",
   "frc2181.scouting.spectator.FormDataService": "FormDataService",
   "frc2181.scouting.spectator.SpectatorForm": "SpectatorForm",
-}, ({ DisplayTable, FormDataService, SpectatorForm }) => {
+  "frc2181.scouting.spectator.TestData": "TestData",
+}, ({ DisplayTable, FormDataService, SpectatorForm, TestData }) => {
   const formData = FormDataService.state;
   return class extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-        dataTable: [],
-        selectedRecord: -1
+        dataTable: TestData,
+        selectedRecord: undefined
       };
     }
     componentDidMount() {
@@ -40,11 +41,13 @@ namespace("frc2181.scouting.spectator.Spectator", {
       }
       formData.reset({ dataTable, selectedRecord: undefined });
     }
+    cancel() {
+      formData.reset({ selectedRecord: undefined });
+    }
     render() {
       return (<>
-        { this.state.now && !isNaN(this.state.selectedRecord) && <SpectatorForm onCommit={ () => {
-          console.log("commit")
-        } }/>}
+        { this.state.now && !isNaN(this.state.selectedRecord) && 
+          <SpectatorForm onCommit={ () => this.commit() } onCancel={ () => this.cancel() }/>}
         { this.state.now && isNaN(this.state.selectedRecord) && 
           <DisplayTable 
             data={this.state.dataTable}

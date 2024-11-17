@@ -1,7 +1,8 @@
 namespace("frc2181.scouting.spectator.Sections", {
+  "frc2181.scouting.spectator.FlagSet": "FlagSet",
   "frc2181.scouting.spectator.FormDataService": "FormDataService",
   "frc2181.scouting.spectator.Section": "Section"
-}, ({ FormDataService, Section }) => {
+}, ({ FlagSet, FormDataService, Section }) => {
   const formData = FormDataService.state;
   const fieldClasses = "mb-3 mx-2 field-style";
   const Label = function({ required, title, value }) {
@@ -11,16 +12,16 @@ namespace("frc2181.scouting.spectator.Sections", {
         <span className="text-gears-danger">&nbsp;!!</span> }
     </label>)
   }
+  const ToggleButton = function(props) {
+    return <button key={props.toggleKey}
+      className={`btn ${props.value?"gears-checked":"gears-unchecked"}`}
+      onClick={() => props.onClick(!props.value)}>
+      <Label {...props}/>
+    </button>;
+  }
   const Checkbox = function(data) {
-    function handleChange() {
-      data.onChange(!data.value);
-    }
-    return (<div className={`text-center ${fieldClasses}`} key={data.title}>
-      <button 
-        className={`btn ${data.value?"gears-checked":"gears-unchecked"}`}
-        onClick={handleChange}>
-        <Label {...data}/>
-      </button>
+    return (<div className={`text-center ${fieldClasses}`} key={data.code}>
+      <ToggleButton {...data}/>
     </div>);
   }
   const CounterInput = function(data) {
@@ -68,7 +69,7 @@ namespace("frc2181.scouting.spectator.Sections", {
       <input 
         type="number" 
         className="form-control" 
-        id={data.title}
+        id={data.code}
         min={data.min}
         max={data.max}
         value={data.value || data.defaultValue || ''}
@@ -86,7 +87,7 @@ namespace("frc2181.scouting.spectator.Sections", {
       <input 
         type="range" 
         className="form-control" 
-        id={data.title}
+        id={data.code}
         min={data.min}
         max={data.max}
         defaultValue={data.defaultValue}
@@ -95,58 +96,77 @@ namespace("frc2181.scouting.spectator.Sections", {
         />
     </div>);
   }
-  const SelectInput = function(data) {
+  const EnumInput = function(data) {
     function handleSelect(evt) {
       evt.preventDefault();
-      if (!data.multiSelect) {
-        data.onChange(evt.currentTarget.value);
-      } else {
-        const selectedOptions = Array.from(evt.currentTarget.selectedOptions).map(
-          o => o.value,
-        );
-        data.onChange(selectedOptions);
-      }
+      data.onChange(evt.currentTarget.value);
     }
     return (<div className={fieldClasses} key={data.title}>
       <Label {...data}/>
       <select
         className="form-select"
-        size={data.multiSelect ? Object.keys(data.options).length : 1}
+        size={1}
         name={data.title}
-        id={data.title}
+        id={data.code}
         onChange={handleSelect}
         value={data.value}
-        multiple={data.multiSelect}
       >
-        {Object.keys(data.options).map(o => {
+        {data.options.map((o,i) => {
           return (
-            <option key={o} value={o}>
-              {data.options[o]}
-            </option>
+            <option key={`select${data.code}-${i}`} value={i}>{o}</option>
           );
         })}
       </select>
     </div>);
   }
-  const StringInput = function(data) {
-    function handleChange(e) {
-      e.preventDefault();
-      data.onChange(e.currentTarget.value);
+  const EnumSetInput = function(data) {
+    const value = FlagSet.decode(data.options, data.value);
+    const values = data.options.map((o) => value.indexOf(o) >= 0);
+    console.log({ encoded: data.value, value });
+    function handleSelect(index) {
+      values[index] = !values[index];
+      data.onChange(FlagSet.encode(data.options, data.options.filter((_,i) => values[i])));
     }
     return (<div className={fieldClasses} key={data.title}>
       <Label {...data}/>
-      <input
-        type="text"
-        className="form-control"
-        disabled={data?.disabled}
-        name={`${data?.title}_input`}
-        id={`${data?.title}_input`}
-        onChange={handleChange}
-        defaultValue={!data?.value && data?.defaultValue}
-        value={data?.value}
-        maxLength={data.max}
-        minLength={data.min}
-      />
+      <div className="btn-group-vertical">
+        { data.options.map((o,i) => <>
+          <ToggleButton 
+            toggleKey={`flag${data.code}-${i}`}
+            required={false}
+            title={o}
+            value={values[i]}
+            onClick={() => handleSelect(i)}
+            />
+        </>)}
+      </div>
+    </div>);
+  }
+  const StringInput = function(data) {
+    const inputProps = {
+      type: "text",
+      className: "form-control",
+      disabled: data.disabled,
+      name: data.code,
+      id: data.code,
+      onChange: (e) => {
+        e.preventDefault();
+        data.onChange(e.currentTarget.value);
+      },
+      maxLength: data.max,
+      minLength: data.min,
+    }
+    return (<div className={fieldClasses} key={data.title}>
+      <Label {...data}/>
+      { data.value?<>
+          <input
+            {...inputProps}
+            value={data.value}/>
+        </>:<>
+          <input
+            {...inputProps}
+            defaultValue={data.defaultValue}/>
+        </>}
     </div>);
   }
   const MarkdownInput = function(data) {
@@ -159,8 +179,8 @@ namespace("frc2181.scouting.spectator.Sections", {
       <textarea
         className="form-control"
         disabled={data?.disabled}
-        name={`${data?.title}_input`}
-        id={`${data?.title}_input`}
+        name={data.code}
+        id={data.code}
         onChange={handleChange}
         defaultValue={!data?.value && data?.defaultValue}
         value={data?.value}
@@ -211,9 +231,20 @@ namespace("frc2181.scouting.spectator.Sections", {
             section={props.section}
           />
         );
-      case 'select':
+      case 'enum':
         return (
-          <SelectInput
+          <EnumInput
+            key={input.title}
+            {...input}
+            options={input.choices || { fail: 'no choices provided' }}
+            defaultValue={input.defaultValue}
+            onChange={handleChange}
+            section={props.section}
+          />
+        );
+      case 'enum-set':
+        return (
+          <EnumSetInput
             key={input.title}
             {...input}
             options={input.choices || { fail: 'no choices provided' }}
@@ -271,7 +302,7 @@ namespace("frc2181.scouting.spectator.Sections", {
             >
               {input.title}
             </label>
-            <div className="form-control" id={input.title}>
+            <div className="form-control" id={input.code}>
               <span className="text-danger">No Renderer for type: ${input.type}</span>
             </div>
           </div>

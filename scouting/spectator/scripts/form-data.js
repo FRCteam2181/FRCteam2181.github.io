@@ -44,5 +44,6 @@ namespace("frc2181.scouting.spectator.FormDataService", {
   stateHandler.commit = commit;
   stateHandler.reset = reset;
   stateHandler.load = loadRecord;
+  stateHandler.getRecord = getRecord;
   return { state: stateHandler, load };
 });

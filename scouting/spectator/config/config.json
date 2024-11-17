@@ -23,17 +23,17 @@
         },
         {
           "title": "Robot",
-          "type": "select",
+          "type": "enum",
           "required": true,
           "code": "robot",
-          "choices": {
-            "R1": "Red 1",
-            "R2": "Red 2",
-            "R3": "Red 3",
-            "B1": "Blue 1",
-            "B2": "Blue 2",
-            "B3": "Blue 3"
-          },
+          "choices": [
+            "Red 1",
+            "Red 2",
+            "Red 3",
+            "Blue 1",
+            "Blue 2",
+            "Blue 3"
+        ],
           "defaultValue": "R1"
         },
         {
@@ -44,14 +44,14 @@
         },
         {
           "title": "Starting Position",
-          "type": "select",
+          "type": "enum",
           "required": true,
           "code": "startPosition",
-          "choices": {
-            "1": "Source",
-            "2": "Middle",
-            "3": "Amp"
-          },
+          "choices": [
+            "Source",
+            "Middle",
+            "Amp"
+          ],
           "defaultValue": ""
         },
         {
@@ -92,18 +92,17 @@
         {
           "code": "autoGamePiecePath",
           "title": "Auto Game Piece Path",
-          "type": "select",
-          "multiSelect": true,
-          "choices": {
-            "1": "Speaker 3 (Source Side)",
-            "2": "Speaker 2 (Middle)",
-            "3": "Speaker 1 (Amp Side)",
-            "4": "Midline 5 (Source Edge)",
-            "5": "Midline 4",
-            "6": "Midline 3 (Middle)",
-            "7": "Midline 2",
-            "8": "Midline 1 (Amp Edge)"
-          }
+          "type": "enum-set",
+          "choices": [
+            "Speaker 3 (Source Side)",
+            "Speaker 2 (Middle)",
+            "Speaker 1 (Amp Side)",
+            "Midline 5 (Source Edge)",
+            "Midline 4",
+            "Midline 3 (Middle)",
+            "Midline 2",
+            "Midline 1 (Amp Edge)"
+          ]
         },
         {
           "code": "autoFoulCount",
@@ -164,41 +163,41 @@
       "fields": [
         {
           "title": "End Position",
-          "type": "select",
+          "type": "enum",
           "required": true,
           "code": "endPosition",
-          "choices": {
-            "0": "No Climb",
-            "1": "Parked",
-            "2": "Onstage",
-            "4": "Harmony",
-            "3": "Failed Harmony"
-          },
+          "choices": [
+            "No Climb",
+            "Parked",
+            "Onstage",
+            "Failed Harmony",
+            "Harmony"
+          ],
           "defaultValue": "No"
         },
         {
           "code": "offenseSkillRating",
           "title": "Offense Skill",
-          "type": "select",
-          "choices": {
-            "1": "Not Effective",
-            "2": "Average",
-            "3": "Very Effective",
-            "x": "Not Observed"
-          },
+          "type": "enum",
+          "choices": [
+            "Not Effective",
+            "Average",
+            "Very Effective",
+            "Not Observed"
+          ],
           "defaultValue": "x",
           "required": false
         },
         {
           "code": "defenseSkillRating",
           "title": "Defense Skill",
-          "type": "select",
-          "choices": {
-            "1": "Not Effective",
-            "2": "Average",
-            "3": "Very Effective",
-            "x": "Not Observed"
-          },
+          "type": "enum",
+          "choices": [
+            "Not Effective",
+            "Average",
+            "Very Effective",
+            "Not Observed"
+          ],
           "defaultValue": "x",
           "required": false
         },
@@ -212,14 +211,14 @@
         {
           "code": "yellowRedCard",
           "title": "Yellow/Red Card",
-          "type": "select",
+          "type": "enum",
           "defaultValue": "No Card",
           "required": true,
-          "choices": {
-            "None": "No Card",
-            "Yellow": "Yellow Card",
-            "Red": "Red Card"
-          }
+          "choices": [
+            "No Card",
+            "Yellow Card",
+            "Red Card"
+          ]
         },
         {
           "code": "comments",
