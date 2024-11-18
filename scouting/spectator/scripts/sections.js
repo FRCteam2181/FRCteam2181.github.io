@@ -132,6 +132,7 @@ namespace("frc2181.scouting.spectator.Sections", {
       <div className="btn-group-vertical">
         { data.options.map((o,i) => <>
           <ToggleButton 
+            key={`flag${data.code}-${i}`}
             toggleKey={`flag${data.code}-${i}`}
             required={false}
             title={o}
@@ -170,23 +171,29 @@ namespace("frc2181.scouting.spectator.Sections", {
     </div>);
   }
   const MarkdownInput = function(data) {
-    function handleChange(e) {
-      e.preventDefault();
-      data.onChange(e.currentTarget.value);
+    const inputProps = {
+      className: "form-control",
+      disabled: data.disabled,
+      name: data.code,
+      id: data.code,
+      onChange: (e) => {
+        e.preventDefault();
+        data.onChange(e.currentTarget.value);
+      },
+      maxLength: data.max,
+      minLength: data.min,
     }
     return (<div className={fieldClasses} key={data.title}>
       <Label {...data}/>
-      <textarea
-        className="form-control"
-        disabled={data?.disabled}
-        name={data.code}
-        id={data.code}
-        onChange={handleChange}
-        defaultValue={!data?.value && data?.defaultValue}
-        value={data?.value}
-        maxLength={data.max}
-        minLength={data.min}
-      />
+      { data.value?<>
+        <textarea
+          {...inputProps}
+          value={data.value}/>
+      </>:<>
+        <textarea
+          {...inputProps}
+          defaultValue={data.defaultValue}/>
+      </>}
     </div>);
   }
   const inputSelector = (section, code) => {
