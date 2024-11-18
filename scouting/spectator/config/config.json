@@ -1,7 +1,8 @@
 {
   "$schema": "./schema.json",
-  "title": "QRScout",
+  "title": "Spectator",
   "page_title": "Crescendo",
+  "aggregateBy": "teamNumber",
   "sections": [
     {
       "name": "Prematch",
@@ -34,7 +35,7 @@
             "Blue 2",
             "Blue 3"
         ],
-          "defaultValue": "R1"
+          "defaultValue": "0"
         },
         {
           "title": "Team Number",
@@ -51,8 +52,7 @@
             "Source",
             "Middle",
             "Amp"
-          ],
-          "defaultValue": ""
+          ]
         },
         {
           "title": "No Show",

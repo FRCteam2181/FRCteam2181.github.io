@@ -18,19 +18,6 @@ namespace("frc2181.scouting.spectator.Spectator", {
         FormDataService.load((newState) => { this.setState(newState) })
       }
     }
-    add() {
-      this.setState({ selectedRecord: -1 });
-    }
-    edit(index) {
-      formData.load(this.state.dataTable[index]);
-      this.setState({ selectedRecord: index });
-
-    }
-    delete(index) {
-      const dataTable = this.state.dataTable.map(row => Object.assign({}, row));
-      dataTable.splice(index,1);
-      this.setState({ dataTable });
-    }
     commit() {
       const dataTable = this.state.dataTable.map(row => Object.assign({}, row));
       const record = formData.getRecord();
@@ -44,17 +31,60 @@ namespace("frc2181.scouting.spectator.Spectator", {
     cancel() {
       formData.reset({ selectedRecord: undefined });
     }
+    add() {
+      this.setState({ selectedRecord: -1 });
+    }
+    loadData() {
+      // todo
+    }
+    saveData() {
+      // todo
+    }
+    downloadTable() {
+      // todo
+    }
+    clearTable() {
+      if(confirm("This will delete ALL DATA! Are you sure?")) {
+        this.setState({ selectedRecord: undefined, dataTable: [] });
+      }
+    }
+    edit(index) {
+      formData.load(this.state.dataTable[index]);
+      this.setState({ selectedRecord: index });
+    }
+    delete(index) {
+      const dataTable = this.state.dataTable.map(row => Object.assign({}, row));
+      dataTable.splice(index,1);
+      this.setState({ dataTable });
+    }
     render() {
       return (<>
         { this.state.now && !isNaN(this.state.selectedRecord) && 
           <SpectatorForm onCommit={ () => this.commit() } onCancel={ () => this.cancel() }/>}
-        { this.state.now && isNaN(this.state.selectedRecord) && 
+        { this.state.now && isNaN(this.state.selectedRecord) && <div className="d-flex flex-column justify-content-center">
+          <div className="m-2 d-flex justify-content-center">
+            <button title="Add New Record" className="btn btn-primary m-2 " onClick={() => this.add()}>
+              <h2 className="text-center align-middle mb-0"><i className="fas fa-file-circle-plus"></i></h2>
+            </button>
+            <button title="Load Data From File" className="btn btn-primary m-2" onClick={() => this.loadData()}>
+              <h2 className="text-center align-middle mb-0"><i className="fas fa-file-import"></i></h2>
+            </button>
+            <button title="Save Data" className="btn btn-primary m-2" onClick={() => this.saveData()}>
+              <h2 className="text-center align-middle mb-0"><i className="far fa-floppy-disk"></i></h2>
+            </button>
+            <button title="Download Table" className="btn btn-primary m-2" onClick={() => this.downloadTable()}>
+              <h2 className="text-center align-middle mb-0"><i className="fas fa-table-cells"></i></h2>
+            </button>
+            <button title="Clear Table" className="btn btn-danger m-2" onClick={() => this.clearTable()}>
+              <h2 className="text-center align-middle mb-0"><i className="far fa-file-excel"></i></h2>
+            </button>
+          </div>
           <DisplayTable 
             data={this.state.dataTable}
-            onAdd={() => this.add()}
             onEdit={(index) => this.edit(index)}
             onDelete={(index) => this.delete(index)}
-            />}
+            />
+        </div>}
       </>);
     }
   }

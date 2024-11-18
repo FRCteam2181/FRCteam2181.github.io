@@ -14,10 +14,19 @@
         "page_title": {
           "type": "string"
         },
+        "aggregateBy": {
+          "type": "string"
+        },
         "sections": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Section"
+          }
+        },
+        "reports": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Report"
           }
         }
       },
@@ -85,6 +94,12 @@
         },
         "autoIncrementOnReset": {
           "type": "boolean"
+        },
+        "aggregate": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AggregateConfig"
+          }
         }
       },
       "required": ["title", "type", "required", "code"],
@@ -103,6 +118,76 @@
         "image",
         "markdown"
       ]
+    },
+    "AggregateConfig": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "function": {
+          "type": "string",
+          "enum": [
+            "min", 
+            "max", 
+            "sum", 
+            "product", 
+            "mean", 
+            "median", 
+            "mode", 
+            "countTrue", 
+            "countFalse", 
+            "countIf", 
+            "union", 
+            "intersection",
+            "minCount", 
+            "maxCount", 
+            "unionCount", 
+            "intersectionCount"
+          ]
+        },
+        "additionalArguments": {
+          "type": "array",
+          "items": {
+            "type": ["number","string","boolean","object","array","null"]
+          }
+        }
+      },
+      "required": ["title", "code"],
+      "additionalProperties": false
+    },
+    "Report": {
+      "type": "object",
+      "properties": {
+        "reportTitle": {
+          "type": "string"
+        },
+        "orderBy": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReportOrder"
+          }
+        }
+      },
+      "required": ["reportTitle", "orderBy"],
+      "additionalProperties": false
+    },
+    "ReportOrder": {
+      "type": "object",
+      "properties": {
+        "field": {
+          "type": "string"
+        },
+        "orderBy": {
+          "type": "string",
+          "enum": [ "asc", "desc" ]
+        }
+      },
+      "required": ["field"],
+      "additionalProperties": false
     }
   }
 }
