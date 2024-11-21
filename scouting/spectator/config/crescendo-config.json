@@ -66,7 +66,12 @@
           "defaultValue": false,
           "required": false,
           "code": "isNoShow",
-          "columnOrder": 5
+          "columnOrder": 5,
+          "aggregate": [{
+            "title": "No Show Count",
+            "code": "noShowCount",
+            "function": "countTrue"
+          }]
         }
       ]
     },
@@ -79,7 +84,12 @@
           "defaultValue": false,
           "required": false,
           "code": "hasMoved",
-          "columnOrder": 6
+          "columnOrder": 6,
+          "aggregate": [{
+            "title": "Moved Count",
+            "code": "movedCount",
+            "function": "countTrue"
+          }]
         },
         {
           "code": "autoSpeakerScoredCount",
@@ -88,7 +98,24 @@
           "defaultValue": 0,
           "min": 0,
           "required": false,
-          "columnOrder": 7
+          "columnOrder": 7,
+          "aggregate": [{
+            "title": "Speaker Scored Minimum",
+            "code": "autoSpeakerScoredMin",
+            "function": "min"
+          },{
+            "title": "Speaker Scored Maximum",
+            "code": "autoSpeakerScoredMax",
+            "function": "max"
+          },{
+            "title": "Speaker Scored Median",
+            "code": "autoSpeakerScoredMedian",
+            "function": "median"
+          },{
+            "title": "Speaker Scored Mean",
+            "code": "autoSpeakerScoredMean",
+            "function": "mean"
+          }]
         },
         {
           "code": "autoSpeakerMissedCount",
@@ -97,11 +124,28 @@
           "defaultValue": 0,
           "min": 0,
           "required": false,
-          "columnOrder": 8
+          "columnOrder": 8,
+          "aggregate": [{
+            "title": "Speaker Missed Minimum",
+            "code": "autoSpeakerMissedMin",
+            "function": "min"
+          },{
+            "title": "Speaker Missed Maximum",
+            "code": "autoSpeakerMissedMax",
+            "function": "max"
+          },{
+            "title": "Speaker Missed Median",
+            "code": "autoSpeakerMissedMedian",
+            "function": "median"
+          },{
+            "title": "Speaker Missed Mean",
+            "code": "autoSpeakerMissedMean",
+            "function": "mean"
+          }]
         },
         {
           "code": "autoGamePiecePath",
-          "title": "Auto Game Piece Path",
+          "title": "Game Piece Path",
           "type": "enum-set",
           "choices": [
             "Speaker 3 (Source Side)",
@@ -113,17 +157,52 @@
             "Midline 2",
             "Midline 1 (Amp Edge)"
           ],
+          "required": false,
           "defaultValue": 0,
-          "columnOrder": 9
+          "columnOrder": 9,
+          "aggregate": [{
+            "title": "Game Piece Path Union Count",
+            "code": "autoGamePiecePathUnionCount",
+            "function": "unionCount"
+          },{
+            "title": "Game Piece Path intersection Count",
+            "code": "autoGamePiecePathIntersectionCount",
+            "function": "intersectionCount"
+          },{
+            "title": "Game Piece Path Count Minimum",
+            "code": "autoGamePiecePathCountMin",
+            "function": "minCount"
+          },{
+            "title": "Game Piece Path Count Maximum",
+            "code": "autoGamePiecePathCountMax",
+            "function": "maxCount"
+          }]
         },
         {
           "code": "autoFoulCount",
-          "title": "Auto Foul",
+          "title": "Fouls",
           "type": "counter",
           "defaultValue": 0,
           "min": 0,
           "required": false,
-          "columnOrder": 10
+          "columnOrder": 10,
+          "aggregate": [{
+            "title": "Foul Count Minimum",
+            "code": "autoFoulCountMin",
+            "function": "min"
+          },{
+            "title": "Foul Count Maximum",
+            "code": "autoFoulCountMax",
+            "function": "max"
+          },{
+            "title": "Foul Count Median",
+            "code": "autoFoulCountMedian",
+            "function": "median"
+          },{
+            "title": "Foul Count Mean",
+            "code": "autoFoulCountMean",
+            "function": "mean"
+          }]
         }
       ]
     },
@@ -137,7 +216,24 @@
           "defaultValue": 0,
           "min": 0,
           "required": false,
-          "columnOrder": 11
+          "columnOrder": 11,
+          "aggregate": [{
+            "title": "Amp Scored Minimum",
+            "code": "ampScoredMin",
+            "function": "min"
+          },{
+            "title": "Amp Scored Maximum",
+            "code": "ampScoredMax",
+            "function": "max"
+          },{
+            "title": "Amp Scored Median",
+            "code": "ampScoredMedian",
+            "function": "median"
+          },{
+            "title": "Amp Scored Mean",
+            "code": "ampScoredMean",
+            "function": "mean"
+          }]
         },
         {
           "code": "speakerScoredCount",
@@ -146,7 +242,24 @@
           "defaultValue": 0,
           "min": 0,
           "required": false,
-          "columnOrder": 12
+          "columnOrder": 12,
+          "aggregate": [{
+            "title": "Speaker Scored Minimum",
+            "code": "speakerScoredMin",
+            "function": "min"
+          },{
+            "title": "Speaker Scored Maximum",
+            "code": "speakerScoredMax",
+            "function": "max"
+          },{
+            "title": "Speaker Scored Median",
+            "code": "speakerScoredMedian",
+            "function": "median"
+          },{
+            "title": "Speaker Scored Mean",
+            "code": "speakerScoredMean",
+            "function": "mean"
+          }]
         },
         {
           "code": "feederShotsCount",
@@ -155,7 +268,24 @@
           "defaultValue": 0,
           "min": 0,
           "required": false,
-          "columnOrder": 13
+          "columnOrder": 13,
+          "aggregate": [{
+            "title": "Feeder Shots Minimum",
+            "code": "feederShotsMin",
+            "function": "min"
+          },{
+            "title": "Feeder Shots Maximum",
+            "code": "feederShotsMax",
+            "function": "max"
+          },{
+            "title": "Feeder Shots Median",
+            "code": "feederShotsMedian",
+            "function": "median"
+          },{
+            "title": "Feeder Shots Mean",
+            "code": "feederShotsMean",
+            "function": "mean"
+          }]
         },
         {
           "code": "noteInTrapCount",
@@ -164,15 +294,49 @@
           "defaultValue": 0,
           "min": 0,
           "required": false,
-          "columnOrder": 14
+          "columnOrder": 14,
+          "aggregate": [{
+            "title": "Notes In Trap Minimum",
+            "code": "notesInTrapMin",
+            "function": "min"
+          },{
+            "title": "Notes In Trap Maximum",
+            "code": "notesInTrapMax",
+            "function": "max"
+          },{
+            "title": "Notes In Trap Median",
+            "code": "notesInTrapMedian",
+            "function": "median"
+          },{
+            "title": "Notes In Trap Mean",
+            "code": "notesInTrapMean",
+            "function": "mean"
+          }]
         },
         {
           "code": "teleopFoulCount",
-          "title": "Teleop Foul",
+          "title": "Fouls",
           "type": "counter",
           "defaultValue": 0,
           "required": false,
-          "columnOrder": 15
+          "columnOrder": 15,
+          "aggregate": [{
+            "title": "Fouls Minimum",
+            "code": "foulsMin",
+            "function": "min"
+          },{
+            "title": "Fouls Maximum",
+            "code": "foulsMax",
+            "function": "max"
+          },{
+            "title": "Fouls Median",
+            "code": "foulsMedian",
+            "function": "median"
+          },{
+            "title": "Fouls Mean",
+            "code": "foulsMean",
+            "function": "mean"
+          }]
         }
       ]
     },
@@ -192,7 +356,24 @@
             "Harmony"
           ],
           "defaultValue": "No",
-          "columnOrder": 16
+          "columnOrder": 16,
+          "aggregate": [{
+            "title": "End Position Minimum",
+            "code": "endPositionMin",
+            "function": "min"
+          },{
+            "title": "End Position Maximum",
+            "code": "endPositionMax",
+            "function": "max"
+          },{
+            "title": "End Position Median",
+            "code": "endPositionMedian",
+            "function": "median"
+          },{
+            "title": "End Position Mean",
+            "code": "endPositionMean",
+            "function": "mean"
+          }]
         },
         {
           "code": "offenseSkillRating",
@@ -206,7 +387,24 @@
           ],
           "defaultValue": "x",
           "required": false,
-          "columnOrder": 17
+          "columnOrder": 17,
+          "aggregate": [{
+            "title": "Offense Skill Rating Minimum",
+            "code": "offenseSkillRatingMin",
+            "function": "min"
+          },{
+            "title": "Offense Skill Rating Maximum",
+            "code": "offenseSkillRatingMax",
+            "function": "max"
+          },{
+            "title": "Offense Skill Rating Median",
+            "code": "offenseSkillRatingMedian",
+            "function": "median"
+          },{
+            "title": "Offense Skill Rating Mean",
+            "code": "offenseSkillRatingMean",
+            "function": "mean"
+          }]
         },
         {
           "code": "defenseSkillRating",
@@ -220,7 +418,24 @@
           ],
           "defaultValue": "x",
           "required": false,
-          "columnOrder": 18
+          "columnOrder": 18,
+          "aggregate": [{
+            "title": "Defense Skill Rating Minimum",
+            "code": "defenseSkillRatingMin",
+            "function": "min"
+          },{
+            "title": "Defense Skill Rating Maximum",
+            "code": "defenseSkillRatingMax",
+            "function": "max"
+          },{
+            "title": "Defense Skill Rating Median",
+            "code": "defenseSkillRatingMedian",
+            "function": "median"
+          },{
+            "title": "Defense Skill Rating Mean",
+            "code": "defenseSkillRatingMean",
+            "function": "mean"
+          }]
         },
         {
           "code": "hasDiedOrTippedOver",
@@ -228,7 +443,12 @@
           "type": "boolean",
           "defaultValue": false,
           "required": false,
-          "columnOrder": 19
+          "columnOrder": 19,
+          "aggregate": [{
+            "title": "Died / Tipped Over Count",
+            "code": "hasDiedOrTippedOverCount",
+            "function": "countTrue"
+          }]
         },
         {
           "code": "yellowRedCard",
@@ -241,7 +461,23 @@
             "Yellow Card",
             "Red Card"
           ],
-          "columnOrder": 20
+          "columnOrder": 20,
+          "aggregate": [{
+            "title": "Any Card Count",
+            "code": "anyCardCount",
+            "function": "countIfNot",
+            "additionalArguments": [0]
+          },{
+            "title": "Yellow Card Count",
+            "code": "yellowCardCount",
+            "function": "countIf",
+            "additionalArguments": [1]
+          },{
+            "title": "Red Card Count",
+            "code": "redCardCount",
+            "function": "countIf",
+            "additionalArguments": [2]
+          }]
         },
         {
           "code": "comments",
