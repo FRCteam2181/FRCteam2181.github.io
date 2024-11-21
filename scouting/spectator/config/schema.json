@@ -134,7 +134,7 @@
         "code": {
           "type": "string"
         },
-        "function": {
+        "aggFunction": {
           "type": "string",
           "enum": [
             "min", 

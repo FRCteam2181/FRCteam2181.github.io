@@ -1,12 +1,19 @@
 namespace("frc2181.scouting.spectator.FlagSet", {}, () => {
-  const encode = function(options, allSelected) {
-    return parseInt(allSelected.reduce((outval, selected) => {
-      outval[options.indexOf(selected)] = "1";
+  const encodeIndicies = function(indicies){
+    const maxIndex = indicies.reduce((max,index) => Math.max(max, index), 0);
+    return parseInt(indicies.reduce((outval, index) => {
+      outval[index] = "1";
       return outval;
-    }, Array(options.length).fill("0")).reverse().join(""), 2);
+    }, Array(maxIndex + 1).fill("0")).reverse().join(""), 2);
+  }
+  const decodeIndicies = function(value) {
+    return value.toString(2).split("").reverse().map((v,i) => [v,i]).filter(([v]) => v === "1").map(([_,i]) => i);
+  }
+  const encode = function(options, allSelected) {
+    return encodeIndicies(allSelected.map(selected => options.indexOf(selected)));
   }
   const decode = function(options, value) {
-    return value.toString(2).split("").reverse().map((v,i) => [v,i]).filter(([v]) => v === "1").map(([_,i]) => options[i]);
+    return decodeIndicies(value).map(i => options[i]);
   }
-  return { encode, decode };
+  return { encode, decode, encodeIndicies, decodeIndicies };
 });

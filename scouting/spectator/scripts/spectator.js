@@ -108,7 +108,6 @@ namespace("frc2181.scouting.spectator.Spectator", {
               onEdit={(index) => this.edit(index)}
               onDelete={(index) => this.delete(index)}
               />
-            {}
           </div>}
         </main>
         <footer>

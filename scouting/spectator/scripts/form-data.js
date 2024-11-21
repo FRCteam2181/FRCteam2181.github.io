@@ -1,6 +1,7 @@
 namespace("frc2181.scouting.spectator.FormDataService", {
-  "gizmo-atheneum.namespaces.Ajax": "Ajax"
-}, ({ Ajax }) => {
+  "gizmo-atheneum.namespaces.Ajax": "Ajax",
+  "frc2181.scouting.spectator.Aggregate": "Aggregate"
+}, ({ Ajax, Aggregate }) => {
   const state = {};
   const commit = ((update) => state.step(Object.assign({ now: (new Date()).getTime() }, update)));
   const reset = ((updateOnCommit) => {
@@ -28,13 +29,24 @@ namespace("frc2181.scouting.spectator.FormDataService", {
       }
     });
   })
+  const getFieldAggregators = function() {
+    return state.formData.sections.map(s => s.fields.map(f => {
+      f.sectionName = s.name;
+      return f.aggregate.map(a => {
+        a.sectionName = s.name;
+        a.fieldCode = f.code;
+        return a;
+      }).flat();
+    })).flat();
+  }
   const load = function(path, update) {
     state.step = update;
     Ajax.get(path, {
       success: (respText) => {
         const config = JSON.parse(respText);
-        config.sections.map(s => s.fields).flat().forEach(f => (f.value = f.defaultValue));
+        config.sections.forEach(s => s.fields.forEach(f => Object.defineProperty(f, "value", f.defaultValue)));
         state.formData = config;
+        state.aggregator = Aggregate.buildAggregator(config.aggregateBy, getFieldAggregators());
         commit();
       }
     })
@@ -44,5 +56,6 @@ namespace("frc2181.scouting.spectator.FormDataService", {
   stateHandler.reset = reset;
   stateHandler.load = loadRecord;
   stateHandler.getRecord = getRecord;
-  return { state: stateHandler, load };
+  stateHandler.getFieldAggregators = getFieldAggregators;
+  return { state: stateHandler, load, aggregate: state.aggregator };
 });

@@ -70,7 +70,7 @@
           "aggregate": [{
             "title": "No Show Count",
             "code": "noShowCount",
-            "function": "countTrue"
+            "aggFunction": "countTrue"
           }]
         }
       ]
@@ -88,7 +88,7 @@
           "aggregate": [{
             "title": "Moved Count",
             "code": "movedCount",
-            "function": "countTrue"
+            "aggFunction": "countTrue"
           }]
         },
         {
@@ -102,19 +102,19 @@
           "aggregate": [{
             "title": "Speaker Scored Minimum",
             "code": "autoSpeakerScoredMin",
-            "function": "min"
+            "aggFunction": "min"
           },{
             "title": "Speaker Scored Maximum",
             "code": "autoSpeakerScoredMax",
-            "function": "max"
+            "aggFunction": "max"
           },{
             "title": "Speaker Scored Median",
             "code": "autoSpeakerScoredMedian",
-            "function": "median"
+            "aggFunction": "median"
           },{
             "title": "Speaker Scored Mean",
             "code": "autoSpeakerScoredMean",
-            "function": "mean"
+            "aggFunction": "mean"
           }]
         },
         {
@@ -128,19 +128,19 @@
           "aggregate": [{
             "title": "Speaker Missed Minimum",
             "code": "autoSpeakerMissedMin",
-            "function": "min"
+            "aggFunction": "min"
           },{
             "title": "Speaker Missed Maximum",
             "code": "autoSpeakerMissedMax",
-            "function": "max"
+            "aggFunction": "max"
           },{
             "title": "Speaker Missed Median",
             "code": "autoSpeakerMissedMedian",
-            "function": "median"
+            "aggFunction": "median"
           },{
             "title": "Speaker Missed Mean",
             "code": "autoSpeakerMissedMean",
-            "function": "mean"
+            "aggFunction": "mean"
           }]
         },
         {
@@ -163,19 +163,19 @@
           "aggregate": [{
             "title": "Game Piece Path Union Count",
             "code": "autoGamePiecePathUnionCount",
-            "function": "unionCount"
+            "aggFunction": "unionCount"
           },{
             "title": "Game Piece Path intersection Count",
             "code": "autoGamePiecePathIntersectionCount",
-            "function": "intersectionCount"
+            "aggFunction": "intersectionCount"
           },{
             "title": "Game Piece Path Count Minimum",
             "code": "autoGamePiecePathCountMin",
-            "function": "minCount"
+            "aggFunction": "minCount"
           },{
             "title": "Game Piece Path Count Maximum",
             "code": "autoGamePiecePathCountMax",
-            "function": "maxCount"
+            "aggFunction": "maxCount"
           }]
         },
         {
@@ -189,19 +189,19 @@
           "aggregate": [{
             "title": "Foul Count Minimum",
             "code": "autoFoulCountMin",
-            "function": "min"
+            "aggFunction": "min"
           },{
             "title": "Foul Count Maximum",
             "code": "autoFoulCountMax",
-            "function": "max"
+            "aggFunction": "max"
           },{
             "title": "Foul Count Median",
             "code": "autoFoulCountMedian",
-            "function": "median"
+            "aggFunction": "median"
           },{
             "title": "Foul Count Mean",
             "code": "autoFoulCountMean",
-            "function": "mean"
+            "aggFunction": "mean"
           }]
         }
       ]
@@ -220,19 +220,19 @@
           "aggregate": [{
             "title": "Amp Scored Minimum",
             "code": "ampScoredMin",
-            "function": "min"
+            "aggFunction": "min"
           },{
             "title": "Amp Scored Maximum",
             "code": "ampScoredMax",
-            "function": "max"
+            "aggFunction": "max"
           },{
             "title": "Amp Scored Median",
             "code": "ampScoredMedian",
-            "function": "median"
+            "aggFunction": "median"
           },{
             "title": "Amp Scored Mean",
             "code": "ampScoredMean",
-            "function": "mean"
+            "aggFunction": "mean"
           }]
         },
         {
@@ -246,19 +246,19 @@
           "aggregate": [{
             "title": "Speaker Scored Minimum",
             "code": "speakerScoredMin",
-            "function": "min"
+            "aggFunction": "min"
           },{
             "title": "Speaker Scored Maximum",
             "code": "speakerScoredMax",
-            "function": "max"
+            "aggFunction": "max"
           },{
             "title": "Speaker Scored Median",
             "code": "speakerScoredMedian",
-            "function": "median"
+            "aggFunction": "median"
           },{
             "title": "Speaker Scored Mean",
             "code": "speakerScoredMean",
-            "function": "mean"
+            "aggFunction": "mean"
           }]
         },
         {
@@ -272,19 +272,19 @@
           "aggregate": [{
             "title": "Feeder Shots Minimum",
             "code": "feederShotsMin",
-            "function": "min"
+            "aggFunction": "min"
           },{
             "title": "Feeder Shots Maximum",
             "code": "feederShotsMax",
-            "function": "max"
+            "aggFunction": "max"
           },{
             "title": "Feeder Shots Median",
             "code": "feederShotsMedian",
-            "function": "median"
+            "aggFunction": "median"
           },{
             "title": "Feeder Shots Mean",
             "code": "feederShotsMean",
-            "function": "mean"
+            "aggFunction": "mean"
           }]
         },
         {
@@ -298,19 +298,19 @@
           "aggregate": [{
             "title": "Notes In Trap Minimum",
             "code": "notesInTrapMin",
-            "function": "min"
+            "aggFunction": "min"
           },{
             "title": "Notes In Trap Maximum",
             "code": "notesInTrapMax",
-            "function": "max"
+            "aggFunction": "max"
           },{
             "title": "Notes In Trap Median",
             "code": "notesInTrapMedian",
-            "function": "median"
+            "aggFunction": "median"
           },{
             "title": "Notes In Trap Mean",
             "code": "notesInTrapMean",
-            "function": "mean"
+            "aggFunction": "mean"
           }]
         },
         {
@@ -323,19 +323,19 @@
           "aggregate": [{
             "title": "Fouls Minimum",
             "code": "foulsMin",
-            "function": "min"
+            "aggFunction": "min"
           },{
             "title": "Fouls Maximum",
             "code": "foulsMax",
-            "function": "max"
+            "aggFunction": "max"
           },{
             "title": "Fouls Median",
             "code": "foulsMedian",
-            "function": "median"
+            "aggFunction": "median"
           },{
             "title": "Fouls Mean",
             "code": "foulsMean",
-            "function": "mean"
+            "aggFunction": "mean"
           }]
         }
       ]
@@ -360,19 +360,19 @@
           "aggregate": [{
             "title": "End Position Minimum",
             "code": "endPositionMin",
-            "function": "min"
+            "aggFunction": "min"
           },{
             "title": "End Position Maximum",
             "code": "endPositionMax",
-            "function": "max"
+            "aggFunction": "max"
           },{
             "title": "End Position Median",
             "code": "endPositionMedian",
-            "function": "median"
+            "aggFunction": "median"
           },{
             "title": "End Position Mean",
             "code": "endPositionMean",
-            "function": "mean"
+            "aggFunction": "mean"
           }]
         },
         {
@@ -391,19 +391,19 @@
           "aggregate": [{
             "title": "Offense Skill Rating Minimum",
             "code": "offenseSkillRatingMin",
-            "function": "min"
+            "aggFunction": "min"
           },{
             "title": "Offense Skill Rating Maximum",
             "code": "offenseSkillRatingMax",
-            "function": "max"
+            "aggFunction": "max"
           },{
             "title": "Offense Skill Rating Median",
             "code": "offenseSkillRatingMedian",
-            "function": "median"
+            "aggFunction": "median"
           },{
             "title": "Offense Skill Rating Mean",
             "code": "offenseSkillRatingMean",
-            "function": "mean"
+            "aggFunction": "mean"
           }]
         },
         {
@@ -422,19 +422,19 @@
           "aggregate": [{
             "title": "Defense Skill Rating Minimum",
             "code": "defenseSkillRatingMin",
-            "function": "min"
+            "aggFunction": "min"
           },{
             "title": "Defense Skill Rating Maximum",
             "code": "defenseSkillRatingMax",
-            "function": "max"
+            "aggFunction": "max"
           },{
             "title": "Defense Skill Rating Median",
             "code": "defenseSkillRatingMedian",
-            "function": "median"
+            "aggFunction": "median"
           },{
             "title": "Defense Skill Rating Mean",
             "code": "defenseSkillRatingMean",
-            "function": "mean"
+            "aggFunction": "mean"
           }]
         },
         {
@@ -447,7 +447,7 @@
           "aggregate": [{
             "title": "Died / Tipped Over Count",
             "code": "hasDiedOrTippedOverCount",
-            "function": "countTrue"
+            "aggFunction": "countTrue"
           }]
         },
         {
@@ -465,17 +465,17 @@
           "aggregate": [{
             "title": "Any Card Count",
             "code": "anyCardCount",
-            "function": "countIfNot",
+            "aggFunction": "countIfNot",
             "additionalArguments": [0]
           },{
             "title": "Yellow Card Count",
             "code": "yellowCardCount",
-            "function": "countIf",
+            "aggFunction": "countIf",
             "additionalArguments": [1]
           },{
             "title": "Red Card Count",
             "code": "redCardCount",
-            "function": "countIf",
+            "aggFunction": "countIf",
             "additionalArguments": [2]
           }]
         },
