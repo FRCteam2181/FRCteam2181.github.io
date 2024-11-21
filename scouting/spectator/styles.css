@@ -57,12 +57,8 @@ h1, h2 {
   content: "\00a0";
 }
 
-.field-style {
-  max-width: 200px;
-}
-
 .section-style {
-  width: 250px!important;
+  width: 275px!important;
 }
 
 input, textarea, select, option {
@@ -75,9 +71,13 @@ input, textarea, select, option {
   overflow-y: scroll;
 }
 
-th {
+thead {
   position: sticky;
   top: 0px;
+  outline: rgb(2,16,57)!important;
+}
+
+th {
   background-color: rgb(2,16,57)!important;
   margin: 0;
   padding: 0;
@@ -93,6 +93,6 @@ td {
 .frame-box {
   background-color: rgb(2,16,57)!important;
   border: 3px solid white;
-  border-radius: .3rem;
+  border-radius: 0.6rem;
   margin-bottom: 1.5rem;
 }

@@ -1,0 +1,258 @@
+{
+  "$schema": "./schema.json",
+  "title": "Spectator",
+  "page_title": "Crescendo",
+  "aggregateBy": "teamNumber",
+  "distinct": ["scouter", "matchNumber"],
+  "sections": [
+    {
+      "name": "Prematch",
+      "preserveDataOnReset": true,
+      "fields": [
+        {
+          "title": "Scouter Initials",
+          "type": "text",
+          "required": true,
+          "code": "scouter",
+          "columnOrder": 2
+        },
+        {
+          "title": "Match Number",
+          "type": "number",
+          "required": true,
+          "code": "matchNumber",
+          "preserveDataOnReset": true,
+          "autoIncrementOnReset": true,
+          "columnOrder": 0
+        },
+        {
+          "title": "Robot",
+          "type": "enum",
+          "required": true,
+          "code": "robot",
+          "choices": [
+            "Red 1",
+            "Red 2",
+            "Red 3",
+            "Blue 1",
+            "Blue 2",
+            "Blue 3"
+          ],
+          "defaultValue": "0",
+          "columnOrder": 3
+        },
+        {
+          "title": "Team Number",
+          "type": "number",
+          "required": true,
+          "code": "teamNumber",
+          "columnOrder": 1
+        },
+        {
+          "title": "Starting Position",
+          "type": "enum",
+          "required": true,
+          "code": "startPosition",
+          "choices": [
+            "Source",
+            "Middle",
+            "Amp"
+          ],
+          "columnOrder": 4
+        },
+        {
+          "title": "No Show",
+          "type": "boolean",
+          "defaultValue": false,
+          "required": false,
+          "code": "isNoShow",
+          "columnOrder": 5
+        }
+      ]
+    },
+    {
+      "name": "Autonomous",
+      "fields": [
+        {
+          "title": "Moved",
+          "type": "boolean",
+          "defaultValue": false,
+          "required": false,
+          "code": "hasMoved",
+          "columnOrder": 6
+        },
+        {
+          "code": "autoSpeakerScoredCount",
+          "title": "Speaker Scored",
+          "type": "counter",
+          "defaultValue": 0,
+          "min": 0,
+          "required": false,
+          "columnOrder": 7
+        },
+        {
+          "code": "autoSpeakerMissedCount",
+          "title": "Speaker Missed",
+          "type": "counter",
+          "defaultValue": 0,
+          "min": 0,
+          "required": false,
+          "columnOrder": 8
+        },
+        {
+          "code": "autoGamePiecePath",
+          "title": "Auto Game Piece Path",
+          "type": "enum-set",
+          "choices": [
+            "Speaker 3 (Source Side)",
+            "Speaker 2 (Middle)",
+            "Speaker 1 (Amp Side)",
+            "Midline 5 (Source Edge)",
+            "Midline 4",
+            "Midline 3 (Middle)",
+            "Midline 2",
+            "Midline 1 (Amp Edge)"
+          ],
+          "defaultValue": 0,
+          "columnOrder": 9
+        },
+        {
+          "code": "autoFoulCount",
+          "title": "Auto Foul",
+          "type": "counter",
+          "defaultValue": 0,
+          "min": 0,
+          "required": false,
+          "columnOrder": 10
+        }
+      ]
+    },
+    {
+      "name": "Teleop",
+      "fields": [
+        {
+          "code": "ampScoredCount",
+          "title": "Amp Scored",
+          "type": "counter",
+          "defaultValue": 0,
+          "min": 0,
+          "required": false,
+          "columnOrder": 11
+        },
+        {
+          "code": "speakerScoredCount",
+          "title": "Speaker Scored",
+          "type": "counter",
+          "defaultValue": 0,
+          "min": 0,
+          "required": false,
+          "columnOrder": 12
+        },
+        {
+          "code": "feederShotsCount",
+          "title": "Feeder Shots",
+          "type": "counter",
+          "defaultValue": 0,
+          "min": 0,
+          "required": false,
+          "columnOrder": 13
+        },
+        {
+          "code": "noteInTrapCount",
+          "title": "Notes in Trap",
+          "type": "counter",
+          "defaultValue": 0,
+          "min": 0,
+          "required": false,
+          "columnOrder": 14
+        },
+        {
+          "code": "teleopFoulCount",
+          "title": "Teleop Foul",
+          "type": "counter",
+          "defaultValue": 0,
+          "required": false,
+          "columnOrder": 15
+        }
+      ]
+    },
+    {
+      "name": "Postmatch",
+      "fields": [
+        {
+          "title": "End Position",
+          "type": "enum",
+          "required": true,
+          "code": "endPosition",
+          "choices": [
+            "No Climb",
+            "Parked",
+            "Onstage",
+            "Failed Harmony",
+            "Harmony"
+          ],
+          "defaultValue": "No",
+          "columnOrder": 16
+        },
+        {
+          "code": "offenseSkillRating",
+          "title": "Offense Skill",
+          "type": "enum",
+          "choices": [
+            "Not Effective",
+            "Average",
+            "Very Effective",
+            "Not Observed"
+          ],
+          "defaultValue": "x",
+          "required": false,
+          "columnOrder": 17
+        },
+        {
+          "code": "defenseSkillRating",
+          "title": "Defense Skill",
+          "type": "enum",
+          "choices": [
+            "Not Effective",
+            "Average",
+            "Very Effective",
+            "Not Observed"
+          ],
+          "defaultValue": "x",
+          "required": false,
+          "columnOrder": 18
+        },
+        {
+          "code": "hasDiedOrTippedOver",
+          "title": "Died / Tipped Over",
+          "type": "boolean",
+          "defaultValue": false,
+          "required": false,
+          "columnOrder": 19
+        },
+        {
+          "code": "yellowRedCard",
+          "title": "Yellow/Red Card",
+          "type": "enum",
+          "defaultValue": "No Card",
+          "required": true,
+          "choices": [
+            "No Card",
+            "Yellow Card",
+            "Red Card"
+          ],
+          "columnOrder": 20
+        },
+        {
+          "code": "comments",
+          "title": "Comments",
+          "type": "markdown",
+          "min": 0,
+          "max": 50,
+          "required": false,
+          "columnOrder": 21
+        }
+      ]
+    }
+  ]
+}

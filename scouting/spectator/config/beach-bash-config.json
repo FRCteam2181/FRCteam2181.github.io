@@ -1,8 +1,9 @@
 {
   "$schema": "./schema.json",
   "title": "Spectator",
-  "page_title": "Crescendo",
+  "page_title": "Beach Bash",
   "aggregateBy": "teamNumber",
+  "distinct": ["scouter", "matchNumber"],
   "sections": [
     {
       "name": "Prematch",
@@ -12,7 +13,8 @@
           "title": "Scouter Initials",
           "type": "text",
           "required": true,
-          "code": "scouter"
+          "code": "scouter",
+          "columnOrder": 2
         },
         {
           "title": "Match Number",
@@ -20,7 +22,8 @@
           "required": true,
           "code": "matchNumber",
           "preserveDataOnReset": true,
-          "autoIncrementOnReset": true
+          "autoIncrementOnReset": true,
+          "columnOrder": 0
         },
         {
           "title": "Robot",
@@ -30,18 +33,18 @@
           "choices": [
             "Red 1",
             "Red 2",
-            "Red 3",
             "Blue 1",
-            "Blue 2",
-            "Blue 3"
-        ],
-          "defaultValue": "0"
+            "Blue 2"
+          ],
+          "defaultValue": "0",
+          "columnOrder": 3
         },
         {
           "title": "Team Number",
           "type": "number",
           "required": true,
-          "code": "teamNumber"
+          "code": "teamNumber",
+          "columnOrder": 1
         },
         {
           "title": "Starting Position",
@@ -49,17 +52,20 @@
           "required": true,
           "code": "startPosition",
           "choices": [
-            "Source",
-            "Middle",
-            "Amp"
-          ]
+            "Top Right",
+            "Top Left",
+            "Bottom Right",
+            "Bottom Left"
+          ],
+          "columnOrder": 4
         },
         {
           "title": "No Show",
           "type": "boolean",
           "defaultValue": false,
           "required": false,
-          "code": "isNoShow"
+          "code": "isNoShow",
+          "columnOrder": 5
         }
       ]
     },
@@ -71,39 +77,44 @@
           "type": "boolean",
           "defaultValue": false,
           "required": false,
-          "code": "hasMoved"
+          "code": "hasMoved",
+          "columnOrder": 6
         },
         {
-          "code": "autoSpeakerScoredCount",
-          "title": "Speaker Scored",
+          "code": "autoNetScoredCount",
+          "title": "Net Scored",
           "type": "counter",
           "defaultValue": 0,
           "min": 0,
-          "required": false
+          "required": false,
+          "columnOrder": 7
         },
         {
-          "code": "autoSpeakerMissedCount",
-          "title": "Speaker Missed",
+          "code": "autoNetMissedCount",
+          "title": "Net Missed",
           "type": "counter",
           "defaultValue": 0,
           "min": 0,
-          "required": false
+          "required": false,
+          "columnOrder": 8
         },
         {
-          "code": "autoGamePiecePath",
-          "title": "Auto Game Piece Path",
-          "type": "enum-set",
-          "choices": [
-            "Speaker 3 (Source Side)",
-            "Speaker 2 (Middle)",
-            "Speaker 1 (Amp Side)",
-            "Midline 5 (Source Edge)",
-            "Midline 4",
-            "Midline 3 (Middle)",
-            "Midline 2",
-            "Midline 1 (Amp Edge)"
-          ],
-          "defaultValue": 0
+          "code": "autoHoopScoredCount",
+          "title": "Hoop Scored",
+          "type": "counter",
+          "defaultValue": 0,
+          "min": 0,
+          "required": false,
+          "columnOrder": 9
+        },
+        {
+          "code": "autoHoopMissedCount",
+          "title": "Hoop Missed",
+          "type": "counter",
+          "defaultValue": 0,
+          "min": 0,
+          "required": false,
+          "columnOrder": 10
         },
         {
           "code": "autoFoulCount",
@@ -111,7 +122,8 @@
           "type": "counter",
           "defaultValue": 0,
           "min": 0,
-          "required": false
+          "required": false,
+          "columnOrder": 11
         }
       ]
     },
@@ -119,43 +131,38 @@
       "name": "Teleop",
       "fields": [
         {
-          "code": "ampScoredCount",
-          "title": "Amp Scored",
+          "code": "netScoredCount",
+          "title": "Net Scored",
           "type": "counter",
           "defaultValue": 0,
           "min": 0,
-          "required": false
+          "required": false,
+          "columnOrder": 12
         },
         {
-          "code": "speakerScoredCount",
-          "title": "Speaker Scored",
+          "code": "hoopScoredCount",
+          "title": "Hoop Scored",
           "type": "counter",
           "defaultValue": 0,
           "min": 0,
-          "required": false
-        },
-        {
-          "code": "feederShotsCount",
-          "title": "Feeder Shots",
-          "type": "counter",
-          "defaultValue": 0,
-          "min": 0,
-          "required": false
-        },
-        {
-          "code": "noteInTrapCount",
-          "title": "Notes in Trap",
-          "type": "counter",
-          "defaultValue": 0,
-          "min": 0,
-          "required": false
+          "required": false,
+          "columnOrder": 13
         },
         {
           "code": "teleopFoulCount",
-          "title": "Teleop Foul",
+          "title": "Foul",
           "type": "counter",
           "defaultValue": 0,
-          "required": false
+          "required": false,
+          "columnOrder": 14
+        },
+        {
+          "code": "teleopTechFoulCount",
+          "title": "Tech Foul",
+          "type": "counter",
+          "defaultValue": 0,
+          "required": false,
+          "columnOrder": 15
         }
       ]
     },
@@ -168,46 +175,45 @@
           "required": true,
           "code": "endPosition",
           "choices": [
-            "No Climb",
-            "Parked",
-            "Onstage",
-            "Failed Harmony",
-            "Harmony"
+            "Not Home",
+            "Home"
           ],
-          "defaultValue": "No"
+          "defaultValue": "No",
+          "columnOrder": 16
         },
         {
           "code": "offenseSkillRating",
           "title": "Offense Skill",
           "type": "enum",
           "choices": [
+            "Not Observed",
             "Not Effective",
             "Average",
-            "Very Effective",
-            "Not Observed"
+            "Very Effective"
           ],
-          "defaultValue": "x",
-          "required": false
+          "required": false,
+          "columnOrder": 17
         },
         {
           "code": "defenseSkillRating",
           "title": "Defense Skill",
           "type": "enum",
           "choices": [
+            "Not Observed",
             "Not Effective",
             "Average",
-            "Very Effective",
-            "Not Observed"
+            "Very Effective"
           ],
-          "defaultValue": "x",
-          "required": false
+          "required": false,
+          "columnOrder": 18
         },
         {
           "code": "hasDiedOrTippedOver",
           "title": "Died / Tipped Over",
           "type": "boolean",
           "defaultValue": false,
-          "required": false
+          "required": false,
+          "columnOrder": 19
         },
         {
           "code": "yellowRedCard",
@@ -219,7 +225,8 @@
             "No Card",
             "Yellow Card",
             "Red Card"
-          ]
+          ],
+          "columnOrder": 20
         },
         {
           "code": "comments",
@@ -227,7 +234,8 @@
           "type": "markdown",
           "min": 0,
           "max": 50,
-          "required": false
+          "required": false,
+          "columnOrder": 21
         }
       ]
     }

@@ -1,7 +1,6 @@
 namespace("frc2181.scouting.spectator.FormDataService", {
   "gizmo-atheneum.namespaces.Ajax": "Ajax"
 }, ({ Ajax }) => {
-  const path = "./config/config.json"
   const state = {};
   const commit = ((update) => state.step(Object.assign({ now: (new Date()).getTime() }, update)));
   const reset = ((updateOnCommit) => {
@@ -29,7 +28,7 @@ namespace("frc2181.scouting.spectator.FormDataService", {
       }
     });
   })
-  const load = function(update) {
+  const load = function(path, update) {
     state.step = update;
     Ajax.get(path, {
       success: (respText) => {

@@ -31,7 +31,7 @@
     ampScoredCount: simpleColorField("Amp Note Count (10)"),
     speakerScoredCount: (record, color) => record["Speaker Note Un-amplified Count (11)"][color] + record["Speaker Note Amplified Count (12)"][color],
     feederShotsCount: () => 0,
-    noteInTrapCount: deepField("Note In Trap (17)"),
+    noteInTrapCount: (_, color, index) => record["Note In Trap (17)"][color][index]?1:0,
     teleopFoulCount: (record, color) => record["Fouls/Techs Committed (26)"][color][1],
     endPosition: randomFromCount(5),
     offenseSkillRating: randomFromCount(4),

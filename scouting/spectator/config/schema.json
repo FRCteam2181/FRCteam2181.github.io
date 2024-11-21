@@ -17,6 +17,12 @@
         "aggregateBy": {
           "type": "string"
         },
+        "distinct": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "sections": {
           "type": "array",
           "items": {
@@ -89,11 +95,11 @@
         "max": {
           "type": "number"
         },
-        "multiSelect": {
-          "type": "boolean"
-        },
         "autoIncrementOnReset": {
           "type": "boolean"
+        },
+        "columnOrder": {
+          "type": "number"
         },
         "aggregate": {
           "type": "array",

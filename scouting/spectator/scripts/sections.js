@@ -4,7 +4,7 @@ namespace("frc2181.scouting.spectator.Sections", {
   "frc2181.scouting.spectator.Section": "Section"
 }, ({ FlagSet, FormDataService, Section }) => {
   const formData = FormDataService.state;
-  const fieldClasses = "mb-3 mx-2 field-style";
+  const fieldClasses = "mb-3 mx-2 w-100";
   const Label = function({ required, title, value }) {
     return (<label className="form-check-label text-uppercase fw-bolder" htmlFor={title}>
       <span className="text-info">{title}</span>
@@ -14,13 +14,13 @@ namespace("frc2181.scouting.spectator.Sections", {
   }
   const ToggleButton = function(props) {
     return <button key={props.toggleKey}
-      className={`btn ${props.value?"gears-checked":"gears-unchecked"}`}
+      className={`btn p-1 w-100 ${props.value?"gears-checked":"gears-unchecked"}`}
       onClick={() => props.onClick(!props.value)}>
       <Label {...props}/>
     </button>;
   }
   const Checkbox = function(data) {
-    return (<div className={`text-center ${fieldClasses}`} key={data.code}>
+    return (<div className={`text-center pt-2 ${fieldClasses}`} key={data.code}>
       <ToggleButton {...data}/>
     </div>);
   }
@@ -68,7 +68,7 @@ namespace("frc2181.scouting.spectator.Sections", {
       <Label {...data}/>
       <input 
         type="number" 
-        className="form-control" 
+        className="form-control text-center" 
         id={data.code}
         min={data.min}
         max={data.max}
@@ -86,7 +86,7 @@ namespace("frc2181.scouting.spectator.Sections", {
       <Label {...data}/>
       <input 
         type="range" 
-        className="form-control" 
+        className="form-control text-center" 
         id={data.code}
         min={data.min}
         max={data.max}
@@ -104,7 +104,7 @@ namespace("frc2181.scouting.spectator.Sections", {
     return (<div className={fieldClasses} key={data.title}>
       <Label {...data}/>
       <select
-        className="form-select"
+        className="form-select text-center"
         size={1}
         name={data.title}
         id={data.code}
@@ -122,14 +122,13 @@ namespace("frc2181.scouting.spectator.Sections", {
   const EnumSetInput = function(data) {
     const value = FlagSet.decode(data.options, data.value);
     const values = data.options.map((o) => value.indexOf(o) >= 0);
-    console.log({ encoded: data.value, value });
     function handleSelect(index) {
       values[index] = !values[index];
       data.onChange(FlagSet.encode(data.options, data.options.filter((_,i) => values[i])));
     }
     return (<div className={fieldClasses} key={data.title}>
       <Label {...data}/>
-      <div className="btn-group-vertical">
+      <div className="btn-group-vertical w-100">
         { data.options.map((o,i) => <>
           <ToggleButton 
             key={`flag${data.code}-${i}`}
@@ -146,7 +145,7 @@ namespace("frc2181.scouting.spectator.Sections", {
   const StringInput = function(data) {
     const inputProps = {
       type: "text",
-      className: "form-control",
+      className: "form-control text-center",
       disabled: data.disabled,
       name: data.code,
       id: data.code,
@@ -275,7 +274,7 @@ namespace("frc2181.scouting.spectator.Sections", {
           <Checkbox
             key={input.title}
             {...input}
-            onChange={handleChange}
+            onClick={handleChange}
             section={props.section}
           />
         );
