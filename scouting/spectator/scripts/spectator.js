@@ -33,7 +33,7 @@ namespace("frc2181.scouting.spectator.Spectator", {
       } else {
         dataTable[this.state.selectedRecord] = record;
       }
-      formData.reset({ dataTable, selectedRecord: undefined });
+      formData.reset({ dataTable, selectedRecord: undefined, aggregate: undefined });
     }
     cancel() {
       formData.reset({ selectedRecord: undefined });
@@ -52,7 +52,7 @@ namespace("frc2181.scouting.spectator.Spectator", {
           console.log({ fileName, badRecords })
           throw { fileName, badRecords };
         }
-        this.setState({ dataTable: this.state.dataTable.concat(newData) })
+        this.setState({ dataTable: this.state.dataTable.concat(newData), aggregate: undefined })
       }, (fileName, error) => {
         console.log({ fileName, error });
         throw error;
@@ -62,15 +62,20 @@ namespace("frc2181.scouting.spectator.Spectator", {
       Download.triggerJSONDownload("spectator", "spectator", this.state.dataTable)
     }
     downloadTable() {
+      /*
       const fields = formData().sections.map(s => s.fields.map(f => Object.assign(f, { sectionName: s.name }))).flat();
       fields.sort((f1,f2) => f1.columnOrder - f2.columnOrder);
       const csv = [fields.map(f => `${f.sectionName} - ${f.title}`)].concat(this.state.dataTable.map(row => fields.map(f => row[f.code])));
       Download.triggerCSVDownload("spectator", "spectator", "\t", csv);
+      */
     }
     clearTable() {
       if(confirm("This will delete ALL DATA! Are you sure?")) {
         this.setState({ selectedRecord: undefined, dataTable: [] });
       }
+    }
+    rollupAggregate() {
+      this.setState({ aggregate: formData.aggregate() });
     }
     edit(index) {
       formData.load(this.state.dataTable[index]);
@@ -98,18 +103,22 @@ namespace("frc2181.scouting.spectator.Spectator", {
               <button title="Save Data" className="btn btn-primary m-2" onClick={() => this.saveData()}>
                 <h2 className="text-center align-middle mb-0"><i className="far fa-floppy-disk"></i></h2>
               </button>
-              <button title="Download Table" className="btn btn-primary m-2" onClick={() => this.downloadTable()}>
-                <h2 className="text-center align-middle mb-0"><i className="fas fa-table-cells"></i></h2>
-              </button>
               <button title="Clear Table" className="btn btn-danger m-2" onClick={() => this.clearTable()}>
                 <h2 className="text-center align-middle mb-0"><i className="far fa-file-excel"></i></h2>
               </button>
+              <button title="Rollup Aggregate Data" className="btn btn-primary m-2" onClick={() => this.rollupAggregate()}>
+                <h2 className="text-center align-middle mb-0"><i className="fas fa-filter"></i></h2>
+              </button>
+              { this.state.aggregate && <button title="Download Table" className="btn btn-primary m-2" onClick={() => this.downloadTable()}>
+                <h2 className="text-center align-middle mb-0"><i className="fas fa-table-cells"></i></h2>
+              </button> }
             </div>
             <DisplayTable 
               data={this.state.dataTable}
               onEdit={(index) => this.edit(index)}
               onDelete={(index) => this.delete(index)}
               />
+          { this.state.aggregate && <AggregateTable data={this.state.aggregate}/> }
           </div>}
         </main>
         <footer>

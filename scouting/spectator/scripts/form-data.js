@@ -53,11 +53,15 @@ namespace("frc2181.scouting.spectator.FormDataService", {
       }
     })
   }
+  const getAggregatorHeaders = function() {
+    const { sectionName, title, code } = state.formData.sections.map(s => s.fields).flat().find(f => f.code === state.formData.aggregateBy)
+    return [{ sectionName, title, code }].concat(getFieldAggregators().map(({ sectionName, title, code }) => Object.create({ sectionName, title, code })));
+  }
   const stateHandler = (() => state.formData);
   stateHandler.commit = commit;
   stateHandler.reset = reset;
   stateHandler.load = loadRecord;
   stateHandler.getRecord = getRecord;
-  stateHandler.getFieldAggregators = getFieldAggregators;
+  stateHandler.getAggregatorHeaders = getAggregatorHeaders;
   return { state: stateHandler, load, aggregate: state.aggregator };
 });
