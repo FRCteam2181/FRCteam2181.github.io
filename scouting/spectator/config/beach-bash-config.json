@@ -65,7 +65,12 @@
           "defaultValue": false,
           "required": false,
           "code": "isNoShow",
-          "columnOrder": 5
+          "columnOrder": 5,
+          "aggregate": [{
+            "title": "No Show Count",
+            "code": "noShowCount",
+            "aggFunction": "countTrue"
+          }]
         }
       ]
     },
@@ -78,7 +83,12 @@
           "defaultValue": false,
           "required": false,
           "code": "hasMoved",
-          "columnOrder": 6
+          "columnOrder": 6,
+          "aggregate": [{
+            "title": "Moved Count",
+            "code": "movedCount",
+            "aggFunction": "countTrue"
+          }]
         },
         {
           "code": "autoNetScoredCount",
@@ -87,7 +97,24 @@
           "defaultValue": 0,
           "min": 0,
           "required": false,
-          "columnOrder": 7
+          "columnOrder": 7,
+          "aggregate": [{
+            "title": "Net Scored Minimum",
+            "code": "autoNetScoredMin",
+            "aggFunction": "min"
+          },{
+            "title": "Net Scored Maximum",
+            "code": "autoNetScoredMax",
+            "aggFunction": "max"
+          },{
+            "title": "Net Scored Median",
+            "code": "autoNetScoredMedian",
+            "aggFunction": "median"
+          },{
+            "title": "Net Scored Mean",
+            "code": "autoNetScoredMean",
+            "aggFunction": "mean"
+          }]
         },
         {
           "code": "autoNetMissedCount",
@@ -96,7 +123,24 @@
           "defaultValue": 0,
           "min": 0,
           "required": false,
-          "columnOrder": 8
+          "columnOrder": 8,
+          "aggregate": [{
+            "title": "Net Missed Minimum",
+            "code": "autoNetMissedMin",
+            "aggFunction": "min"
+          },{
+            "title": "Net Missed Maximum",
+            "code": "autoNetMissedMax",
+            "aggFunction": "max"
+          },{
+            "title": "Net Missed Median",
+            "code": "autoNetMissedMedian",
+            "aggFunction": "median"
+          },{
+            "title": "Net Missed Mean",
+            "code": "autoNetMissedMean",
+            "aggFunction": "mean"
+          }]
         },
         {
           "code": "autoHoopScoredCount",
@@ -105,7 +149,24 @@
           "defaultValue": 0,
           "min": 0,
           "required": false,
-          "columnOrder": 9
+          "columnOrder": 9,
+          "aggregate": [{
+            "title": "Hoop Scored Minimum",
+            "code": "autoHoopScoredMin",
+            "aggFunction": "min"
+          },{
+            "title": "Hoop Scored Maximum",
+            "code": "autoHoopScoredMax",
+            "aggFunction": "max"
+          },{
+            "title": "Hoop Scored Median",
+            "code": "autoHoopScoredMedian",
+            "aggFunction": "median"
+          },{
+            "title": "Hoop Scored Mean",
+            "code": "autoHoopScoredMean",
+            "aggFunction": "mean"
+          }]
         },
         {
           "code": "autoHoopMissedCount",
@@ -114,7 +175,24 @@
           "defaultValue": 0,
           "min": 0,
           "required": false,
-          "columnOrder": 10
+          "columnOrder": 10,
+          "aggregate": [{
+            "title": "Hoop Missed Minimum",
+            "code": "autoHoopMissedMin",
+            "aggFunction": "min"
+          },{
+            "title": "Hoop Missed Maximum",
+            "code": "autoHoopMissedMax",
+            "aggFunction": "max"
+          },{
+            "title": "Hoop Missed Median",
+            "code": "autoHoopMissedMedian",
+            "aggFunction": "median"
+          },{
+            "title": "Hoop Missed Mean",
+            "code": "autoHoopMissedMean",
+            "aggFunction": "mean"
+          }]
         },
         {
           "code": "autoFoulCount",
@@ -123,7 +201,24 @@
           "defaultValue": 0,
           "min": 0,
           "required": false,
-          "columnOrder": 11
+          "columnOrder": 11,
+          "aggregate": [{
+            "title": "Foul Count Minimum",
+            "code": "autoFoulCountMin",
+            "aggFunction": "min"
+          },{
+            "title": "Foul Count Maximum",
+            "code": "autoFoulCountMax",
+            "aggFunction": "max"
+          },{
+            "title": "Foul Count Median",
+            "code": "autoFoulCountMedian",
+            "aggFunction": "median"
+          },{
+            "title": "Foul Count Mean",
+            "code": "autoFoulCountMean",
+            "aggFunction": "mean"
+          }]
         }
       ]
     },
@@ -137,7 +232,24 @@
           "defaultValue": 0,
           "min": 0,
           "required": false,
-          "columnOrder": 12
+          "columnOrder": 12,
+          "aggregate": [{
+            "title": "Net Scored Minimum",
+            "code": "netScoredMin",
+            "aggFunction": "min"
+          },{
+            "title": "Net Scored Maximum",
+            "code": "netScoredMax",
+            "aggFunction": "max"
+          },{
+            "title": "Net Scored Median",
+            "code": "netScoredMedian",
+            "aggFunction": "median"
+          },{
+            "title": "Net Scored Mean",
+            "code": "netScoredMean",
+            "aggFunction": "mean"
+          }]
         },
         {
           "code": "hoopScoredCount",
@@ -146,7 +258,24 @@
           "defaultValue": 0,
           "min": 0,
           "required": false,
-          "columnOrder": 13
+          "columnOrder": 13,
+          "aggregate": [{
+            "title": "Hoop Scored Minimum",
+            "code": "hoopScoredMin",
+            "aggFunction": "min"
+          },{
+            "title": "Hoop Scored Maximum",
+            "code": "hoopScoredMax",
+            "aggFunction": "max"
+          },{
+            "title": "Hoop Scored Median",
+            "code": "hoopScoredMedian",
+            "aggFunction": "median"
+          },{
+            "title": "Hoop Scored Mean",
+            "code": "hoopScoredMean",
+            "aggFunction": "mean"
+          }]
         },
         {
           "code": "teleopFoulCount",
@@ -154,7 +283,24 @@
           "type": "counter",
           "defaultValue": 0,
           "required": false,
-          "columnOrder": 14
+          "columnOrder": 14,
+          "aggregate": [{
+            "title": "Fouls Minimum",
+            "code": "foulsMin",
+            "aggFunction": "min"
+          },{
+            "title": "Fouls Maximum",
+            "code": "foulsMax",
+            "aggFunction": "max"
+          },{
+            "title": "Fouls Median",
+            "code": "foulsMedian",
+            "aggFunction": "median"
+          },{
+            "title": "Fouls Mean",
+            "code": "foulsMean",
+            "aggFunction": "mean"
+          }]
         },
         {
           "code": "teleopTechFoulCount",
@@ -162,7 +308,24 @@
           "type": "counter",
           "defaultValue": 0,
           "required": false,
-          "columnOrder": 15
+          "columnOrder": 15,
+          "aggregate": [{
+            "title": "Tech Fouls Minimum",
+            "code": "techFoulsMin",
+            "aggFunction": "min"
+          },{
+            "title": "Tech Fouls Maximum",
+            "code": "techFoulsMax",
+            "aggFunction": "max"
+          },{
+            "title": "Tech Fouls Median",
+            "code": "techFoulsMedian",
+            "aggFunction": "median"
+          },{
+            "title": "Tech Fouls Mean",
+            "code": "techFoulsMean",
+            "aggFunction": "mean"
+          }]
         }
       ]
     },
@@ -179,7 +342,24 @@
             "Home"
           ],
           "defaultValue": "No",
-          "columnOrder": 16
+          "columnOrder": 16,
+          "aggregate": [{
+            "title": "End Position Minimum",
+            "code": "endPositionMin",
+            "aggFunction": "min"
+          },{
+            "title": "End Position Maximum",
+            "code": "endPositionMax",
+            "aggFunction": "max"
+          },{
+            "title": "End Position Median",
+            "code": "endPositionMedian",
+            "aggFunction": "median"
+          },{
+            "title": "End Position Mean",
+            "code": "endPositionMean",
+            "aggFunction": "mean"
+          }]
         },
         {
           "code": "offenseSkillRating",
@@ -192,7 +372,24 @@
             "Very Effective"
           ],
           "required": false,
-          "columnOrder": 17
+          "columnOrder": 17,
+          "aggregate": [{
+            "title": "Offense Skill Rating Minimum",
+            "code": "offenseSkillRatingMin",
+            "aggFunction": "min"
+          },{
+            "title": "Offense Skill Rating Maximum",
+            "code": "offenseSkillRatingMax",
+            "aggFunction": "max"
+          },{
+            "title": "Offense Skill Rating Median",
+            "code": "offenseSkillRatingMedian",
+            "aggFunction": "median"
+          },{
+            "title": "Offense Skill Rating Mean",
+            "code": "offenseSkillRatingMean",
+            "aggFunction": "mean"
+          }]
         },
         {
           "code": "defenseSkillRating",
@@ -205,7 +402,24 @@
             "Very Effective"
           ],
           "required": false,
-          "columnOrder": 18
+          "columnOrder": 18,
+          "aggregate": [{
+            "title": "Defense Skill Rating Minimum",
+            "code": "defenseSkillRatingMin",
+            "aggFunction": "min"
+          },{
+            "title": "Defense Skill Rating Maximum",
+            "code": "defenseSkillRatingMax",
+            "aggFunction": "max"
+          },{
+            "title": "Defense Skill Rating Median",
+            "code": "defenseSkillRatingMedian",
+            "aggFunction": "median"
+          },{
+            "title": "Defense Skill Rating Mean",
+            "code": "defenseSkillRatingMean",
+            "aggFunction": "mean"
+          }]
         },
         {
           "code": "hasDiedOrTippedOver",
@@ -213,7 +427,12 @@
           "type": "boolean",
           "defaultValue": false,
           "required": false,
-          "columnOrder": 19
+          "columnOrder": 19,
+          "aggregate": [{
+            "title": "Died / Tipped Over Count",
+            "code": "hasDiedOrTippedOverCount",
+            "aggFunction": "countTrue"
+          }]
         },
         {
           "code": "yellowRedCard",
@@ -226,7 +445,23 @@
             "Yellow Card",
             "Red Card"
           ],
-          "columnOrder": 20
+          "columnOrder": 20,
+          "aggregate": [{
+            "title": "Any Card Count",
+            "code": "anyCardCount",
+            "aggFunction": "countIfNot",
+            "additionalArguments": [0]
+          },{
+            "title": "Yellow Card Count",
+            "code": "yellowCardCount",
+            "aggFunction": "countIf",
+            "additionalArguments": [1]
+          },{
+            "title": "Red Card Count",
+            "code": "redCardCount",
+            "aggFunction": "countIf",
+            "additionalArguments": [2]
+          }]
         },
         {
           "code": "comments",

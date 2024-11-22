@@ -62,12 +62,9 @@ namespace("frc2181.scouting.spectator.Spectator", {
       Download.triggerJSONDownload("spectator", "spectator", this.state.dataTable)
     }
     downloadTable() {
-      /*
-      const fields = formData().sections.map(s => s.fields.map(f => Object.assign(f, { sectionName: s.name }))).flat();
-      fields.sort((f1,f2) => f1.columnOrder - f2.columnOrder);
-      const csv = [fields.map(f => `${f.sectionName} - ${f.title}`)].concat(this.state.dataTable.map(row => fields.map(f => row[f.code])));
-      Download.triggerCSVDownload("spectator", "spectator", "\t", csv);
-      */
+      const headers = formData.getAggregatorHeaders();
+      const csv = [headers.map(h => `${h.sectionName} - ${h.title}`)].concat(this.state.aggregate.map(row => headers.map(h => row[h.code])));
+      Download.triggerCSVDownload("spectator-aggregate", "spectator-aggregate", "\t", csv);
     }
     clearTable() {
       if(confirm("This will delete ALL DATA! Are you sure?")) {
@@ -109,7 +106,7 @@ namespace("frc2181.scouting.spectator.Spectator", {
               <button title="Rollup Aggregate Data" className="btn btn-primary m-2" onClick={() => this.rollupAggregate()}>
                 <h2 className="text-center align-middle mb-0"><i className="fas fa-filter"></i></h2>
               </button>
-              { this.state.aggregate && <button title="Download Table" className="btn btn-primary m-2" onClick={() => this.downloadTable()}>
+              { this.state.aggregate && <button title="Download Aggregate Table" className="btn btn-primary m-2" onClick={() => this.downloadTable()}>
                 <h2 className="text-center align-middle mb-0"><i className="fas fa-table-cells"></i></h2>
               </button> }
             </div>
