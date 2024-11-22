@@ -44,7 +44,9 @@ namespace("frc2181.scouting.spectator.FormDataService", {
     Ajax.get(path, {
       success: (respText) => {
         const config = JSON.parse(respText);
-        config.sections.forEach(s => s.fields.forEach(f => Object.defineProperty(f, "value", f.defaultValue)));
+        config.sections.forEach(s => s.fields.forEach(f => {
+          f.value = f.defaultValue;
+        }));
         state.formData = config;
         state.aggregator = Aggregate.buildAggregator(config.aggregateBy, getFieldAggregators());
         commit();
