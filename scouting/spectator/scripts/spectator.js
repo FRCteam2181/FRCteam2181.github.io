@@ -72,7 +72,7 @@ namespace("frc2181.scouting.spectator.Spectator", {
       }
     }
     rollupAggregate() {
-      this.setState({ aggregate: formData.aggregate() });
+      this.setState({ aggregate: formData.aggregate(this.state.dataTable) });
     }
     edit(index) {
       formData.load(this.state.dataTable[index]);

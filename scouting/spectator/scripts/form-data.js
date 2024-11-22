@@ -63,5 +63,6 @@ namespace("frc2181.scouting.spectator.FormDataService", {
   stateHandler.load = loadRecord;
   stateHandler.getRecord = getRecord;
   stateHandler.getAggregatorHeaders = getAggregatorHeaders;
-  return { state: stateHandler, load, aggregate: state.aggregator };
+  stateHandler.aggregate = (dataTable) => state.aggregator(dataTable);
+  return { state: stateHandler, load };
 });
