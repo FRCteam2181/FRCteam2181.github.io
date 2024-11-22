@@ -30,8 +30,7 @@ namespace("frc2181.scouting.spectator.FormDataService", {
     });
   })
   const getFieldAggregators = function() {
-    return state.formData.sections.map(s => s.fields.map(f => {
-      f.sectionName = s.name;
+    return state.formData.sections.map(s => s.fields.filter(f => f.aggregate).map(f => {
       return f.aggregate.map(a => {
         a.sectionName = s.name;
         a.fieldCode = f.code;
@@ -46,6 +45,7 @@ namespace("frc2181.scouting.spectator.FormDataService", {
         const config = JSON.parse(respText);
         config.sections.forEach(s => s.fields.forEach(f => {
           f.value = f.defaultValue;
+          f.sectionName = s.name;
         }));
         state.formData = config;
         state.aggregator = Aggregate.buildAggregator(config.aggregateBy, getFieldAggregators());
