@@ -35,8 +35,8 @@ namespace("frc2181.scouting.spectator.FormDataService", {
         a.sectionName = s.name;
         a.fieldCode = f.code;
         return a;
-      }).flat();
-    })).flat();
+      });
+    }).flat()).flat();
   }
   const load = function(path, update) {
     state.step = update;

@@ -22,23 +22,26 @@ namespace("frc2181.scouting.spectator.Aggregate", {
       const maxCount = max(Object.values(counts));
       return max(Object.entries(counts).filter(([_,v]) => v === maxCount).map(([k,_]) => k));
     },
-    countTrue: (dataArray) => dataArray.filter(i => i),
-    countFalse: (dataArray) => dataArray.filter(i => !i),
-    countIf: (dataArray, compareValue) => dataArray.filter(i => i === compareValue),
-    countIfNot: (dataArray, compareValue) => dataArray.filter(i => i !== compareValue),
+    countTrue: (dataArray) => dataArray.filter(i => i).length,
+    countFalse: (dataArray) => dataArray.filter(i => !i).length,
+    countIf: (dataArray, compareValue) => dataArray.filter(i => i === compareValue).length,
+    countIfNot: (dataArray, compareValue) => dataArray.filter(i => i !== compareValue).length,
     union,
     intersection,
     minCount: (dataArray) => min(dataArray.map(elem => FlagSet.decodeIndicies(elem).length)),
     maxCount: (dataArray) => max(dataArray.map(elem => FlagSet.decodeIndicies(elem).length)),
-    unionCount: (dataArray) => FlagSet.decodeIndicies(union(dataArray)),
-    intersectionCount: (dataArray) => FlagSet.decodeIndicies(intersection(dataArray))
+    unionCount: (dataArray) => FlagSet.decodeIndicies(union(dataArray)).length,
+    intersectionCount: (dataArray) => FlagSet.decodeIndicies(intersection(dataArray)).length
   };
   const buildAggregator = function(aggregateBy, fieldAggregators) {
+    console.log({aggregateBy, fieldAggregators})
     return function(dataTable) {
       const groups = Object.groupBy(dataTable, row => row[aggregateBy]);
       return Object.entries(groups).map(([grouper, rows]) => {
-        return fieldAggregators.reduce((acc, { fieldCode, code, aggFunction, additionalArguments }) => {
-          return Object.assign(acc, Object.fromEntries([[code, aggFunction.apply(null, [rows.map(row => row[fieldCode])].concat(additionalArguments || []))]]));
+        return fieldAggregators.reduce((acc, agg) => {
+          console.log(agg);
+          const { fieldCode, code, aggFunction, additionalArguments } = agg;
+          return Object.assign(acc, Object.fromEntries([[code, functions[aggFunction].apply(null, [rows.map(row => row[fieldCode])].concat(additionalArguments || []))]]));
         }, Object.fromEntries([[aggregateBy, grouper]]));
       });
     }
