@@ -65,7 +65,7 @@ namespace("frc2181.scouting.spectator.Spectator", {
     downloadTable() {
       const headers = formData.getAggregatorHeaders();
       const csv = [headers.map(h => `${h.sectionName} - ${h.title}`)].concat(this.state.aggregate.map(row => headers.map(h => row[h.code])));
-      Download.triggerCSVDownload("spectator-aggregate", "spectator-aggregate", "\t", csv);
+      Download.triggerCSVDownload("spectator-aggregate", "spectator-aggregate", ",", csv);
     }
     clearTable() {
       if(confirm("This will delete ALL DATA! Are you sure?")) {

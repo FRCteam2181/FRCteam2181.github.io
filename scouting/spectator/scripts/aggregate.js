@@ -13,7 +13,7 @@ namespace("frc2181.scouting.spectator.Aggregate", {
     sum,
     product: binaryReducer((a,b) => a * b),
     mean: (dataArray) => Math.round(sum(dataArray)/dataArray.length),
-    median: (dataArray) => dataArray[Math.round(dataArray/2)],
+    median: (dataArray) => dataArray[Math.round(dataArray.length/2)],
     mode: (dataArray) => {
       const counts = dataArray.reduce((acc,elem) => {
         acc[elem] = (acc[elem] || 1) + 1;
