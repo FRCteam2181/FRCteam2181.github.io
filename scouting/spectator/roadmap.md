@@ -1,10 +1,8 @@
-1. add an "Load File" button to the data view
-   * append to current data
-2. add an "Download" buttons to the data view for both json and csv
-   * "Save" downloads json
-   * "Download Table" downloads csv
-3. add a "Clear All" button to the data view
-   * use "confirm" to confirm
-4. plan reporting feature
+1. prevent refresh
+2. remove csv download button
+3. plan reporting feature
    * aggregate generated columns
+   * display aggregate table
+   * create button to download aggregate data as csv
    * ordering by multiple fields, by both field and direction
+4. backup to local storage

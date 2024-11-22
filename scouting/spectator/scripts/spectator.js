@@ -2,10 +2,11 @@ namespace("frc2181.scouting.spectator.Spectator", {
   "gizmo-atheneum.namespaces.Download": "Download",
   "gizmo-atheneum.namespaces.LoadFile": "LoadFile",
   "frc2181.scouting.spectator.DisplayTable": "DisplayTable",
+  "frc2181.scouting.spectator.EditMode": "EditMode",
   "frc2181.scouting.spectator.FormDataService": "FormDataService",
   "frc2181.scouting.spectator.Logo": "Logo",
   "frc2181.scouting.spectator.SpectatorForm": "SpectatorForm",
-}, ({ Download, LoadFile, DisplayTable, FormDataService, Logo, SpectatorForm }) => {
+}, ({ Download, LoadFile, DisplayTable, EditMode, FormDataService, Logo, SpectatorForm }) => {
   const defaultPath = "./config/crescendo-config.json"
   const getPathForGame = (game) => `./config/${game}-config.json`;
   const formData = FormDataService.state;
@@ -19,6 +20,7 @@ namespace("frc2181.scouting.spectator.Spectator", {
       };
     }
     componentDidMount() {
+      EditMode.enable();
       if (!this.state.now) {
         FormDataService.load(this.state.path, (newState) => { this.setState(newState) })
       }
