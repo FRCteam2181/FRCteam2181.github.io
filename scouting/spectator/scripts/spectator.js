@@ -65,7 +65,7 @@ namespace("frc2181.scouting.spectator.Spectator", {
       const fields = formData().sections.map(s => s.fields.map(f => Object.assign(f, { sectionName: s.name }))).flat();
       fields.sort((f1,f2) => f1.columnOrder - f2.columnOrder);
       const csv = [fields.map(f => `${f.sectionName} - ${f.title}`)].concat(this.state.dataTable.map(row => fields.map(f => row[f.code])));
-      Download.triggerCSVDownload("spectator", "spectator", "\t", file);
+      Download.triggerCSVDownload("spectator", "spectator", "\t", csv);
     }
     clearTable() {
       if(confirm("This will delete ALL DATA! Are you sure?")) {
