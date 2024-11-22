@@ -38,8 +38,8 @@ namespace("frc2181.scouting.spectator.Aggregate", {
       const groups = Object.groupBy(dataTable, row => row[aggregateBy]);
       return Object.entries(groups).map(([grouper, rows]) => {
         return fieldAggregators.reduce((acc, { fieldCode, code, aggFunction, additionalArguments }) => {
-          return Object.defineProperty(acc, code, aggFunction.apply(null, [rows.map(row => row[fieldCode])].concat(additionalArguments || [])));
-        }, Object.defineProperty({}, aggregateBy, grouper));
+          return Object.assign(acc, Object.fromEntries([[code, aggFunction.apply(null, [rows.map(row => row[fieldCode])].concat(additionalArguments || []))]]));
+        }, Object.fromEntries([[aggregateBy, grouper]]));
       });
     }
   }
