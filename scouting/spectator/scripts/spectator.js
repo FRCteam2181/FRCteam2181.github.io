@@ -62,6 +62,11 @@ namespace("frc2181.scouting.spectator.Spectator", {
     saveData() {
       Download.triggerJSONDownload("spectator", "spectator", this.state.dataTable)
     }
+    downloadTable() {
+      const headers = formData.getAggregatorHeaders();
+      const csv = [headers.map(h => `${h.sectionName} - ${h.title}`)].concat(this.state.aggregate.map(row => headers.map(h => row[h.code])));
+      Download.triggerCSVDownload("spectator-aggregate", "spectator-aggregate", ",", csv);
+    }
     clearTable() {
       if(confirm("This will delete ALL DATA! Are you sure?")) {
         this.setState({ selectedRecord: undefined, dataTable: [] });
@@ -126,7 +131,7 @@ namespace("frc2181.scouting.spectator.Spectator", {
           { this.state.aggregate && <div className="d-flex flex-column justify-content-center">
             <div className="m-2 d-flex justify-content-around">
               <button title="Back to Main" className="btn btn-warning m-2" onClick={() => this.clearAggregate()}>
-                <h2 className="text-center align-middle mb-0"><i className="fas fa-table-cells"></i></h2>
+                <h2 className="text-center align-middle mb-0"><i className="fas fa-arrow-left"></i></h2>
               </button>
               <button title="Download Aggregate Table" className="btn btn-primary m-2" onClick={() => this.downloadTable()}>
                 <h2 className="text-center align-middle mb-0"><i className="fas fa-table-cells"></i></h2>
