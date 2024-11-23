@@ -62,11 +62,6 @@ namespace("frc2181.scouting.spectator.Spectator", {
     saveData() {
       Download.triggerJSONDownload("spectator", "spectator", this.state.dataTable)
     }
-    downloadTable() {
-      const headers = formData.getAggregatorHeaders();
-      const csv = [headers.map(h => `${h.sectionName} - ${h.title}`)].concat(this.state.aggregate.map(row => headers.map(h => row[h.code])));
-      Download.triggerCSVDownload("spectator-aggregate", "spectator-aggregate", "\t", csv);
-    }
     clearTable() {
       if(confirm("This will delete ALL DATA! Are you sure?")) {
         this.setState({ selectedRecord: undefined, dataTable: [] });
@@ -74,6 +69,14 @@ namespace("frc2181.scouting.spectator.Spectator", {
     }
     rollupAggregate() {
       this.setState({ aggregate: formData.aggregate(this.state.dataTable) });
+    }
+    downloadTable() {
+      const headers = formData.getAggregatorHeaders();
+      const csv = [headers.map(h => `${h.sectionName} - ${h.title}`)].concat(this.state.aggregate.map(row => headers.map(h => row[h.code])));
+      Download.triggerCSVDownload("spectator-aggregate", "spectator-aggregate", "\t", csv);
+    }
+    clearAggregate() {
+      this.setState({ aggregate: undefined });
     }
     edit(index) {
       formData.load(this.state.dataTable[index]);
@@ -90,34 +93,47 @@ namespace("frc2181.scouting.spectator.Spectator", {
           { formData() && <h1 className="text-center text-gears-dark">{formData().page_title}</h1>}
           { this.state.now && !isNaN(this.state.selectedRecord) && 
             <SpectatorForm onCommit={ () => this.commit() } onCancel={ () => this.cancel() }/>}
-          { this.state.now && isNaN(this.state.selectedRecord) && <div className="d-flex flex-column justify-content-center">
-            <div className="m-2 d-flex justify-content-center">
-              <button title="Add New Record" className="btn btn-primary m-2 " onClick={() => this.add()}>
-                <h2 className="text-center align-middle mb-0"><i className="fas fa-file-circle-plus"></i></h2>
-              </button>
-              <button title="Load Data From File" className="btn btn-primary m-2" onClick={() => this.loadData()}>
-                <h2 className="text-center align-middle mb-0"><i className="fas fa-file-import"></i></h2>
-              </button>
-              <button title="Save Data" className="btn btn-primary m-2" onClick={() => this.saveData()}>
-                <h2 className="text-center align-middle mb-0"><i className="far fa-floppy-disk"></i></h2>
-              </button>
-              <button title="Clear Table" className="btn btn-danger m-2" onClick={() => this.clearTable()}>
-                <h2 className="text-center align-middle mb-0"><i className="far fa-file-excel"></i></h2>
-              </button>
-              <button title="Rollup Aggregate Data" className="btn btn-primary m-2" onClick={() => this.rollupAggregate()}>
-                <h2 className="text-center align-middle mb-0"><i className="fas fa-filter"></i></h2>
-              </button>
-              { this.state.aggregate && <button title="Download Aggregate Table" className="btn btn-primary m-2" onClick={() => this.downloadTable()}>
-                <h2 className="text-center align-middle mb-0"><i className="fas fa-table-cells"></i></h2>
-              </button> }
+          { this.state.now && isNaN(this.state.selectedRecord) && !this.state.aggregate && <div className="d-flex flex-column justify-content-center">
+            <div className="m-2 d-flex justify-content-between">
+              <div className="m-2 d-flex justify-content-center">
+                <button title="Load Data From File" className="btn btn-primary m-2" onClick={() => this.loadData()}>
+                  <h2 className="text-center align-middle mb-0"><i className="fas fa-file-import"></i></h2>
+                </button>
+                <button title="Save Data" className="btn btn-primary m-2" onClick={() => this.saveData()}>
+                  <h2 className="text-center align-middle mb-0"><i className="far fa-floppy-disk"></i></h2>
+                </button>
+              </div>
+              <div className="m-2 d-flex justify-content-center">
+                <button title="Add New Record" className="btn btn-success m-2 " onClick={() => this.add()}>
+                  <h2 className="text-center align-middle mb-0"><i className="fas fa-file-circle-plus"></i></h2>
+                </button>
+                <button title="Rollup Aggregate Data" className="btn btn-success m-2" onClick={() => this.rollupAggregate()}>
+                  <h2 className="text-center align-middle mb-0"><i className="fas fa-filter"></i></h2>
+                </button>
+              </div>
+              <div className="m-2 d-flex justify-content-center">
+                <button title="Clear Table" className="btn btn-danger m-2" onClick={() => this.clearTable()}>
+                  <h2 className="text-center align-middle mb-0"><i className="far fa-file-excel"></i></h2>
+                </button>
+              </div>
             </div>
             <DisplayTable 
               data={this.state.dataTable}
               onEdit={(index) => this.edit(index)}
               onDelete={(index) => this.delete(index)}
               />
-          { this.state.aggregate && <AggregateTable data={this.state.aggregate}/> }
-          </div>}
+          </div> }
+          { this.state.aggregate && <div className="d-flex flex-column justify-content-center">
+            <div className="m-2 d-flex justify-content-around">
+              <button title="Back to Main" className="btn btn-warning m-2" onClick={() => this.clearAggregate()}>
+                <h2 className="text-center align-middle mb-0"><i className="fas fa-table-cells"></i></h2>
+              </button>
+              <button title="Download Aggregate Table" className="btn btn-primary m-2" onClick={() => this.downloadTable()}>
+                <h2 className="text-center align-middle mb-0"><i className="fas fa-table-cells"></i></h2>
+              </button>
+            </div>
+            <AggregateTable data={this.state.aggregate}/>
+          </div> }
         </main>
         <footer>
           <div className="d-flex flex-column justify-content-center">
