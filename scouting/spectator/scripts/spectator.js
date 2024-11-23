@@ -45,13 +45,20 @@ namespace("frc2181.scouting.spectator.Spectator", {
     loadData() {
       LoadFile(false, "text", (fileContent, fileName) => {
         const newData = JSON.parse(fileContent);
-        const badRecords = newData.filter(record => 
+        const dupRecords = newData.filter(record => 
           this.state.dataTable.find(row => 
             formData().distinct.reduce((acc,field) => 
               acc && row[field] === record[field], true)));
-        if (badRecords.length > 0) {
-          console.log({ fileName, badRecords })
-          throw { fileName, badRecords };
+        if (dupRecords.length > 0) {
+          console.log({ fileName, dupRecords });
+          alert(`"${fileName} contains duplicate records. Did not load! View console for details."`);
+          throw { fileName, badRecords: dupRecords };
+        }
+        try {
+          formData.validateData(newData);
+        } catch(e) {
+          alert(`${e.message} View console for details.`);
+          throw e;
         }
         this.setState({ dataTable: this.state.dataTable.concat(newData), aggregate: undefined })
       }, (fileName, error) => {

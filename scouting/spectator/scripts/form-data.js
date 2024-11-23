@@ -53,6 +53,70 @@ namespace("frc2181.scouting.spectator.FormDataService", {
       }
     })
   }
+  const inputTypeOf = {
+    "text": "string",
+    "number": "number",
+    "boolean": "boolean",
+    "range": "number",
+    "counter": "number",
+    "enum": "number",
+    "enum-set": "number",
+    "markdown": "string"
+  }
+  const validateData = function(saveData, fileName) {
+    const errors = saveData.reduce((acc, row, rowIndex) => {
+      return state.formData.sections.map(s => s.fields).flat().reduce((outval, field) => {
+        if(field.required && !(field.code in row)) {
+          outval.push({
+            code: field.code,
+            row: rowIndex,
+            error: "Required!"
+          });
+        }
+        const value = row[field.code]
+        const dataType = (typeof value);
+        if(dataType !== inputTypeOf[field.type]) {
+          outval.push({
+            code: field.code,
+            row: rowIndex,
+            fieldType: field.type,
+            fieldTypeOf: inputTypeOf[field.type],
+            dataType,
+            error: "Invalid Type!"
+          });
+        }
+        if(field.required && dataType === "string" && value.length === 0) {
+          outval.push({
+            code: field.code,
+            row: rowIndex,
+            error: "Required Value Is Empty!"
+          });
+        }
+        if(!isNaN(field.min) && value < min) {
+          outval.push({
+            code: field.code,
+            row: rowIndex,
+            min: field.min,
+            value,
+            error: "Value Out Of Range!"
+          });
+        }
+        if(!isNaN(field.max) && value > max) {
+          outval.push({
+            code: field.code,
+            row: rowIndex,
+            max: field.max,
+            value,
+            error: "Value Out Of Range!"
+          });
+        }
+        return outval;
+      }, acc);
+    }, []);
+    if (errors.length > 0) {
+      throw { errors, message: `"${fileName}" does not contain valid data for "${state.formData.page_title}"!` };
+    }
+  }
   const getAggregatorHeaders = function() {
     const { sectionName, title, code } = state.formData.sections.map(s => s.fields).flat().find(f => f.code === state.formData.aggregateBy)
     return [{ sectionName, title, code }].concat(getFieldAggregators().map(({ sectionName, title, code }) => Object.create({ sectionName, title, code })));
@@ -63,6 +127,7 @@ namespace("frc2181.scouting.spectator.FormDataService", {
   stateHandler.load = loadRecord;
   stateHandler.getRecord = getRecord;
   stateHandler.getAggregatorHeaders = getAggregatorHeaders;
+  stateHandler.validate = validateData
   stateHandler.aggregate = (dataTable) => state.aggregator(dataTable);
   return { state: stateHandler, load };
 });
