@@ -99,7 +99,7 @@ namespace("frc2181.scouting.spectator.Sections", {
   const EnumInput = function(data) {
     function handleSelect(evt) {
       evt.preventDefault();
-      data.onChange(evt.currentTarget.value);
+      data.onChange(parseInt(evt.currentTarget.value.toString()));
     }
     return (<div className={fieldClasses} key={data.title}>
       <Label {...data}/>
@@ -196,10 +196,10 @@ namespace("frc2181.scouting.spectator.Sections", {
     </div>);
   }
   const inputSelector = (section, code) => {
-    return formData().sections.find(s => s.name === section)?.fields.find(f => f.code === code);
+    return formData().sections.find(s => s.title === section)?.fields.find(f => f.code === code);
   };
-  const updateValue = function(sectionName, code, data) {
-    let section = formData().sections.find(s => s.name === sectionName);
+  const updateValue = function(sectionTitle, code, data) {
+    let section = formData().sections.find(s => s.title === sectionTitle);
     if (section) {
       let field = section.fields.find(f => f.code === code);
       if (field) {
@@ -316,12 +316,12 @@ namespace("frc2181.scouting.spectator.Sections", {
     }
   }
   const FormSection = function(props) {
-    const inputs = formData().sections.find(s => s.name === props.name)?.fields;
+    const inputs = formData().sections.find(s => s.title === props.title)?.fields;
     return (
-      <Section title={props.name}>
+      <Section title={props.title}>
         <div className="d-flex flex-wrap justify-content-around">
           {inputs?.map((e) => (
-            <ConfigurableInput key={e.title} section={props.name} code={e.code} />
+            <ConfigurableInput key={e.title} section={props.title} code={e.code} />
           ))}
         </div>
       </Section>
@@ -330,7 +330,7 @@ namespace("frc2181.scouting.spectator.Sections", {
   const Sections = function () {
     return (<div className="d-flex flex-wrap justify-content-around">
       {formData().sections.map(section => {
-        return <FormSection key={section.name} name={section.name} />;
+        return <FormSection key={section.title} title={section.title} />;
       })}
     </div>);
   }

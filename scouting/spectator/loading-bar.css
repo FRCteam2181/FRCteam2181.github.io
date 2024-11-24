@@ -1,0 +1,19 @@
+.loading {
+  text-align: center;
+  span {
+    display: inline-block;
+  	margin: 0 -.075em;
+    animation: loading03 .7s infinite alternate;
+    &:nth-child(0) {
+      animation-delay: 0s;
+    }
+  }
+}
+@keyframes loading03 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(.8);
+  }
+}

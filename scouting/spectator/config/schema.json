@@ -42,12 +42,8 @@
     "Section": {
       "type": "object",
       "properties": {
-        "name": {
+        "title": {
           "type": "string"
-        },
-        "preserveDataOnReset": {
-          "type": "boolean",
-          "description": "If true, field data will not be cleared when the scouting form is reset."
         },
         "fields": {
           "type": "array",
@@ -56,7 +52,7 @@
           }
         }
       },
-      "required": ["name", "fields"],
+      "required": ["title", "fields"],
       "additionalProperties": false
     },
     "InputProps": {

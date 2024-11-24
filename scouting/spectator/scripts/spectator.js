@@ -5,9 +5,10 @@ namespace("frc2181.scouting.spectator.Spectator", {
   "frc2181.scouting.spectator.DisplayTable": "DisplayTable",
   "frc2181.scouting.spectator.EditMode": "EditMode",
   "frc2181.scouting.spectator.FormDataService": "FormDataService",
+  "frc2181.scouting.spectator.LoadingBar": "LoadingBar",
   "frc2181.scouting.spectator.Logo": "Logo",
   "frc2181.scouting.spectator.SpectatorForm": "SpectatorForm",
-}, ({ Download, LoadFile, AggregateTable, DisplayTable, EditMode, FormDataService, Logo, SpectatorForm }) => {
+}, ({ Download, LoadFile, AggregateTable, DisplayTable, EditMode, FormDataService, LoadingBar, Logo, SpectatorForm }) => {
   const defaultPath = "./config/crescendo-config.json"
   const getPathForGame = (game) => `./config/${game}-config.json`;
   const formData = FormDataService.state;
@@ -52,26 +53,37 @@ namespace("frc2181.scouting.spectator.Spectator", {
         if (dupRecords.length > 0) {
           console.log({ fileName, dupRecords });
           alert(`"${fileName} contains duplicate records. Did not load! View console for details."`);
-          throw { fileName, badRecords: dupRecords };
+          try {
+            throw { fileName, badRecords: dupRecords };
+          } finally {
+            this.setState({ loading: undefined });
+          }
         }
         try {
-          formData.validate(newData);
+          formData.validate(newData, fileName);
+          this.setState({ dataTable: this.state.dataTable.concat(newData), aggregate: undefined })
         } catch(e) {
           alert(`${e.message} View console for details.`);
           throw e;
+        } finally {
+          this.setState({ loading: undefined });
         }
-        this.setState({ dataTable: this.state.dataTable.concat(newData), aggregate: undefined })
       }, (fileName, error) => {
         console.log({ fileName, error });
-        throw error;
+        try {
+          throw error;
+        } finally {
+          this.setState({ loading: undefined });
+        }
       });
+      this.setState({ loading: true });
     }
     saveData() {
       Download.triggerJSONDownload("spectator", "spectator", this.state.dataTable)
     }
     downloadTable() {
       const headers = formData.getAggregatorHeaders();
-      const csv = [headers.map(h => `${h.sectionName} - ${h.title}`)].concat(this.state.aggregate.map(row => headers.map(h => row[h.code])));
+      const csv = [headers.map(h => `${h.sectionTitle} - ${h.title}`)].concat(this.state.aggregate.map(row => headers.map(h => row[h.code])));
       Download.triggerCSVDownload("spectator-aggregate", "spectator-aggregate", ",", csv);
     }
     clearTable() {
@@ -84,7 +96,7 @@ namespace("frc2181.scouting.spectator.Spectator", {
     }
     downloadTable() {
       const headers = formData.getAggregatorHeaders();
-      const csv = [headers.map(h => `${h.sectionName} - ${h.title}`)].concat(this.state.aggregate.map(row => headers.map(h => row[h.code])));
+      const csv = [headers.map(h => `${h.sectionTitle} - ${h.title}`)].concat(this.state.aggregate.map(row => headers.map(h => row[h.code])));
       Download.triggerCSVDownload("spectator-aggregate", "spectator-aggregate", "\t", csv);
     }
     clearAggregate() {
@@ -129,11 +141,13 @@ namespace("frc2181.scouting.spectator.Spectator", {
                 </button>
               </div>
             </div>
-            <DisplayTable 
-              data={this.state.dataTable}
-              onEdit={(index) => this.edit(index)}
-              onDelete={(index) => this.delete(index)}
-              />
+            { this.state.loading && <LoadingBar classes="text-gears-dark" label="Loading..."/>}
+            { !this.state.loading && 
+              <DisplayTable 
+                data={this.state.dataTable}
+                onEdit={(index) => this.edit(index)}
+                onDelete={(index) => this.delete(index)}
+                />}
           </div> }
           { this.state.aggregate && <div className="d-flex flex-column justify-content-center">
             <div className="m-2 d-flex justify-content-around">

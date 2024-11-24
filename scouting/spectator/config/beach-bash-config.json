@@ -6,8 +6,7 @@
   "distinct": ["scouter", "matchNumber"],
   "sections": [
     {
-      "name": "Prematch",
-      "preserveDataOnReset": true,
+      "title": "Prematch",
       "fields": [
         {
           "title": "Scouter Initials",
@@ -75,7 +74,7 @@
       ]
     },
     {
-      "name": "Autonomous",
+      "title": "Autonomous",
       "fields": [
         {
           "title": "Moved",
@@ -223,7 +222,7 @@
       ]
     },
     {
-      "name": "Teleop",
+      "title": "Teleop",
       "fields": [
         {
           "code": "netScoredCount",
@@ -330,7 +329,7 @@
       ]
     },
     {
-      "name": "Postmatch",
+      "title": "Postmatch",
       "fields": [
         {
           "title": "End Position",

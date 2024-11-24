@@ -8,7 +8,7 @@ namespace("frc2181.scouting.spectator.AggregateTable", {
       <table className="text-light">
         <thead>
           <tr>
-            { headers.map(header => <th>{header.sectionName}</th>)}
+            { headers.map(header => <th>{header.sectionTitle}</th>)}
           </tr>
           <tr>
             { headers.map(header => <th>{header.title}</th>)}

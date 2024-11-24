@@ -3,7 +3,7 @@ namespace("frc2181.scouting.spectator.DisplayTable", {
 }, ({ FormDataService }) => {
   const formData = FormDataService.state;
   return function({ data, onEdit, onDelete }) {
-    const fields = formData().sections.map(s => s.fields.map(f => Object.assign(f, { sectionName: s.name }))).flat();
+    const fields = formData().sections.map(s => s.fields.map(f => Object.assign(f, { sectionTitle: s.title }))).flat();
     fields.sort((f1,f2) => f1.columnOrder - f2.columnOrder);
     return (<div className="frame-box w-100 table-wrapper" style={{ height: `${Math.min(screen.availHeight, window.innerHeight) - 100}px` }}>
       <table className="text-light">
@@ -12,7 +12,7 @@ namespace("frc2181.scouting.spectator.DisplayTable", {
             <th></th>
             <th></th>
             {fields.map(f => <th key={f.code} className="text-center">
-              {f.sectionName}
+              {f.sectionTitle}
             </th>)}
           </tr>
           <tr>
