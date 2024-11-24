@@ -55,7 +55,7 @@ namespace("frc2181.scouting.spectator.Spectator", {
           throw { fileName, badRecords: dupRecords };
         }
         try {
-          formData.validateData(newData);
+          formData.validate(newData);
         } catch(e) {
           alert(`${e.message} View console for details.`);
           throw e;
