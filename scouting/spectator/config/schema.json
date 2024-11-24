@@ -183,7 +183,7 @@
         "field": {
           "type": "string"
         },
-        "orderBy": {
+        "direction": {
           "type": "string",
           "enum": [ "asc", "desc" ]
         }

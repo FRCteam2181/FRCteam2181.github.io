@@ -7,8 +7,9 @@ namespace("frc2181.scouting.spectator.Spectator", {
   "frc2181.scouting.spectator.FormDataService": "FormDataService",
   "frc2181.scouting.spectator.LoadingBar": "LoadingBar",
   "frc2181.scouting.spectator.Logo": "Logo",
+  "frc2181.scouting.spectator.ReportTables": "ReportTables",
   "frc2181.scouting.spectator.SpectatorForm": "SpectatorForm",
-}, ({ Download, LoadFile, AggregateTable, DisplayTable, EditMode, FormDataService, LoadingBar, Logo, SpectatorForm }) => {
+}, ({ Download, LoadFile, AggregateTable, DisplayTable, EditMode, FormDataService, LoadingBar, Logo, ReportTables, SpectatorForm }) => {
   const defaultPath = "./config/crescendo-config.json"
   const getPathForGame = (game) => `./config/${game}-config.json`;
   const formData = FormDataService.state;
@@ -159,6 +160,7 @@ namespace("frc2181.scouting.spectator.Spectator", {
               </button>
             </div>
             <AggregateTable data={this.state.aggregate}/>
+            <ReportTables allData={this.state.aggregate}/>
           </div> }
         </main>
         <footer>

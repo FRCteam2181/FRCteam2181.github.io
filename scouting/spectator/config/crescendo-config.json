@@ -489,5 +489,54 @@
         }
       ]
     }
-  ]
+  ],
+  "reports": [{
+    "reportTitle": "Goon",
+    "orderBy": [{
+      "field": "anyCardCount",
+      "direction": "desc"
+    },{
+      "field": "foulsMax",
+      "direction": "desc"
+    },{
+      "field": "autoFoulCountMax",
+      "direction": "desc"
+    }]
+  },{
+    "reportTitle": "Auto",
+    "orderBy": [{
+      "field": "autoSpeakerScoredMean",
+      "direction": "desc"
+    },{
+      "field": "autoSpeakerMissedMax",
+      "direction": "asc"
+    },{
+      "field": "autoFoulCountMax",
+      "direction": "asc"
+    },{
+      "field": "autoGamePiecePathCountMin",
+      "direction": "desc"
+    }]
+  },{
+    "reportTitle": "Sharpshooter",
+    "orderBy": [{
+      "field": "speakerScoredMean",
+      "direction": "desc"
+    }]
+  },{
+    "reportTitle": "Support",
+    "orderBy": [{
+      "field": "ampScoredMean",
+      "direction": "desc"
+    },{
+      "field": "endPositionMean",
+      "direction": "desc"
+    },{
+      "field": "notesInTrapMax",
+      "direction": "desc"
+    },{
+      "field": "endPositionMin",
+      "direction": "desc"
+    }]
+  }]
 }
