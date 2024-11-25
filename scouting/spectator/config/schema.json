@@ -97,6 +97,9 @@
         "columnOrder": {
           "type": "number"
         },
+        "calculation": {
+          "$ref": "#/definitions/Expression"
+        },
         "aggregate": {
           "type": "array",
           "items": {
@@ -106,6 +109,27 @@
       },
       "required": ["title", "type", "required", "code"],
       "additionalProperties": false
+    },
+    "Expression": {
+      "type": "array",
+      "items": {
+        "type": [ "string", "boolean", "array" ],
+        "prefixItems": [{
+          "type": "string",
+          "enum": ["+", "-", "*", "/", "%", "&", "|", "min", "max", "abs", "ceil", "floor", "round", "pow"]
+        }],
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/definitions/Expression"
+          }
+        ]
+      }
     },
     "InputTypes": {
       "type": "string",
@@ -117,7 +141,8 @@
         "counter",
         "enum",
         "enum-set",
-        "markdown"
+        "markdown",
+        "calculated"
       ]
     },
     "AggregateConfig": {
