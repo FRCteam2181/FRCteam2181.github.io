@@ -194,6 +194,58 @@
           }]
         },
         {
+          "code": "autoPointsScoredCount",
+          "title": "Points Scored",
+          "type": "calculated",
+          "calculation": ["+", ["*", "autoHoopScoredCount", 5], ["*", "autoNetScoredCount", 2]],
+          "defaultValue": 0,
+          "required": false,
+          "columnOrder": 10,
+          "aggregate": [{
+            "title": "Points Scored Minimum",
+            "code": "autoPointsScoredMin",
+            "aggFunction": "min"
+          },{
+            "title": "Points Scored Maximum",
+            "code": "autoPointsScoredMax",
+            "aggFunction": "max"
+          },{
+            "title": "Points Scored Median",
+            "code": "autoPointsScoredMedian",
+            "aggFunction": "median"
+          },{
+            "title": "Points Scored Mean",
+            "code": "autoPointsScoredMean",
+            "aggFunction": "mean"
+          }]
+        },
+        {
+          "code": "autoPointsMissedCount",
+          "title": "Points Missed",
+          "type": "calculated",
+          "calculation": ["+", ["*", "autoHoopMissedCount", 5], ["*", "autoNetMissedCount", 2]],
+          "defaultValue": 0,
+          "required": false,
+          "columnOrder": 11,
+          "aggregate": [{
+            "title": "Points Missed Minimum",
+            "code": "autoPointsMissedMin",
+            "aggFunction": "min"
+          },{
+            "title": "Points Missed Maximum",
+            "code": "autoPointsMissedMax",
+            "aggFunction": "max"
+          },{
+            "title": "Points Missed Median",
+            "code": "autoPointsMissedMedian",
+            "aggFunction": "median"
+          },{
+            "title": "Points Missed Mean",
+            "code": "autoPointsMissedMean",
+            "aggFunction": "mean"
+          }]
+        },
+        {
           "code": "autoFoulCount",
           "title": "Auto Foul",
           "type": "counter",
@@ -273,6 +325,58 @@
           },{
             "title": "Hoop Scored Mean",
             "code": "hoopScoredMean",
+            "aggFunction": "mean"
+          }]
+        },
+        {
+          "code": "sharkScoredCount",
+          "title": "Shark Scored",
+          "type": "counter",
+          "defaultValue": 0,
+          "min": 0,
+          "required": false,
+          "columnOrder": 13,
+          "aggregate": [{
+            "title": "Shark Scored Minimum",
+            "code": "sharkScoredMin",
+            "aggFunction": "min"
+          },{
+            "title": "Shark Scored Maximum",
+            "code": "sharkScoredMax",
+            "aggFunction": "max"
+          },{
+            "title": "Shark Scored Median",
+            "code": "sharkScoredMedian",
+            "aggFunction": "median"
+          },{
+            "title": "Shark Scored Mean",
+            "code": "sharkScoredMean",
+            "aggFunction": "mean"
+          }]
+        },
+        {
+          "code": "pointsScoredCount",
+          "title": "Points Scored",
+          "type": "calculated",
+          "calculation": ["+", ["*", "sharkScoredCount", 5], ["*", "hoopScoredCount", 2], "netScoredCount"],
+          "defaultValue": 0,
+          "required": false,
+          "columnOrder": 10,
+          "aggregate": [{
+            "title": "Points Scored Minimum",
+            "code": "pointsScoredMin",
+            "aggFunction": "min"
+          },{
+            "title": "Points Scored Maximum",
+            "code": "pointsScoredMax",
+            "aggFunction": "max"
+          },{
+            "title": "Points Scored Median",
+            "code": "pointsScoredMedian",
+            "aggFunction": "median"
+          },{
+            "title": "Points Scored Mean",
+            "code": "pointsScoredMean",
             "aggFunction": "mean"
           }]
         },

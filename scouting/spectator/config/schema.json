@@ -123,7 +123,7 @@
             "type": "string"
           },
           {
-            "type": "boolean"
+            "type": "number"
           },
           {
             "$ref": "#/definitions/Expression"
