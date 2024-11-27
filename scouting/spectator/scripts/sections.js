@@ -1,9 +1,8 @@
 namespace("frc2181.scouting.spectator.Sections", {
-  "frc2181.scouting.spectator.Calculation": "Calculation",
   "frc2181.scouting.spectator.FlagSet": "FlagSet",
   "frc2181.scouting.spectator.FormDataService": "FormDataService",
   "frc2181.scouting.spectator.Section": "Section"
-}, ({ Calculation, FlagSet, FormDataService, Section }) => {
+}, ({ FlagSet, FormDataService, Section }) => {
   const formData = FormDataService.state;
   const fieldClasses = "mb-3 mx-2 w-100";
   const Label = function({ required, title, value }) {
@@ -61,10 +60,11 @@ namespace("frc2181.scouting.spectator.Sections", {
     </div>);
   }
   const CalcInput = function(data) {
+    const value = formData.calculate(data.code);
     return (<div className={fieldClasses} key={data.title}>
       <Label {...data}/>
       <div className="d-flex justify-content-center align-items-center">
-        <h2 className="px-3 mb-0 text-info">{data.value}</h2>
+        <h2 className="px-3 mb-0 text-info">{value}</h2>
       </div>
     </div>);
   }
@@ -215,9 +215,6 @@ namespace("frc2181.scouting.spectator.Sections", {
         field.value = data;
       }
     }
-    formData().sections.map(s => s.fields).flat().filter(f => f.type === "calculated").forEach(f => {
-      f.value = Calculation.resolveExpression(f.calculation, formData.getRecord());
-    });
     formData.commit();
   }
   const ConfigurableInput = function(props) {

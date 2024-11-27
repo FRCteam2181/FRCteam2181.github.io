@@ -9,7 +9,7 @@ namespace("frc2181.scouting.spectator.Calculation", {
   const functions = {
     "+": [aggregateFromBinary((a,b) => a + b)],
     "-": [(a,b) => a - b, 2],
-    "*": [aggregateFromBinary((a,b) => a + b)],
+    "*": [aggregateFromBinary((a,b) => a * b)],
     "/": [(a,b) => a / b, 2],
     "%": [(a,b) => a % b, 2],
     "&": [(a,b) => a & b, 2],
@@ -24,16 +24,15 @@ namespace("frc2181.scouting.spectator.Calculation", {
   };
   const resolveExpression = function (expression, context, path) {
     path = path || [];
-    const func = functions[expression[0]];
+    const func = functions[expression[0]][0];
     const args = expression.slice(1).map((arg, index) => {
-      switch(typeof arg) {
-        case "object":
-          return resolveExpression(arg, context, path.concat([index]));
-        case "string":
-          return constext[arg];
-        default:
-          return arg;
-      };
+      if (Array.isArray(arg)) {
+        return resolveExpression(arg, context, path.concat([index]));
+      } else if (typeof arg === "string") {
+        return context[arg];
+      } else {
+        return arg;
+      }
     });
     return func.apply(null, args);
   }

@@ -1,7 +1,8 @@
 namespace("frc2181.scouting.spectator.FormDataService", {
   "gizmo-atheneum.namespaces.Ajax": "Ajax",
-  "frc2181.scouting.spectator.Aggregate": "Aggregate"
-}, ({ Ajax, Aggregate }) => {
+  "frc2181.scouting.spectator.Aggregate": "Aggregate",
+  "frc2181.scouting.spectator.Calculation": "Calculation"
+}, ({ Ajax, Aggregate, Calculation }) => {
   const inputTypeOf = {
     "text": "string",
     "number": "number",
@@ -25,10 +26,28 @@ namespace("frc2181.scouting.spectator.FormDataService", {
     });
     commit(updateOnCommit);
   });
-  const getRecord = (() => getFields().reduce((outval,f) => {
-    outval[f.code] = f.value;
-    return outval;
-  }, {}));
+  const getRecord = (() => {
+    const fields = getFields()
+    const values = fields.filter(f => f.type !== "calculated").reduce((outval,f) => {
+      outval[f.code] = f.value;
+      return outval;
+    }, {});
+    fields.filter(f => f.type === "calculated").forEach(f => {
+      values[f.code] = Calculation.resolveExpression(f.calculation, values);
+    });
+  });
+  const calculate = function(code) {
+    const fieldMap = getFields().reduce((acc,f) => {
+      acc[f.code] = f;
+      return acc;
+    }, {});
+    const calcField = fieldMap[code];
+    const values = Object.entries(fieldMap).reduce((acc,[code,field]) => {
+      acc[code] = field.value;
+      return acc;
+    }, {});
+    return Calculation.resolveExpression(calcField.calculation, values);
+  }
   const loadRecord = ((record) => {
     getFields().forEach(f => {
       const value = record[f.code];
@@ -121,6 +140,7 @@ namespace("frc2181.scouting.spectator.FormDataService", {
   }
   const stateHandler = (() => state.formData);
   stateHandler.commit = commit;
+  stateHandler.calculate = calculate;
   stateHandler.reset = reset;
   stateHandler.load = loadRecord;
   stateHandler.getRecord = getRecord;
