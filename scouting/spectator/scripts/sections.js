@@ -71,12 +71,17 @@ namespace("frc2181.scouting.spectator.Sections", {
   const NumberInput = function(data) {
     function handleChange(e) {
       e.preventDefault();
-      data.onChange(Number(e.currentTarget.value));
+      const newValue = Number(e.currentTarget.value);
+      if (isNaN(newValue)) {
+        data.onChange(data.value);
+      } else {
+        data.onChange(newValue);
+      }
     }
     return (<div className={fieldClasses} key={data.title}>
       <Label {...data}/>
       <input 
-        type="number" 
+        type="text" 
         className="form-control text-center" 
         id={data.code}
         min={data.min}
