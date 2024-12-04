@@ -57,7 +57,8 @@
             "Bottom Right",
             "Bottom Left"
           ],
-          "columnOrder": 4
+          "columnOrder": 4,
+          "defaultValue": 0
         },
         {
           "title": "No Show",
