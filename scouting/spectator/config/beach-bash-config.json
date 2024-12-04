@@ -417,7 +417,14 @@
           "code": "totalPointsScoredCount",
           "title": "Total Points Scored",
           "type": "calculated",
-          "calculation": ["+", "autoPointsScoredCount", "pointsScoredCount", ["*", ["true2One", "endInStartingZoneCount"], 5]],
+          "calculation": ["+", 
+            ["*", "autoHoopScoredCount", 6], 
+            ["*", "autoNetScoredCount", 4], 
+            ["*", ["true2One", "hasMovedOutOfStartingZone"], 5], 
+            ["*", "hoopScoredCount", 3], 
+            ["*", "netScoredCount", 2], 
+            ["*", ["true2One", "endInStartingZoneCount"], 5]
+          ],
           "defaultValue": 0,
           "required": false,
           "columnOrder": 18,
@@ -552,5 +559,8 @@
         }
       ]
     }
-  ]
+  ],
+  "reports": [{
+
+  }]
 }
