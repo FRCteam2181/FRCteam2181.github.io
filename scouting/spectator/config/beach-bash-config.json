@@ -423,7 +423,7 @@
             ["*", ["true2One", "hasMovedOutOfStartingZone"], 5], 
             ["*", "hoopScoredCount", 3], 
             ["*", "netScoredCount", 2], 
-            ["*", ["true2One", "endInStartingZoneCount"], 5]
+            ["*", ["true2One", "endInStartingZone"], 5]
           ],
           "defaultValue": 0,
           "required": false,
