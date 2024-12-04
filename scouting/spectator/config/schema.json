@@ -116,7 +116,7 @@
     "Expression": {
       "type": "array",
       "items": {
-        "type": [ "string", "boolean", "array" ],
+        "type": [ "string", "number", "array" ],
         "prefixItems": [{
           "type": "string",
           "enum": ["+", "-", "*", "/", "%", "&", "|", "min", "max", "abs", "ceil", "floor", "round", "pow"]
