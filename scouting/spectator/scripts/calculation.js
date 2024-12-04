@@ -20,7 +20,9 @@ namespace("frc2181.scouting.spectator.Calculation", {
     "ceil": [(a) => Math.ceil(a), 1],
     "floor": [(a) => Math.floor(a), 1],
     "round": [(a) => Math.ceil(a), 1],
-    "pow": [(a,b) => Math.pow(a,b), 2]
+    "pow": [(a,b) => Math.pow(a,b), 2],
+    "true2One":[(bool) => (bool?1:0), 1],
+    "false2One":[(bool) => (bool?0:1), 1],
   };
   const resolveExpression = function (expression, context, path) {
     path = path || [];

@@ -197,7 +197,7 @@
           "code": "autoPointsScoredCount",
           "title": "Points Scored",
           "type": "calculated",
-          "calculation": ["+", ["*", "autoHoopScoredCount", 6], ["*", "autoNetScoredCount", 4]],
+          "calculation": ["+", ["*", "autoHoopScoredCount", 6], ["*", "autoNetScoredCount", 4], ["*", ["true2One", "hasMovedOutOfStartingZone"], 5]],
           "defaultValue": 0,
           "required": false,
           "columnOrder": 10,
@@ -223,7 +223,7 @@
           "code": "autoPointsMissedCount",
           "title": "Points Missed",
           "type": "calculated",
-          "calculation": ["+", ["*", "autoHoopMissedCount", 6], ["*", "autoNetMissedCount", 4]],
+          "calculation": ["+", ["*", "autoHoopMissedCount", 6], ["*", "autoNetMissedCount", 4], ["*", ["false2One", "hasMovedOutOfStartingZone"], 5]],
           "defaultValue": 0,
           "required": false,
           "columnOrder": 11,
@@ -414,6 +414,32 @@
           }]
         },
         {
+          "code": "totalPointsScoredCount",
+          "title": "Total Points Scored",
+          "type": "calculated",
+          "calculation": ["+", "autoPointsScoredCount", "pointsScoredCount", ["*", ["true2One", "endInStartingZoneCount"], 5]],
+          "defaultValue": 0,
+          "required": false,
+          "columnOrder": 18,
+          "aggregate": [{
+            "title": "Total Points Scored Minimum",
+            "code": "totalPointsScoredMin",
+            "aggFunction": "min"
+          },{
+            "title": "Total Points Scored Maximum",
+            "code": "totalPointsScoredMax",
+            "aggFunction": "max"
+          },{
+            "title": "Total Points Scored Median",
+            "code": "totalPointsScoredMedian",
+            "aggFunction": "median"
+          },{
+            "title": "Total Points Scored Mean",
+            "code": "totalPointsScoredMean",
+            "aggFunction": "mean"
+          }]
+        },
+        {
           "code": "offenseSkillRating",
           "title": "Offense Skill",
           "type": "enum",
@@ -424,7 +450,7 @@
             "Very Effective"
           ],
           "required": false,
-          "columnOrder": 17,
+          "columnOrder": 19,
           "aggregate": [{
             "title": "Offense Skill Rating Minimum",
             "code": "offenseSkillRatingMin",
@@ -454,7 +480,7 @@
             "Very Effective"
           ],
           "required": false,
-          "columnOrder": 18,
+          "columnOrder": 20,
           "aggregate": [{
             "title": "Defense Skill Rating Minimum",
             "code": "defenseSkillRatingMin",
@@ -479,7 +505,7 @@
           "type": "boolean",
           "defaultValue": false,
           "required": false,
-          "columnOrder": 19,
+          "columnOrder": 21,
           "aggregate": [{
             "title": "Died / Tipped Over Count",
             "code": "hasDiedOrTippedOverCount",
@@ -497,7 +523,7 @@
             "Yellow Card",
             "Red Card"
           ],
-          "columnOrder": 20,
+          "columnOrder": 22,
           "aggregate": [{
             "title": "Any Card Count",
             "code": "anyCardCount",
@@ -522,7 +548,7 @@
           "min": 0,
           "max": 50,
           "required": false,
-          "columnOrder": 21
+          "columnOrder": 23
         }
       ]
     }

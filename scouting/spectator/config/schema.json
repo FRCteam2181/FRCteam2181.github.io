@@ -119,7 +119,7 @@
         "type": [ "string", "number", "array" ],
         "prefixItems": [{
           "type": "string",
-          "enum": ["+", "-", "*", "/", "%", "&", "|", "min", "max", "abs", "ceil", "floor", "round", "pow"]
+          "enum": ["+", "-", "*", "/", "%", "&", "|", "min", "max", "abs", "ceil", "floor", "round", "pow", "true2One", "false2One"]
         }],
         "anyOf": [
           {
