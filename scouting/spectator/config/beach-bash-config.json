@@ -77,15 +77,15 @@
       "title": "Autonomous",
       "fields": [
         {
-          "title": "Moved",
+          "title": "Moved Out Of Starting Zone",
           "type": "boolean",
           "defaultValue": false,
           "required": false,
-          "code": "hasMoved",
+          "code": "hasMovedOutOfStartingZone",
           "columnOrder": 6,
           "aggregate": [{
             "title": "Moved Count",
-            "code": "movedCount",
+            "code": "movedOutOfStartingZoneCount",
             "aggFunction": "countTrue"
           }]
         },
@@ -197,7 +197,7 @@
           "code": "autoPointsScoredCount",
           "title": "Points Scored",
           "type": "calculated",
-          "calculation": ["+", ["*", "autoHoopScoredCount", 5], ["*", "autoNetScoredCount", 2]],
+          "calculation": ["+", ["*", "autoHoopScoredCount", 6], ["*", "autoNetScoredCount", 4]],
           "defaultValue": 0,
           "required": false,
           "columnOrder": 10,
@@ -223,7 +223,7 @@
           "code": "autoPointsMissedCount",
           "title": "Points Missed",
           "type": "calculated",
-          "calculation": ["+", ["*", "autoHoopMissedCount", 5], ["*", "autoNetMissedCount", 2]],
+          "calculation": ["+", ["*", "autoHoopMissedCount", 6], ["*", "autoNetMissedCount", 4]],
           "defaultValue": 0,
           "required": false,
           "columnOrder": 11,
@@ -246,28 +246,29 @@
           }]
         },
         {
-          "code": "autoFoulCount",
-          "title": "Auto Foul",
+          "code": "autoPenaltyCount",
+          "title": "Auto Penalty",
           "type": "counter",
           "defaultValue": 0,
           "min": 0,
+          "step":5,
           "required": false,
           "columnOrder": 11,
           "aggregate": [{
-            "title": "Foul Count Minimum",
-            "code": "autoFoulCountMin",
+            "title": "Penalty Count Minimum",
+            "code": "autoPenaltyCountMin",
             "aggFunction": "min"
           },{
-            "title": "Foul Count Maximum",
-            "code": "autoFoulCountMax",
+            "title": "Penalty Count Maximum",
+            "code": "autoPenaltyCountMax",
             "aggFunction": "max"
           },{
-            "title": "Foul Count Median",
-            "code": "autoFoulCountMedian",
+            "title": "Penalty Count Median",
+            "code": "autoPenaltyCountMedian",
             "aggFunction": "median"
           },{
-            "title": "Foul Count Mean",
-            "code": "autoFoulCountMean",
+            "title": "Penalty Count Mean",
+            "code": "autoPenaltyCountMean",
             "aggFunction": "mean"
           }]
         }
@@ -355,65 +356,42 @@
           }]
         },
         {
-          "code": "teleopFoulCount",
-          "title": "Foul",
+          "code": "teleopPenaltyCount",
+          "title": "Penalty",
           "type": "counter",
           "defaultValue": 0,
+          "min":0,
+          "step":5,
           "required": false,
           "columnOrder": 14,
           "aggregate": [{
-            "title": "Fouls Minimum",
-            "code": "foulsMin",
+            "title": "Penalties Minimum",
+            "code": "penaltiesMin",
             "aggFunction": "min"
           },{
-            "title": "Fouls Maximum",
-            "code": "foulsMax",
+            "title": "Penalties Maximum",
+            "code": "penaltiesMax",
             "aggFunction": "max"
           },{
-            "title": "Fouls Median",
-            "code": "foulsMedian",
+            "title": "Penalties Median",
+            "code": "penaltiesMedian",
             "aggFunction": "median"
           },{
-            "title": "Fouls Mean",
-            "code": "foulsMean",
+            "title": "Penalties Mean",
+            "code": "penaltiesMean",
             "aggFunction": "mean"
           }]
         },
         {
-          "code": "teleopTechFoulCount",
-          "title": "Tech Foul",
-          "type": "counter",
-          "defaultValue": 0,
-          "required": false,
-          "columnOrder": 15,
-          "aggregate": [{
-            "title": "Tech Fouls Minimum",
-            "code": "techFoulsMin",
-            "aggFunction": "min"
-          },{
-            "title": "Tech Fouls Maximum",
-            "code": "techFoulsMax",
-            "aggFunction": "max"
-          },{
-            "title": "Tech Fouls Median",
-            "code": "techFoulsMedian",
-            "aggFunction": "median"
-          },{
-            "title": "Tech Fouls Mean",
-            "code": "techFoulsMean",
-            "aggFunction": "mean"
-          }]
-        },
-        {
-          "title": "Shark Point",
+          "title": "Shark Saver",
           "type": "boolean",
           "defaultValue": false,
           "required": false,
-          "code": "sharkPoint",
+          "code": "sharkSaver",
           "columnOrder": 16,
           "aggregate": [{
-            "title": "Shark Count",
-            "code": "sharkCount",
+            "title": "Shark Saver Count",
+            "code": "sharkSaverCount",
             "aggFunction": "countTrue"
           }]
         }
@@ -423,32 +401,16 @@
       "title": "Postmatch",
       "fields": [
         {
-          "title": "End Position",
-          "type": "enum",
-          "required": true,
-          "code": "endPosition",
-          "choices": [
-            "Not Home",
-            "Home"
-          ],
-          "defaultValue": "No",
-          "columnOrder": 16,
+          "title": "End In Starting Zone",
+          "type": "boolean",
+          "defaultValue": false,
+          "required": false,
+          "code": "endInStartingZone",
+          "columnOrder": 17,
           "aggregate": [{
-            "title": "End Position Minimum",
-            "code": "endPositionMin",
-            "aggFunction": "min"
-          },{
-            "title": "End Position Maximum",
-            "code": "endPositionMax",
-            "aggFunction": "max"
-          },{
-            "title": "End Position Median",
-            "code": "endPositionMedian",
-            "aggFunction": "median"
-          },{
-            "title": "End Position Mean",
-            "code": "endPositionMean",
-            "aggFunction": "mean"
+            "title": "End In Starting Zone Count",
+            "code": "endInStartingZoneCount",
+            "aggFunction": "countTrue"
           }]
         },
         {

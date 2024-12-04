@@ -10,7 +10,7 @@ namespace("frc2181.scouting.spectator.Spectator", {
   "frc2181.scouting.spectator.ReportTables": "ReportTables",
   "frc2181.scouting.spectator.SpectatorForm": "SpectatorForm",
 }, ({ Download, LoadFile, AggregateTable, DisplayTable, EditMode, FormDataService, LoadingBar, Logo, ReportTables, SpectatorForm }) => {
-  const defaultPath = "./config/crescendo-config.json"
+  const defaultPath = "./config/beach-bash-config.json"
   const getPathForGame = (game) => `./config/${game}-config.json`;
   const formData = FormDataService.state;
   return class extends React.Component {
