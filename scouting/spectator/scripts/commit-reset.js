@@ -3,7 +3,7 @@ namespace("frc2181.scouting.spectator.CommitAndResetSection", {
 }, ({ FormDataService }) => {
   const formData = FormDataService.state;
   const missingRequiredFieldsCount = (() => {
-    const requireds = formData().sections.map(s => s.fields).flat().map(({ required, value }) => Object.assign({}, { required, value, missing: (required && (value === null || value === undefined || value === "")) }));
+    const requireds = formData().sections.map(s => s.fields).flat().map(({ title, required, value }) => Object.assign({}, { title, required, value, missing: (required && (value === null || value === undefined || value === "")) }));
     console.log({ requireds });
     return requireds.filter(f => f.missing).length;
   });
