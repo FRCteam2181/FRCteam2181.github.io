@@ -45,16 +45,15 @@ h1, h2 {
 .gears-unchecked .text-info {
   color: #0dcaf0!important;
   font-weight: light!important;
-  text-decoration: line-through 20%!important;
   text-transform: capitalize!important;
 }
 
-.gears-unchecked .text-info::before {
-  content: "\00a0";
+.gears-checked .text-info::after {
+  content: "!";
 }
 
 .gears-unchecked .text-info::after {
-  content: "\00a0";
+  content: "?";
 }
 
 .section-style {
