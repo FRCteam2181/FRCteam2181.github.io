@@ -20,6 +20,7 @@
           "type": "number",
           "required": true,
           "code": "matchNumber",
+          "defaultValue": 1,
           "preserveDataOnReset": true,
           "autoIncrementOnReset": true,
           "columnOrder": 0
