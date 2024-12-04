@@ -561,6 +561,13 @@
     }
   ],
   "reports": [{
-
+    "reportTitle": "Points",
+    "orderBy": [{
+      "field": "totalPointsScoredMean",
+      "direction": "desc"
+    },{
+      "field": "totalPointsScoredMax",
+      "direction": "desc"
+    }]
   }]
 }
