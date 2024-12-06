@@ -306,6 +306,32 @@
           }]
         },
         {
+          "code": "netMissedCount",
+          "title": "Net Missed",
+          "type": "counter",
+          "defaultValue": 0,
+          "min": 0,
+          "required": false,
+          "columnOrder": 9,
+          "aggregate": [{
+            "title": "Net Missed Minimum",
+            "code": "netMissedMin",
+            "aggFunction": "min"
+          },{
+            "title": "Net Missed Maximum",
+            "code": "netMissedMax",
+            "aggFunction": "max"
+          },{
+            "title": "Net Missed Median",
+            "code": "netMissedMedian",
+            "aggFunction": "median"
+          },{
+            "title": "Net Missed Mean",
+            "code": "netMissedMean",
+            "aggFunction": "mean"
+          }]
+        },
+        {
           "code": "hoopScoredCount",
           "title": "Hoop Scored",
           "type": "counter",
@@ -332,6 +358,32 @@
           }]
         },
         {
+          "code": "hoopMissedCount",
+          "title": "Hoop Missed",
+          "type": "counter",
+          "defaultValue": 0,
+          "min": 0,
+          "required": false,
+          "columnOrder": 11,
+          "aggregate": [{
+            "title": "Hoop Missed Minimum",
+            "code": "hoopMissedMin",
+            "aggFunction": "min"
+          },{
+            "title": "Hoop Missed Maximum",
+            "code": "hoopMissedMax",
+            "aggFunction": "max"
+          },{
+            "title": "Hoop Missed Median",
+            "code": "hoopMissedMedian",
+            "aggFunction": "median"
+          },{
+            "title": "Hoop Missed Mean",
+            "code": "hoopMissedMean",
+            "aggFunction": "mean"
+          }]
+        },
+        {
           "code": "pointsScoredCount",
           "title": "Points Scored",
           "type": "calculated",
@@ -354,6 +406,32 @@
           },{
             "title": "Points Scored Mean",
             "code": "pointsScoredMean",
+            "aggFunction": "mean"
+          }]
+        },
+        {
+          "code": "pointsMissedCount",
+          "title": "Points Missed",
+          "type": "calculated",
+          "calculation": ["+", ["*", "hoopMissedCount", 3], ["*", "netMissedCount", 2]],
+          "defaultValue": 0,
+          "required": false,
+          "columnOrder": 13,
+          "aggregate": [{
+            "title": "Points Missed Minimum",
+            "code": "pointsMissedMin",
+            "aggFunction": "min"
+          },{
+            "title": "Points Missed Maximum",
+            "code": "pointsMissedMax",
+            "aggFunction": "max"
+          },{
+            "title": "Points Missed Median",
+            "code": "pointsMissedMedian",
+            "aggFunction": "median"
+          },{
+            "title": "Points Missed Mean",
+            "code": "pointsMissedMean",
             "aggFunction": "mean"
           }]
         },
@@ -445,6 +523,67 @@
           },{
             "title": "Total Points Scored Mean",
             "code": "totalPointsScoredMean",
+            "aggFunction": "mean"
+          }]
+        },
+        {
+          "code": "totalPointsMissedCount",
+          "title": "Total Points Missed",
+          "type": "calculated",
+          "calculation": ["+", 
+            ["*", "autoHoopMissedCount", 6], 
+            ["*", "autoNetMissedCount", 4], 
+            ["*", ["false2One", "hasMovedOutOfStartingZone"], 5], 
+            ["*", "hoopMissedCount", 3], 
+            ["*", "netMissedCount", 2],
+            ["*", ["false2One", "endInStartingZone"], 5]
+          ],
+          "defaultValue": 0,
+          "required": false,
+          "columnOrder": 13,
+          "aggregate": [{
+            "title": "Total Points Missed Minimum",
+            "code": "totalPointsMissedMin",
+            "aggFunction": "min"
+          },{
+            "title": "Total Points Missed Maximum",
+            "code": "totalPointsMissedMax",
+            "aggFunction": "max"
+          },{
+            "title": "Total Points Missed Median",
+            "code": "totalPointsMissedMedian",
+            "aggFunction": "median"
+          },{
+            "title": "Total Points Missed Mean",
+            "code": "totalPointsMissedMean",
+            "aggFunction": "mean"
+          }]
+        },
+        {
+          "code": "totalPenaltyCount",
+          "title": "Total Penalties",
+          "type": "calculated",
+          "calculation": ["+", "autoPenaltyCount", "teleopPenaltyCount"],
+          "defaultValue": 0,
+          "min": 0,
+          "step":5,
+          "required": false,
+          "columnOrder": 14,
+          "aggregate": [{
+            "title": "Total Penalty Count Minimum",
+            "code": "totalPenaltyCountMin",
+            "aggFunction": "min"
+          },{
+            "title": "Total Penalty Count Maximum",
+            "code": "totalPenaltyCountMax",
+            "aggFunction": "max"
+          },{
+            "title": "Total Penalty Count Median",
+            "code": "totalPenaltyCountMedian",
+            "aggFunction": "median"
+          },{
+            "title": "Total Penalty Count Mean",
+            "code": "totalPenaltyCountMean",
             "aggFunction": "mean"
           }]
         },
@@ -570,7 +709,40 @@
       "field": "totalPointsScoredMean",
       "direction": "desc"
     },{
-      "field": "totalPointsScoredMax",
+      "field": "totalPointsMissedMax",
+      "direction": "asc"
+    }]
+  },{
+    "reportTitle": "Goon",
+    "orderBy": [{
+      "field": "anyCardCount",
+      "direction": "desc"
+    },{
+      "field": "totalPenaltyCountMean",
+      "direction": "desc"
+    },{
+      "field": "totalPenaltyCountMax",
+      "direction": "desc"
+    }]
+  },{
+    "reportTitle": "Auto",
+    "orderBy": [{
+      "field": "autoPointsScoredMean",
+      "direction": "desc"
+    },{
+      "field": "autoPointsMissedMax",
+      "direction": "asc"
+    },{
+      "field": "autoPenaltyCountMax",
+      "direction": "asc"
+    }]
+  },{
+    "reportTitle": "Support",
+    "orderBy": [{
+      "field": "endInStartingZoneCount",
+      "direction": "desc"
+    },{
+      "field": "sharkSaverCount",
       "direction": "desc"
     }]
   }]
