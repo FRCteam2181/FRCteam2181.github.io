@@ -35,6 +35,7 @@ namespace("frc2181.scouting.spectator.FormDataService", {
     fields.filter(f => f.type === "calculated").forEach(f => {
       values[f.code] = Calculation.resolveExpression(f.calculation, values);
     });
+    return values;
   });
   const calculate = function(code) {
     const fieldMap = getFields().reduce((acc,f) => {

@@ -13,7 +13,7 @@
           "type": "text",
           "required": true,
           "code": "scouter",
-          "columnOrder": 2
+          "columnOrder": 3
         },
         {
           "title": "Match Number",
@@ -37,7 +37,7 @@
             "Blue 2"
           ],
           "defaultValue": "0",
-          "columnOrder": 3
+          "columnOrder": 4
         },
         {
           "title": "Team Number",
@@ -57,7 +57,7 @@
             "Bottom Right",
             "Bottom Left"
           ],
-          "columnOrder": 4,
+          "columnOrder": 5,
           "defaultValue": 0
         },
         {
@@ -66,7 +66,7 @@
           "defaultValue": false,
           "required": false,
           "code": "isNoShow",
-          "columnOrder": 5,
+          "columnOrder": 6,
           "aggregate": [{
             "title": "No Show Count",
             "code": "noShowCount",
@@ -84,7 +84,7 @@
           "defaultValue": false,
           "required": false,
           "code": "hasMovedOutOfStartingZone",
-          "columnOrder": 6,
+          "columnOrder": 7,
           "aggregate": [{
             "title": "Moved Count",
             "code": "movedOutOfStartingZoneCount",
@@ -98,7 +98,7 @@
           "defaultValue": 0,
           "min": 0,
           "required": false,
-          "columnOrder": 7,
+          "columnOrder": 8,
           "aggregate": [{
             "title": "Net Scored Minimum",
             "code": "autoNetScoredMin",
@@ -124,7 +124,7 @@
           "defaultValue": 0,
           "min": 0,
           "required": false,
-          "columnOrder": 8,
+          "columnOrder": 9,
           "aggregate": [{
             "title": "Net Missed Minimum",
             "code": "autoNetMissedMin",
@@ -150,7 +150,7 @@
           "defaultValue": 0,
           "min": 0,
           "required": false,
-          "columnOrder": 9,
+          "columnOrder": 10,
           "aggregate": [{
             "title": "Hoop Scored Minimum",
             "code": "autoHoopScoredMin",
@@ -176,7 +176,7 @@
           "defaultValue": 0,
           "min": 0,
           "required": false,
-          "columnOrder": 10,
+          "columnOrder": 11,
           "aggregate": [{
             "title": "Hoop Missed Minimum",
             "code": "autoHoopMissedMin",
@@ -202,7 +202,7 @@
           "calculation": ["+", ["*", "autoHoopScoredCount", 6], ["*", "autoNetScoredCount", 4], ["*", ["true2One", "hasMovedOutOfStartingZone"], 5]],
           "defaultValue": 0,
           "required": false,
-          "columnOrder": 10,
+          "columnOrder": 12,
           "aggregate": [{
             "title": "Points Scored Minimum",
             "code": "autoPointsScoredMin",
@@ -228,7 +228,7 @@
           "calculation": ["+", ["*", "autoHoopMissedCount", 6], ["*", "autoNetMissedCount", 4], ["*", ["false2One", "hasMovedOutOfStartingZone"], 5]],
           "defaultValue": 0,
           "required": false,
-          "columnOrder": 11,
+          "columnOrder": 13,
           "aggregate": [{
             "title": "Points Missed Minimum",
             "code": "autoPointsMissedMin",
@@ -255,7 +255,7 @@
           "min": 0,
           "step":5,
           "required": false,
-          "columnOrder": 11,
+          "columnOrder": 14,
           "aggregate": [{
             "title": "Penalty Count Minimum",
             "code": "autoPenaltyCountMin",
@@ -286,7 +286,7 @@
           "defaultValue": 0,
           "min": 0,
           "required": false,
-          "columnOrder": 12,
+          "columnOrder": 15,
           "aggregate": [{
             "title": "Net Scored Minimum",
             "code": "netScoredMin",
@@ -312,7 +312,7 @@
           "defaultValue": 0,
           "min": 0,
           "required": false,
-          "columnOrder": 13,
+          "columnOrder": 16,
           "aggregate": [{
             "title": "Hoop Scored Minimum",
             "code": "hoopScoredMin",
@@ -338,7 +338,7 @@
           "calculation": ["+", ["*", "hoopScoredCount", 3], ["*", "netScoredCount", 2]],
           "defaultValue": 0,
           "required": false,
-          "columnOrder": 10,
+          "columnOrder": 17,
           "aggregate": [{
             "title": "Points Scored Minimum",
             "code": "pointsScoredMin",
@@ -365,7 +365,7 @@
           "min":0,
           "step":5,
           "required": false,
-          "columnOrder": 14,
+          "columnOrder": 18,
           "aggregate": [{
             "title": "Penalties Minimum",
             "code": "penaltiesMin",
@@ -390,7 +390,7 @@
           "defaultValue": false,
           "required": false,
           "code": "sharkSaver",
-          "columnOrder": 16,
+          "columnOrder": 19,
           "aggregate": [{
             "title": "Shark Saver Count",
             "code": "sharkSaverCount",
@@ -408,7 +408,7 @@
           "defaultValue": false,
           "required": false,
           "code": "endInStartingZone",
-          "columnOrder": 17,
+          "columnOrder": 20,
           "aggregate": [{
             "title": "End In Starting Zone Count",
             "code": "endInStartingZoneCount",
@@ -429,7 +429,7 @@
           ],
           "defaultValue": 0,
           "required": false,
-          "columnOrder": 18,
+          "columnOrder": 2,
           "aggregate": [{
             "title": "Total Points Scored Minimum",
             "code": "totalPointsScoredMin",
@@ -452,6 +452,7 @@
           "code": "offenseSkillRating",
           "title": "Offense Skill",
           "type": "enum",
+          "defaultValue": 0,
           "choices": [
             "Not Observed",
             "Not Effective",
@@ -459,7 +460,7 @@
             "Very Effective"
           ],
           "required": false,
-          "columnOrder": 19,
+          "columnOrder": 21,
           "aggregate": [{
             "title": "Offense Skill Rating Minimum",
             "code": "offenseSkillRatingMin",
@@ -482,6 +483,7 @@
           "code": "defenseSkillRating",
           "title": "Defense Skill",
           "type": "enum",
+          "defaultValue": 0,
           "choices": [
             "Not Observed",
             "Not Effective",
@@ -489,7 +491,7 @@
             "Very Effective"
           ],
           "required": false,
-          "columnOrder": 20,
+          "columnOrder": 22,
           "aggregate": [{
             "title": "Defense Skill Rating Minimum",
             "code": "defenseSkillRatingMin",
@@ -514,7 +516,7 @@
           "type": "boolean",
           "defaultValue": false,
           "required": false,
-          "columnOrder": 21,
+          "columnOrder": 23,
           "aggregate": [{
             "title": "Died / Tipped Over Count",
             "code": "hasDiedOrTippedOverCount",
@@ -525,14 +527,14 @@
           "code": "yellowRedCard",
           "title": "Yellow/Red Card",
           "type": "enum",
-          "defaultValue": "No Card",
+          "defaultValue": 0,
           "required": true,
           "choices": [
             "No Card",
             "Yellow Card",
             "Red Card"
           ],
-          "columnOrder": 22,
+          "columnOrder": 24,
           "aggregate": [{
             "title": "Any Card Count",
             "code": "anyCardCount",
