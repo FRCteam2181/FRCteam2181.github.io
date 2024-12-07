@@ -80,7 +80,16 @@ namespace("frc2181.scouting.spectator.Spectator", {
       this.setState({ loading: true });
     }
     saveData() {
-      Download.triggerJSONDownload("spectator", "spectator", this.state.dataTable)
+      let filename = "spectator";
+      if (this.state.dataTable.length === 1) {
+        let { scouter, matchNumber, teamNumber } = this.state.dataTable[0];
+        filename = [scouter, matchNumber, teamNumber].join("-");
+      } else if (this.state.dataTable.map(r => r.scouter).filter((r,i,a) => a.indexOf(r) === i).length === 1) {
+        const first = this.state.dataTable[0];
+        const last = this.state.dataTable[this.state.dataTable.length - 1];
+        filename = `scouter-${first.scouter}-${first.matchNumber}-${last.matchNumber}`;
+      }
+      Download.triggerJSONDownload(filename, filename, this.state.dataTable)
     }
     downloadTable() {
       const headers = formData.getAggregatorHeaders();
