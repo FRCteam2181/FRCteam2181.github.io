@@ -13,7 +13,12 @@ namespace("frc2181.scouting.spectator.Aggregate", {
     sum,
     product: binaryReducer((a,b) => a * b),
     mean: (dataArray) => Math.round(sum(dataArray)/dataArray.length),
-    median: (dataArray) => dataArray[Math.round(dataArray.length/2)],
+    median: (dataArray) => {
+      const index = Math.round(dataArray.length/2);
+      const value = dataArray[index];
+      console.log({ index, value });
+      return value;
+    },
     mode: (dataArray) => {
       const counts = dataArray.reduce((acc,elem) => {
         acc[elem] = (acc[elem] || 1) + 1;
@@ -38,7 +43,6 @@ namespace("frc2181.scouting.spectator.Aggregate", {
       const groups = Object.groupBy(dataTable, row => row[aggregateBy]);
       const values = Object.entries(groups).map(([grouper, rows]) => {
         return fieldAggregators.reduce((acc, agg) => {
-          console.log(agg);
           const { fieldCode, code, aggFunction, additionalArguments } = agg;
           return Object.assign(acc, Object.fromEntries([[code, functions[aggFunction].apply(null, [rows.map(row => row[fieldCode])].concat(additionalArguments || []))]]));
         }, Object.fromEntries([[aggregateBy, grouper]]));
