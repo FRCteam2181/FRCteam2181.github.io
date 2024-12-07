@@ -2,7 +2,7 @@
   {
     "scouter": "LH",
     "matchNumber": 8,
-    "robot": "0",
+    "robot": 0,
     "teamNumber": "2823",
     "startPosition": 2,
     "isNoShow": false,
@@ -35,7 +35,7 @@
   {
     "scouter": "LH",
     "matchNumber": 9,
-    "robot": "0",
+    "robot": 0,
     "teamNumber": "2052A",
     "startPosition": 2,
     "isNoShow": false,
@@ -68,7 +68,7 @@
   {
     "scouter": "LH",
     "matchNumber": 10,
-    "robot": "0",
+    "robot": 0,
     "teamNumber": "3206A",
     "startPosition": 2,
     "isNoShow": false,
@@ -101,7 +101,7 @@
   {
     "scouter": "LH",
     "matchNumber": 11,
-    "robot": "0",
+    "robot": 0,
     "teamNumber": "5464",
     "startPosition": 2,
     "isNoShow": false,

@@ -2,7 +2,7 @@
   {
     "scouter": "LH",
     "matchNumber": 1,
-    "robot": "0",
+    "robot": 0,
     "teamNumber": "3082",
     "startPosition": 2,
     "isNoShow": false,
@@ -35,7 +35,7 @@
   {
     "scouter": "LH",
     "matchNumber": 2,
-    "robot": "0",
+    "robot": 0,
     "teamNumber": "2052A",
     "startPosition": 2,
     "isNoShow": false,
@@ -68,7 +68,7 @@
   {
     "scouter": "LH",
     "matchNumber": 3,
-    "robot": "0",
+    "robot": 0,
     "teamNumber": "3206B",
     "startPosition": 2,
     "isNoShow": false,
@@ -101,7 +101,7 @@
   {
     "scouter": "LH",
     "matchNumber": 4,
-    "robot": "0",
+    "robot": 0,
     "teamNumber": "2181B",
     "startPosition": 2,
     "isNoShow": false,
@@ -134,7 +134,7 @@
   {
     "scouter": "LH",
     "matchNumber": 5,
-    "robot": "0",
+    "robot": 0,
     "teamNumber": "7850",
     "startPosition": 2,
     "isNoShow": false,
@@ -167,7 +167,7 @@
   {
     "scouter": "LH",
     "matchNumber": 6,
-    "robot": "0",
+    "robot": 0,
     "teamNumber": "3206B",
     "startPosition": 2,
     "isNoShow": false,
@@ -200,7 +200,7 @@
   {
     "scouter": "LH",
     "matchNumber": 7,
-    "robot": "0",
+    "robot": 0,
     "teamNumber": "3206A",
     "startPosition": 2,
     "isNoShow": false,

@@ -37,7 +37,7 @@
             "Blue 2",
             "Blue 3"
           ],
-          "defaultValue": "0",
+          "defaultValue": 0,
           "columnOrder": 3
         },
         {

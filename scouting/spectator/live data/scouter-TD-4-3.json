@@ -35,7 +35,7 @@
   {
     "scouter": "TD",
     "matchNumber": 3,
-    "robot": "0",
+    "robot": 0,
     "teamNumber": "3206B",
     "startPosition": 2,
     "isNoShow": false,
