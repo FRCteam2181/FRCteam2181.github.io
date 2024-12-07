@@ -17,10 +17,11 @@
         },
         {
           "title": "Match Number",
-          "type": "number",
+          "type": "counter",
           "required": true,
           "code": "matchNumber",
           "defaultValue": 1,
+          "min": 1,
           "preserveDataOnReset": true,
           "autoIncrementOnReset": true,
           "columnOrder": 0
