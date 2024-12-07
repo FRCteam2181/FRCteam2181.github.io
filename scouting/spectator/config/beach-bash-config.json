@@ -41,7 +41,7 @@
         },
         {
           "title": "Team Number",
-          "type": "number",
+          "type": "text",
           "required": true,
           "code": "teamNumber",
           "columnOrder": 1
