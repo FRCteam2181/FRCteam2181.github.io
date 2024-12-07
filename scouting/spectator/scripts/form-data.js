@@ -11,7 +11,8 @@ namespace("frc2181.scouting.spectator.FormDataService", {
     "counter": "number",
     "enum": "number",
     "enum-set": "number",
-    "markdown": "string"
+    "markdown": "string",
+    "calculated": "number"
   }
   const state = {};
   const commit = ((update) => state.step(Object.assign({ now: (new Date()).getTime() }, update)));
