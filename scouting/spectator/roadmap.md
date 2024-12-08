@@ -41,17 +41,16 @@ What does "transmitting" the data look like and what is our "central location"?
 * summary:
   * When a Scouter commits their report, it is sent and added to a Google Sheet
   * Rollup queries the Google Sheet for data, without any necessary interaction between users.
+  * need to ensure security by avoiding enshrining ids in code (api-key, spreadsheet-id, etc)
+    * possible solution: build an app which generates links to the app which include a "user key" built from the required secrets, and publish those links to discord
+      * this would allow us to change things like "spreadsheet-id", which would, in turn, allow us to use different spreadsheets for each event / tournament / etc
 * pros:
   * not dependent on particular devices
   * data security / integrity
   * external service is (potentially) free
 * cons:
   * slower to develop
-  * need to ensure security 
-    * avoid enshrining ids in code
-      * api-key
-      * spreadsheet-id
-      * etc
+  * need to hold "secrets" in a separate location / source of truth
 
 ##### Option 3: Custom server / service
 * Transmission:
@@ -67,6 +66,7 @@ What does "transmitting" the data look like and what is our "central location"?
       * once we're done with it, the session is allowed to expire
 * pros:
   * we control how the data is stored and where
+  * secrets generated on the fly
 * cons:
   * setup
   * additional development time
