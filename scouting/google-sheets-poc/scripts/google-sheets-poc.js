@@ -3,12 +3,14 @@ namespace("frc2181.scouting.google-sheets-poc.GoogleSheetsPoc", {
 }, ({ GoogleSheetsService }) => {
   return class extends React.Component {
     constructor({ userKey }) {
-      const { apiKey, authToken, spreadsheetId } = JSON.parse(btoa(userKey));
-      this.sheetService = new GoogleSheetsService(apiKey, authToken, spreadsheetId);
-      this.state = {};
+      this.state = { userKey };
     }
     afterRender() {
-      this.sheetService.getSpreadsheet((respText) => console.log(JSON.parse(respText)));
+      if (!this.state.sheetService) {
+        GoogleSheetsService.buildService(this.state.userKey, (sheetService) => this.setState({ sheetService }));
+      } else {
+        this.state.sheetService.getSpreadsheet(({ body, headers}) => console.log({ body, headers }))
+      }
     }
     componentDidMount() {
       this.afterRender();
