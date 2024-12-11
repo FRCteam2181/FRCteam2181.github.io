@@ -11,7 +11,8 @@ namespace("frc2181.scouting.spectator.FormDataService", {
     "counter": "number",
     "enum": "number",
     "enum-set": "number",
-    "markdown": "string"
+    "markdown": "string",
+    "calculated": "number"
   }
   const state = {};
   const commit = ((update) => state.step(Object.assign({ now: (new Date()).getTime() }, update)));
@@ -91,9 +92,9 @@ namespace("frc2181.scouting.spectator.FormDataService", {
             error: "Required!"
           });
         }
-        const value = row[field.code]
+        const value = row[field.code];
         const dataType = (typeof value);
-        if(dataType !== inputTypeOf[field.type]) {
+        if(value && dataType !== inputTypeOf[field.type]) {
           outval.push({
             code: field.code,
             row: rowIndex,

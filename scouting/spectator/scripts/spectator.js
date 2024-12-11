@@ -47,13 +47,23 @@ namespace("frc2181.scouting.spectator.Spectator", {
     loadData() {
       LoadFile(false, "text", (fileContent, fileName) => {
         const newData = JSON.parse(fileContent);
-        const dupRecords = newData.filter(record => 
-          this.state.dataTable.find(row => 
+        const { dupRecords, newRecords } = newData.reduce(({ dupRecords, newRecords }, record) => {
+          const dupe = this.state.dataTable.find(row => 
             formData().distinct.reduce((acc,field) => 
-              acc && row[field] === record[field], true)));
-        if (dupRecords.length > 0) {
+              acc && row[field] === record[field], true));
+          if (dupe) {
+            dupRecords.push(record);
+          } else {
+            newRecords.push(record);
+          }
+          return { dupRecords, newRecords };
+        }, {
+          dupRecords: [],
+          newRecords: []
+        });          
+        if (newRecords.length <= 0) {
           console.log({ fileName, dupRecords });
-          alert(`"${fileName} contains duplicate records. Did not load! View console for details."`);
+          alert(`"${fileName} contains exclusively duplicate records. Did not load! View console for details."`);
           try {
             throw { fileName, badRecords: dupRecords };
           } finally {
@@ -61,8 +71,9 @@ namespace("frc2181.scouting.spectator.Spectator", {
           }
         }
         try {
-          formData.validate(newData, fileName);
-          this.setState({ dataTable: this.state.dataTable.concat(newData), aggregate: undefined })
+          formData.validate(newRecords, fileName);
+          alert(`loading ${newRecords.length} new records${dupRecords.length > 0?`, found ${dupRecords.length} duplicate records`:""}`)
+          this.setState({ dataTable: this.state.dataTable.concat(newRecords), aggregate: undefined })
         } catch(e) {
           alert(`${e.message} View console for details.`);
           throw e;
