@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    Control Board
+  </title>
+  <style>
+    @media screen {
+      .page {
+        height: 75% !important;
+        width: 75% !important;
+        margin: 25px !important;
+      }
+    }
+
+    @media print {
+      .page {
+        height: 5.5in !important;
+        width: 9.5in !important;
+        margin: 0.5in !important;
+      }
+
+      @page {
+        size: landscape
+      }
+    }
+  </style>
+  <script type="text/javascript" src="allRefs.js"></script>
+  <script type="text/javascript" src="drawBoard.js"></script>
+</head>
+<body onload="drawBoard()">
+  <div class="page" id="page">
+  </div>
+  <div class="page" id="page2">
+  </div>
+</body>
+</html>
